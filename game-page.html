@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RapidIdentity Login</title>
-    <link rel="shortcut icon" href="https://apsva.us002-rapididentity.com:443/files/apsA.jpg">
-    <script defer>
+  <body>
+    <button style='width:40px;height:4vh;position:fixed;top:0;left:0' id='fs-button'>FS</button>
+    <button style='width:40px;height:4vh;position:fixed;top:0;left:40px' id='bk-button'>BK</button>
+    <iframe 
+      id='gameFrame' 
+      allowfullscreen 
+      style='
+        position:fixed;
+        left: 0;
+        top: 5vh;
+        width: 100vw;
+        height: 95vh;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        border: none
+      ' 
+      src='about:blank'>
+    </iframe>
+    <script>
       function fs() {
         var elem = document.getElementById('gameFrame');
         if (elem.requestFullscreen) {
@@ -24,6 +40,9 @@
         document.write(h);
         document.close();
       }  
+
+      document.getElementById("fs-button").addEventListener("click", fs);
+      document.getElementById("bk-button").addEventListener("click", back);
       
       setInterval(focus, 20);   
       function focus() {     
@@ -31,25 +50,5 @@
         frame.contentWindow.focus();   
       }
     </script>
-  </head>
-  <body>
-    <button style='width:40px;height:4vh;position:fixed;top:0;left:0' onclick='fs()'>FS</button>
-    <button style='width:40px;height:4vh;position:fixed;top:0;left:40px' onclick='back()'>BK</button>
-    <iframe 
-      id='gameFrame' 
-      allowfullscreen 
-      style='
-        position:fixed;
-        left: 0;
-        top: 5vh;
-        width: 100vw;
-        height: 95vh;
-        overflow: hidden;
-        margin: 0;
-        padding: 0;
-        border: none
-      ' 
-      src=''>
-    </iframe>
   </body>
 </html>
