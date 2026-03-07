@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <button style='width:40px;height:4vh;position:fixed;top:0;left:0' onclick='fs'>FS</button>
+    <button style='width:40px;height:4vh;position:fixed;top:0;left:40px' onclick='back'>BK</button>
+    <iframe 
+      id='gameFrame' 
+      allowfullscreen 
+      style='
+        position:fixed;
+        left: 0;
+        top: 5vh;
+        width: 100vw;
+        height: 95vh;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        border: none
+      ' 
+      src=''>
+    </iframe>"
+
+    <script>
+      function openFullscreen() {
+        var elem = document.getElementById('gameFrame');
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { 
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { 
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        }
+      }
+      
+      async function back(){
+        n=fetch('https://pugmoog.github.io/Bugmoog/menu.html')
+        document.open();
+        document.write(n);
+        document.close();
+      }  
+      
+      setInterval(focus, 20);   
+      function focus() {     
+        var frame = document.getElementById('gameFrame');     
+        frame.contentWindow.focus();   
+      }
+    </script>
+
+  </body>
+</html>
