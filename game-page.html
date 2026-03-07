@@ -35,8 +35,8 @@
       }
       
       async function back(){
-        n=await fetch('https://pugmoog.github.io/Bugmoog/menu.html')
-        h=await n.text()
+        let n=await fetch('https://pugmoog.github.io/Bugmoog/menu.html')
+        let h=await n.text()
         document.open();
         document.write(h);
         document.close();
