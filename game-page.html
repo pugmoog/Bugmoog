@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <button style='width:40px;height:4vh;position:fixed;top:0;left:0' onclick='fs'>FS</button>
-    <button style='width:40px;height:4vh;position:fixed;top:0;left:40px' onclick='back'>BK</button>
+    <button style='width:40px;height:4vh;position:fixed;top:0;left:0' onclick='fs()'>FS</button>
+    <button style='width:40px;height:4vh;position:fixed;top:0;left:40px' onclick='back()'>BK</button>
     <iframe 
       id='gameFrame' 
       allowfullscreen 
@@ -18,7 +18,7 @@
         border: none
       ' 
       src=''>
-    </iframe>"
+    </iframe>
 
     <script>
       function openFullscreen() {
@@ -35,9 +35,10 @@
       }
       
       async function back(){
-        n=fetch('https://pugmoog.github.io/Bugmoog/menu.html')
+        n=await fetch('https://pugmoog.github.io/Bugmoog/menu.html')
+        h=await n.text
         document.open();
-        document.write(n);
+        document.write(h);
         document.close();
       }  
       
