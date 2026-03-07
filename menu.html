@@ -57,7 +57,7 @@
       </button>
       
       <button class="game" data-url="cookieclicker">
-        <img src="https://rugmoog.github.io/IMG_0625.jpeg"></img>
+        <img data-url="candy.png"></img>
         <h3>cookie clicker</h3>
       </button>
       
@@ -208,6 +208,10 @@
           loadPage("https://pugmoog.github.io/games/"+this.dataset.url);
         };
         }
+      });
+      
+      document.querySelectorAll('img').forEach(image=>{
+        button.src = "https://pugmoog.github.io/Bugmoog/"+this.dataset.url;
       });
     </script>
     
