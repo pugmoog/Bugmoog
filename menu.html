@@ -175,6 +175,19 @@
     
     
     <script>
+      function openFullscreen() {
+        var elem = document.getElementById("gameFrame");
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { // Firefox
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { // IE/Edge
+            elem.msRequestFullscreen();
+        }
+    }
+      
       setInterval(focus, 20);   
       function focus() {     
         var frame = document.getElementById('gameFrame');     
@@ -183,7 +196,7 @@
 
       async function loadPage(url){
         document.open();
-        document.write("<iframe id='gameFrame' style='position:fixed;left:0;top:0;width:100vw;height:100vh;overflow:hidden;margin:0;padding:0;border:none' src='"+url+"'></iframe>");
+        document.write("<iframe id='gameFrame' allowfullscreen style='position:fixed;left:0;top:5vh;width:100vw;height:95vh;overflow:hidden;margin:0;padding:0;border:none' src='"+url+"'></iframe>");
         document.close();
       }  
 
