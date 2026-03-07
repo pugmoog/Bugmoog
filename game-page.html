@@ -21,7 +21,7 @@
     </iframe>
 
     <script>
-      function openFullscreen() {
+      function fs() {
         var elem = document.getElementById('gameFrame');
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
@@ -36,7 +36,7 @@
       
       async function back(){
         n=await fetch('https://pugmoog.github.io/Bugmoog/menu.html')
-        h=await n.text
+        h=await n.text()
         document.open();
         document.write(h);
         document.close();
