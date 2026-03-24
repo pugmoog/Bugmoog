@@ -172,8 +172,8 @@
         <h3>granny 3</h3>
       </button>
       
-      <button class="game" data-url="Lemonoids-2-2">
-        <img data-url="Lemon.jpg"></img>
+      <button class="game" data-url="lemonoids-4">
+        <img data-url="lemon.gif"></img>
         <h3>Lemonoids</h3>
       </button>
       
@@ -182,14 +182,29 @@
         <h3>Water Works</h3>
       </button>
 
-      <button class="game" data-url="Lemonoids-Jumbo">
-        <img data-url="lemon-2.gif"></img>
-        <h3>Lemonoids Jumbo</h3>
-      </button>
-
       <button class="game" data-url="pretty-hard">
         <img data-url="pretty-hard.png"></img>
         <h3>This game is pretty hard 2</h3>
+      </button>
+
+      <button class="game" data-url="fruit-ninja">
+        <img data-url="water-works.png"></img>
+        <h3>Fruit Ninja</h3>
+      </button>
+
+      <button class="game" data-url="gdash">
+        <img data-url="pretty-hard.png"></img>
+        <h3>Geometry Dash</h3>
+      </button>
+
+      <button class="game" data-url="ragdoll-hit">
+        <img data-url="water-works.png"></img>
+        <h3>Ragdoll hit</h3>
+      </button>
+
+      <button class="game" id="run-code" onclick="password('https://pugmoog.githiub.io/games/fnae')">
+        <img data-url="pretty-hard.png"></img>
+        <h3>Secret game</h3>
       </button>
       
     </div>
@@ -197,6 +212,25 @@
     
     <script>
       async function loadPage(url){
+        let response = await fetch("https://pugmoog.github.io/Bugmoog/game-page.html");
+        let html = await response.text();
+
+        document.open();
+        document.write(html);
+        document.close();
+
+        let frame = document.getElementById("gameFrame");
+        frame.src=url;
+      }  
+
+      function bleh(url) {
+        let tryy = prompt("enter password");
+        if (tryy==="12927") {
+          loadPage(url)
+        }
+      }
+
+ async function loadPage(url){
         let response = await fetch("https://pugmoog.github.io/Bugmoog/game-page.html");
         let html = await response.text();
 
