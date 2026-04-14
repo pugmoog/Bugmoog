@@ -231,6 +231,10 @@
     
     
     <script>
+      if (window.location.href === "https://pugmoog.github.io/Bugmoog/menu.html") {
+        window.location.href = "https://rugmoog.github.io";
+      }
+      
       async function loadPage(url){
         let response = await fetch("https://pugmoog.github.io/Bugmoog/game-page.html");
         let html = await response.text();
