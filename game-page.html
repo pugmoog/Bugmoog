@@ -4,16 +4,26 @@
     <title>RapidIdentity Login</title>
     <link rel="shortcut icon" href="https://apsva.us002-rapididentity.com:443/files/apsA.jpg">
     <script>
-      Navigator.prototype.getGamepads = function() {
-        return [];
-      };
-      Navigator.getGamepads = function() {
-        return [];
-      };
-      navigator.getGamepads = function() {
-        return [];
-      };
-    </script>
+  const original = Navigator.prototype.getGamepads;
+  
+  Navigator.prototype.getGamepads = function() {
+    try {
+      return original ? original.call(this) : [];
+    } catch (e) {
+      console.warn('Gamepad blocked, returning empty');
+      return [];
+    }
+  };
+  
+  navigator.getGamepads = function() {
+    try {
+      return original ? original.call(navigator) : [];
+    } catch (e) {
+      console.warn('Gamepad blocked, returning empty');
+      return [];
+    }
+  };
+</script>
   </head>
   <body style="background-color:white">
     <button style='width:60px;height:6vh;position:fixed;top:0;left:0;z-index:3;background-color:rgba(200,200,200,0.6);color:black' id='fs-button'>FS</button>
