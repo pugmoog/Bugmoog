@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -266,7 +267,8 @@
         <h3>Desmos Game 2</h3>
       </button>
       
-      <button class="game" data-url="fnaf">
+      <button class="game" id="run-code"
+      onclick="document.getElementById('fnafMenu').showModal();">
         <img data-url="fanf.png"></img>
         <h3>Five Nights At Freddy's</h3>
       </button>
@@ -298,6 +300,13 @@
       
     </div>
     
+    <dialog id="fnafMenu">
+      Pick a FNAF Game:
+      <br><button onclick="loadPage('https://pugmoog.github.io/games/fnaf1');" id="run-code">FNAF 1</button>
+      <br><button onclick="loadPage('https://pugmoog.github.io/games/fnaf2');" id="run-code">FNAF 2</button>
+      <br><button onclick="loadPage('https://pugmoog.github.io/games/fnaf3');" id="run-code">FNAF 3</button>
+      <br><button onclick="loadPage('https://pugmoog.github.io/games/fnaf4');" id="run-code">FNAF 4</button>
+    </dialog>
     
     <script>
       if (window.location.href === "https://pugmoog.github.io/Bugmoog/menu.html") {
