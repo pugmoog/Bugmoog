@@ -342,15 +342,15 @@
       }
 
 
-
-      document.querySelectorAll('button').forEach(button=>{
-        if (!(button.id=== "run-code")) {
-        button.onclick=function(){
-          loadPage("https://pugmoog.github.io/games/"+this.dataset.url);
-        };
-        }
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('button').forEach(button=>{
+          if (!(button.id=== "run-code")) {
+          button.onclick=function(){
+            loadPage("https://pugmoog.github.io/games/"+this.dataset.url);
+          };
+          }
+        });
       });
-      
       
     </script>
     
