@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://script.google.com/a/macros/apsva.us/s/AKfycbxSLuYr4Bo-71kmDO_wgjk0CV9M6AOCeK-5hXkP7UII6tAHUmpjceC9fw17DYhD_Py5/exec"></script>
+    <script src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
     <title>RapidIdentity Login</title>
     <link rel="shortcut icon" href="https://apsva.us002-rapididentity.com:443/files/apsA.jpg">
     <style>
@@ -317,6 +317,11 @@
       if (window.location.href === "https://pugmoog.github.io/Bugmoog/menu.html") {
         window.location.href = "https://rugmoog.github.io";
       }
+
+      const counter = new Counter({ workspace: 'my-website' });
+
+    // Increment the view count when the page loads
+    counter.up('page-views')
       
       async function loadPage(url){
         let response = await fetch("https://pugmoog.github.io/Bugmoog/game-page.html");
