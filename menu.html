@@ -342,7 +342,7 @@
       }
 
 
-      document.addEventListener("load", () => {
+      window.onload = function() {
         document.querySelectorAll('button').forEach(button=>{
           if (!(button.id=== "run-code")) {
           button.onclick=function(){
@@ -350,7 +350,7 @@
           };
           }
         });
-      });
+      };
       
     </script>
     
