@@ -341,18 +341,7 @@
         }
       }
 
- async function loadPage(url){
-        let response = await fetch("https://pugmoog.github.io/Bugmoog/game-page.html");
-        let html = await response.text();
 
-        document.open();
-        document.write(html);
-        document.close();
-
-        let frame = document.getElementById("gameFrame");
-        frame.src=url;
-      }  
- 
 
       document.querySelectorAll('button').forEach(button=>{
         if (!(button.id=== "run-code")) {
