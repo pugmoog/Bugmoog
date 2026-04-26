@@ -61,11 +61,10 @@
       }
       
       async function back(){
-        let n=await fetch('https://pugmoog.github.io/Bugmoog/menu.html')
-        let h=await n.text()
         document.open();
-        document.write(h);
+        document.write('');
         document.close();
+        document.style.display = "none";
       }  
 
       document.getElementById("fs-button").addEventListener("click", fs);
