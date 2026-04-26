@@ -377,7 +377,7 @@
   
     -->
     
-    <iframe id="gamePageFrame" style="display:none;position:fixed;left:0;top:0;width:100vw;height:100vh"></iframe>
+    <iframe id="gamePageFrame" style="display:none;position:fixed;left:0;top:0;width:100vw;height:100vh" z-index="99999"></iframe>
     
     <dialog id="fnafMenu">
       Pick a FNAF Game:
@@ -403,7 +403,7 @@
         let response = await fetch("https://pugmoog.github.io/Bugmoog/game-page.html");
         let html = await response.text();
 
-        gamePageframe.innerHTML = html;
+        gamePageFrame.innerHTML = html;
         gamePageFrame.style.display = "block";
 
         let frame = gamePageFrame.getElementById("gameFrame");
