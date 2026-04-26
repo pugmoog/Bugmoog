@@ -403,7 +403,7 @@
         let response = await fetch("https://pugmoog.github.io/Bugmoog/game-page.html");
         let html = await response.text();
 
-        gamePageFrame.innerHTML = html;
+        gamePageFrame.srcdoc = html;
         gamePageFrame.style.display = "block";
 
         let frame = gamePageFrame.getElementById("gameFrame");
