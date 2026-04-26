@@ -51,145 +51,146 @@
   </head>
 
   <body>
-    <h1>BugMoog v3.8</h1>
+    <h1>BugMoog v4</h1>
     <p>By Pug Moog. <a href="https://pugmoog.com">pugmoog.com</a>
     <br>
     <p>To get BugMoog, go to <br>
     <a href="https://rugmoog.github.io"><strong>R</strong>ugmoog.github.io</a><br>
     with an <strong>R.</strong>
     </p>
-    <a href="https://forms.gle/jrbnDkp1dAAcPUbk6" target="_blank"><button id="run-code">Have a game suggestion?</button></a><br>
+    <a href="https://forms.gle/jrbnDkp1dAAcPUbk6" target="_blank"><button>Have a game suggestion?</button></a><br>
     
     <h2 style="color:red">UPDATES:</h2><p style="color:red">
 
-- 5 new games<br>
-- I wasnt able to get age of battle. sorry<br>
+- A search bar!<br>
+- i fixed up some colors not displaying right<br>
 - shoutout to nico for not asking for a shoutout, unlike almost everyone else
 
 </p>
 
-  
+  <input type="text" placeholder="Search" name="search" id="search"></input>
+  <button onclick="document.getElementById('search').value = '';search();">Clear</button>
     
     <div class="grid">
       
       <button class="game" onclick="loadPage('chrome-dino');">
         <img src="https://pugmoog.github.io/Bugmoog/images/dino-game.png"></img>
-        <h3>chrome dino game</h3>
+        <h3>Chrome Dino Game</h3>
       </button>
       
       <button class="game" onclick="loadPage('cookieclicker');">
         <img src="https://pugmoog.github.io/Bugmoog/images/cookie-clicker.png"></img>
-        <h3>cookie clicker</h3>
+        <h3>Cookie Clicker</h3>
       </button>
       
       <button class="game" onclick="loadPage('eaglercraft');">
         <img src="https://pugmoog.github.io/Bugmoog/images/minecraft.png"></img>
-        <h3>minecraft</h3>
+        <h3>Minecraft</h3>
       </button>
 
       <button class="game" onclick="loadPage('eaglercraft-mobile');">
         <img src="https://pugmoog.github.io/Bugmoog/images/minecraft.png"></img>
-        <h3>minecraft mobile</h3>
+        <h3>Minecraft mobile</h3>
       </button>
       
       <button class="game" onclick="loadPage('escaperoad');">
         <img src="https://pugmoog.github.io/Bugmoog/images/escape-road.png"></img>
-        <h3>escape road</h3>
+        <h3>Escape Road</h3>
       </button>
       
       <button class="game" onclick="loadPage('little-alchemy-two');">
         <img src="https://pugmoog.github.io/Bugmoog/images/la2.png"></img>
-        <h3>little alchemy 2</h3>
+        <h3>Little Alchemy 2</h3>
       </button>
       
       <button class="game" onclick="loadPage('little-alchemy');">
         <img src="https://pugmoog.github.io/Bugmoog/images/la1.png"></img>
-        <h3>little alchemy</h3>
+        <h3>Little Alchemy</h3>
       </button>
       
       <button class="game" onclick="loadPage('ragdoll-archers');">
         <img src="https://pugmoog.github.io/Bugmoog/images/ragdoll.png"></img>
-        <h3>ragdoll archers</h3>
+        <h3>Ragdoll Archers</h3>
       </button>
       
       <button class="game" onclick="loadPage('snow-rider-4d');">
         <img src="https://pugmoog.github.io/Bugmoog/images/snow-rider.png"></img>
-        <h3>snow rider</h3>
+        <h3>Snow Rider 3d</h3>
       </button>
       
       <button class="game" onclick="loadPage('slope-4');">
         <img src="https://pugmoog.github.io/Bugmoog/images/slope.png"></img>
-        <h3>slope</h3>
+        <h3>Slope</h3>
       </button>
       
       <button class="game" onclick="loadPage('survival-race-4');">
         <img src="https://pugmoog.github.io/Bugmoog/images/survival-race.png"></img>
-        <h3>survival race</h3>
+        <h3>Survival Race</h3>
       </button>
       
       <button class="game" onclick="loadPage('war-the-knights');">
         <img src="https://pugmoog.github.io/Bugmoog/images/war-the-knights.png"></img>
-        <h3>war the knights</h3>
+        <h3>War the Knights</h3>
       </button>
       
       <button class="game" onclick="loadPage('tunnelrush');">
         <img src="https://pugmoog.github.io/Bugmoog/images/tunnel-rush.png"></img>
-        <h3>tunnel rush</h3>
+        <h3>Tunnel Rush</h3>
       </button>
       
       <button class="game" onclick="loadPage('factory-balls-forever');">
         <img src="https://pugmoog.github.io/Bugmoog/images/factory-balls.png"></img>
-        <h3>factory balls</h3>
+        <h3>Factory Balls</h3>
       </button>
       
       <button class="game" onclick="loadPage('scorch');">
         <img src="https://pugmoog.github.io/Bugmoog/images/scorch.png"></img>
-        <h3>scorched earth</h3>
+        <h3>Scorched Earth</h3><small>(doesn't work on mobile)</small>
       </button>
       
       <button class="game" onclick="loadPage('bitlife');">
         <img src="https://pugmoog.github.io/Bugmoog/images/bitlife.png"></img>
-        <h3>bitlife</h3>
+        <h3>Bitlife</h3>
       </button>
       
       <button class="game" onclick="loadPage('drive-mad');">
         <img src="https://pugmoog.github.io/Bugmoog/images/drive-mad.png"></img>
-        <h3>drive mad</h3>
+        <h3>Drive Mad</h3>
       </button>
       
       <button class="game" onclick="loadPage('golf-orbit');">
         <img src="https://pugmoog.github.io/Bugmoog/images/golf-orbit.png"></img>
-        <h3>golf orbit</h3>
+        <h3>Golf Orbit</h3>
       </button>
       
       <button class="game" onclick="loadPage('polytrack');">
         <img src="https://pugmoog.github.io/Bugmoog/images/polytrack.png"></img>
-        <h3>poly track</h3>
+        <h3>Poly Track</h3>
       </button>
       
       <button class="game" onclick="loadPage('Ballistic');">
         <img src="https://pugmoog.github.io/Bugmoog/images/ballistic.png"></img>
-        <h3>ballistic</h3>
+        <h3>Ballistic</h3>
       </button>
       
       <button class="game" onclick="loadPage('candy-crush');">
         <img src="https://pugmoog.github.io/Bugmoog/images/candy.png"></img>
-        <h3>candy crush</h3>
+        <h3>Candy Crush</h3>
       </button>
       
       <button class="game" onclick="loadPage('idle-breakout');">
         <img src="https://pugmoog.github.io/Bugmoog/images/idle-breakout.png"></img>
-        <h3>idle breakout</h3>
+        <h3>Idle Breakout</h3>
       </button>
       
       <button class="game" onclick="loadPage('granny-1');">
         <img src="https://pugmoog.github.io/Bugmoog/images/granny.png"></img>
-        <h3>granny</h3>
+        <h3>Granny</h3>
       </button>
       
       <button class="game" onclick="loadPage('granny-2');">
         <img src="https://pugmoog.github.io/Bugmoog/images/granny.png"></img>
-        <h3>granny 2</h3>
+        <h3>Granny 2</h3>
       </button>
       
       <button class="game" onclick="loadPage('lemonoids-4');">
@@ -204,7 +205,7 @@
 
       <button class="game" onclick="loadPage('pretty-hard');">
         <img src="https://pugmoog.github.io/Bugmoog/images/pretty-hard.png"></img>
-        <h3>This game is pretty hard 2</h3>
+        <h3>This Game is Pretty Hard 2</h3>
       </button>
 
       <button class="game" onclick="loadPage('fruit-ninja');">
@@ -219,12 +220,12 @@
 
       <button class="game" onclick="loadPage('ragdoll-hit');">
         <img src="https://pugmoog.github.io/Bugmoog/images/ragdoll-hit.png"></img>
-        <h3>Ragdoll hit</h3>
+        <h3>Ragdoll Hit</h3>
       </button>
 
       <button class="game" onclick="loadPage('paper-io');">
         <img src="https://pugmoog.github.io/Bugmoog/images/paper-io.png"></img>
-        <h3>Paper io</h3>
+        <h3>Paper.io</h3>
       </button>
 
       <button class="game" onclick="loadPage('minesweeper');">
@@ -267,7 +268,7 @@
         <h3>Desmos Game 2</h3>
       </button>
       
-      <button class="game" id="run-code"
+      <button class="game"
       onclick="document.getElementById('fnafMenu').showModal();">
         <img src="https://pugmoog.github.io/Bugmoog/images/fanf.png"></img>
         <h3>Five Nights At Freddy's</h3>
@@ -358,7 +359,7 @@
         <h3>The World's Hardest Game</h3>
       </button>
       
-      <button class="game" id="run-code" onclick="password('fnae');">
+      <button class="game" onclick="password('fnae');">
         <img src="https://pugmoog.github.io/Bugmoog/images/lock.png"></img>
         <h3>Password protected game</h3>
       </button>
@@ -380,10 +381,10 @@
     
     <dialog id="fnafMenu">
       Pick a FNAF Game:
-      <br><button onclick="loadPage('https://pugmoog.github.io/games/fnaf1');" id="run-code">FNAF 1</button>
-      <br><button onclick="loadPage('https://pugmoog.github.io/games/fnaf2');" id="run-code">FNAF 2</button>
-      <br><button onclick="loadPage('https://pugmoog.github.io/games/fnaf3');" id="run-code">FNAF 3</button>
-      <br><button onclick="loadPage('https://pugmoog.github.io/games/fnaf4');" id="run-code">FNAF 4</button>
+      <br><button onclick="loadPage('https://pugmoog.github.io/games/fnaf1');">FNAF 1</button>
+      <br><button onclick="loadPage('https://pugmoog.github.io/games/fnaf2');">FNAF 2</button>
+      <br><button onclick="loadPage('https://pugmoog.github.io/games/fnaf3');">FNAF 3</button>
+      <br><button onclick="loadPage('https://pugmoog.github.io/games/fnaf4');">FNAF 4</button>
     </dialog>
     
     <script>
@@ -416,7 +417,22 @@
         }
       }
 
-
+      const searchBox = document.getElementById("search");
+      searchBox.addEventListener('input', search);
+      
+      function search() {
+        const query = searchBox.value.toLowerCase().replace(/[^\w\s]/g, '');
+        const elements = document.querySelectorAll('button.game');
+        elements.forEach(element => {
+          const h3Text = element.querySelector("h3").textContent;
+          const h3TextStripped = h3Text.toLowerCase().replace(/[^\w\s]/g, '')
+          if (h3TextStripped.includes(query) || query === "") {
+            element.style.display = "block";
+          } else {
+            element.style.display = "none";
+          }
+        });
+      }
       
     </script>
     
