@@ -389,6 +389,8 @@ z-index="99999" src="about:blank"></iframe>
     </dialog>
     
     <script>
+	let focusInterval;
+
       if (window.location.href === "https://pugmoog.github.io/Bugmoog/menu.html") {
         window.location.href = "https://rugmoog.github.io";
       }
@@ -413,7 +415,9 @@ z-index="99999" src="about:blank"></iframe>
         
         let frame = gamePageFrame.contentDocument.getElementById("gameFrame");
         frame.src = "https://pugmoog.github.io/games/" + url;
-        
+	const backButton = gamePageFrame.contentDocument.getElementById("bk-button");
+	backButton.addEventListener("click", closePage);
+        focusInterval = setInterval(focus, 20);   
       }  
 
       function password(url) {
@@ -440,13 +444,21 @@ z-index="99999" src="about:blank"></iframe>
         });
       }
       
-setInterval(focus, 20);   
+
       function focus() {    
 	if (gamePageFrame.style.display === "block") {
           var frame = gamePageFrame.contentDocument.getElementById('gameFrame');     
           frame.contentWindow.focus();   
         }
       }
+
+	function closePage() {
+  gamePageFrame.style.display = "none";
+  gamePageFrame.srcdoc = "";
+  clearInterval(focusInterval);
+}
+
+
 
     </script>
     
