@@ -377,7 +377,7 @@
   
     -->
     
-    
+    <iframe id="gamePageFrame" style="display:none;position:fixed;left:0;top:0;width:100vw;height:100vh"></iframe>
     
     <dialog id="fnafMenu">
       Pick a FNAF Game:
@@ -396,17 +396,17 @@
 
     // Increment the view count when the page loads
     counter.up('bugmoog-menu');
+    const gamePageFrame = document.getElementById("gamePageFrame");
       
       async function loadPage(url){
         counter.up("bugmoog-game-opened");
         let response = await fetch("https://pugmoog.github.io/Bugmoog/game-page.html");
         let html = await response.text();
 
-        document.open();
-        document.write(html);
-        document.close();
+        gamePageframe.innerHTML = html;
+        gamePageFrame.style.display = "block";
 
-        let frame = document.getElementById("gameFrame");
+        let frame = gamePageFrame.getElementById("gameFrame");
         frame.src="https://pugmoog.github.io/games/"+url;
       }  
 
