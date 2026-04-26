@@ -406,7 +406,7 @@
         gamePageFrame.srcdoc = html;
         gamePageFrame.style.display = "block";
 
-        let frame = gamePageFrame.getElementById("gameFrame");
+        let frame = gamePageFrame.contentDocument.getElementById("gameFrame");
         frame.src="https://pugmoog.github.io/games/"+url;
       }  
 
