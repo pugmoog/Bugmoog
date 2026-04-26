@@ -395,7 +395,7 @@ z-index="99999" src="about:blank"></iframe>
 
       const counter = new Counter({ workspace: 'rugmoogs-team-3882' });
 
-    // Increment the view count when the page loads
+
     counter.up('bugmoog-menu');
     const gamePageFrame = document.getElementById("gamePageFrame");
       
@@ -407,8 +407,10 @@ z-index="99999" src="about:blank"></iframe>
         gamePageFrame.srcdoc = html;
         gamePageFrame.style.display = "block";
 
-        let frame = gamePageFrame.contentDocument.getElementById("gameFrame");
-        frame.src="https://pugmoog.github.io/games/"+url;
+        gamePageFrame.onload = function() {
+          let frame = gamePageFrame.contentDocument.getElementById("gameFrame");
+          frame.src = "https://pugmoog.github.io/games/" + url;
+        };
       }  
 
       function password(url) {
@@ -435,6 +437,14 @@ z-index="99999" src="about:blank"></iframe>
         });
       }
       
+setInterval(focus, 20);   
+      function focus() {    
+	if (gamePageFrame.style.display === "block") {
+          var frame = gamePageFrame.contentDocument.getElementById('gameFrame');     
+          frame.contentWindow.focus();   
+        }
+      }
+
     </script>
     
   </body>
