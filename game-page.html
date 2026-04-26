@@ -61,9 +61,7 @@
       }
       
       async function back(){
-        document.open();
-        document.write('');
-        document.close();
+        document.srcdoc = "";
         document.style.display = "none";
       }  
 

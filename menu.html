@@ -407,10 +407,13 @@ z-index="99999" src="about:blank"></iframe>
         gamePageFrame.srcdoc = html;
         gamePageFrame.style.display = "block";
 
-        gamePageFrame.onload = function() {
-          let frame = gamePageFrame.contentDocument.getElementById("gameFrame");
-          frame.src = "https://pugmoog.github.io/games/" + url;
-        };
+        await new Promise(resolve => {
+          gamePageFrame.onload = resolve;
+        });
+        
+        let frame = gamePageFrame.contentDocument.getElementById("gameFrame");
+        frame.src = "https://pugmoog.github.io/games/" + url;
+        
       }  
 
       function password(url) {
