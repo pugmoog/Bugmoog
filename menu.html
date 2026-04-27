@@ -68,6 +68,15 @@
       return [];
     }
   };
+
+  Navigator.getGamepads = function() {
+    try {
+      return original ? original.call(navigator) : [];
+    } catch (e) {
+      console.warn('Gamepad blocked, returning empty');
+      return [];
+    }
+  };
 </script>
   </head>
 
