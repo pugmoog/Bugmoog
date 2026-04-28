@@ -447,7 +447,12 @@ z-index="99999" src="about:blank"></iframe>
         frame.src = "https://pugmoog.github.io/games/" + url;
 	const backButton = gamePageFrame.contentDocument.getElementById("bk-button");
 	backButton.addEventListener("click", closePage);
-        focusInterval = setInterval(focus, 20);   
+        focusInterval = setInterval(focus, 20);
+
+        const script = frame.contentDocument.createElement('script');
+        script.textContent = `navigator.getGamepads = function() { return []; };`;
+        frame.contentDocument.head.insertBefore(script, frame.contentDocument.head.firstChild);
+
       }  
 
       function password(url) {
