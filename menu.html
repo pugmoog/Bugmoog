@@ -413,10 +413,10 @@ z-index="99999" src="about:blank"></iframe>
     
     <dialog id="fnafMenu">
       Pick a FNAF Game:
-      <br><button onclick="loadPage('fnaf1');">FNAF 1</button>
-      <br><button onclick="loadPage('fnaf2');">FNAF 2</button>
-      <br><button onclick="loadPage('fnaf3');">FNAF 3</button>
-      <br><button onclick="loadPage('fnaf4');">FNAF 4</button>
+      <br><button onclick="document.getElementById('fnafMenu').close();loadPage('fnaf1');">FNAF 1</button>
+      <br><button onclick="document.getElementById('fnafMenu').close();loadPage('fnaf2');">FNAF 2</button>
+      <br><button onclick="document.getElementById('fnafMenu').close();loadPage('fnaf3');">FNAF 3</button>
+      <br><button onclick="document.getElementById('fnafMenu').close();loadPage('fnaf4');">FNAF 4</button>
     </dialog>
     
     <script>
