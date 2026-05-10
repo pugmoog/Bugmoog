@@ -47,6 +47,10 @@
       .border {
         border: 1px solid black;
       }
+      
+      h4 {
+        margin: 2px;
+      }
     </style>
 <script>
   const original = Navigator.prototype.getGamepads;
@@ -81,22 +85,31 @@
   </head>
 
   <body>
-    <h1>BugMoog v4.1</h1>
+    <h1>BugMoog v4.2</h1><h4 style="color:green">(LOTS of updates)</h4>
     <p>By Pug Moog. <a href="https://pugmoog.com">pugmoog.com</a>
     <br>
-    <p>To get BugMoog, go to <br>
+    To get BugMoog, go to <br>
     <a href="https://rugmoog.github.io"><strong>R</strong>ugmoog.github.io</a><br>
     with an <strong>R.</strong>
     </p>
     <a href="https://forms.gle/jrbnDkp1dAAcPUbk6" target="_blank"><button>Have a game suggestion?</button></a><br>
-    
-    <h2 style="color:red">UPDATES:</h2><p style="color:red">
-
+    <br>
+    <details><summary style="color:red; font-size:25px; font-weight: bold">
+      Update log</summary><p>
+</p><h4>v4.1</h4><p>
 - Fixed bugs<br>
 - combined Minecraft into one<br>
 - added retro bowl college
-
+</p><h4>v4.2</h4><p>
+- New granny & granny 2 icons<br>
+- Added an update log<br>
+- Games now in alphabetical order<br>
+- Added backyard baseball, binding of isaac, GD world toxic factory, Riddle School, and puppet hockey<br>
+- Was not able to add brawl stars, stick ranger, or Hammy Home
 </p>
+</details><br>
+
+
 
   <input type="text" placeholder="Search" name="search" id="search"></input>
   <button onclick="document.getElementById('search').value = '';search();">Clear</button>
@@ -209,12 +222,12 @@
       </button>
       
       <button class="game" onclick="loadPage('granny-1');">
-        <img src="https://pugmoog.github.io/Bugmoog/images/granny.png"></img>
+        <img src="https://pugmoog.github.io/Bugmoog/images/granny1.png"></img>
         <h3>Granny</h3>
       </button>
       
       <button class="game" onclick="loadPage('granny-2');">
-        <img src="https://pugmoog.github.io/Bugmoog/images/granny.png"></img>
+        <img src="https://pugmoog.github.io/Bugmoog/images/granny2.png"></img>
         <h3>Granny 2</h3>
       </button>
       
@@ -395,6 +408,32 @@
         <h3>Password protected game</h3>
       </button>
       
+      <button class="game" onclick="loadPage('backyard-baseball');">
+        <img src="https://pugmoog.github.io/Bugmoog/images/bbaseball.png"></img>
+        <h3>Backyard Baseball</h3>
+      </button>
+      
+      <button class="game" onclick="loadPage('isaac');">
+        <img src="https://pugmoog.github.io/Bugmoog/images/isaac.png"></img>
+        <h3>The Binding of Isaac</h3>
+      </button>
+      
+      <button class="game" onclick="loadPage('puppet-hockey');">
+        <img src="https://pugmoog.github.io/Bugmoog/images/puppet-hockey.png"></img>
+        <h3>Puppet Hockey</h3>
+      </button>
+      
+      <button class="game" onclick="loadPage('gd-world-tf');">
+        <img src="https://pugmoog.github.io/Bugmoog/images/gd-world-tf.png"></img>
+        <h3>Geometry Dash Word Toxic Factory</h3>
+      </button>
+      
+      <button class="game"
+      onclick="document.getElementById('riddleMenu').showModal();">
+        <img src="https://pugmoog.github.io/Bugmoog/images/riddleschool.png"></img>
+        <h3>Riddle School</h3>
+      </button>
+      
     </div>
     
     <!--
@@ -419,84 +458,102 @@ z-index="99999" src="about:blank"></iframe>
       <br><button onclick="document.getElementById('fnafMenu').close();loadPage('fnaf4');">FNAF 4</button>
     </dialog>
     
+    <dialog id="riddleMenu">
+      Pick a Riddle School Game:
+      <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddleschool1');">Riddle School 1</button>
+      <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddleschool2');">Riddle School 2</button>
+      <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddleschool3');">Riddle School 3</button>
+      <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddleschool4');">Riddle School 4</button>
+      <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddleschool5');">Riddle School 5</button>
+    </dialog>
+    
     <script>
 	let focusInterval;
 
-      if (window.location.href === "https://pugmoog.github.io/Bugmoog/menu.html") {
-        window.location.href = "https://rugmoog.github.io";
-      }
+	if (window.location.href === "https://pugmoog.github.io/Bugmoog/menu.html") {
+		window.location.href = "https://rugmoog.github.io";
+	}
 
-      const counter = new Counter({ workspace: 'rugmoogs-team-3882' });
+	const counter = new Counter({ workspace: 'rugmoogs-team-3882' });
 
+	counter.up('bugmoog-menu');
+	const gamePageFrame = document.getElementById("gamePageFrame");
+	const gridContainer = document.querySelector('.grid');
+	const games = Array.from(document.querySelectorAll('.game'));
 
-    counter.up('bugmoog-menu');
-    const gamePageFrame = document.getElementById("gamePageFrame");
-      
-      async function loadPage(url){
-        counter.up("bugmoog-game-opened");
-        let response = await fetch("https://pugmoog.github.io/Bugmoog/game-page.html");
-        let html = await response.text();
+	// Sort games alphabetically by their h3 text content
+	games.sort((a, b) => {
+		const nameA = a.querySelector('h3').textContent.trim().toLowerCase();
+		const nameB = b.querySelector('h3').textContent.trim().toLowerCase();
+		return nameA.localeCompare(nameB);
+	});
 
-        gamePageFrame.srcdoc = html;
-        gamePageFrame.style.display = "block";
+	// Reorder the DOM
+	games.forEach(game => {
+		gridContainer.appendChild(game);
+	});
 
-        await new Promise(resolve => {
-          gamePageFrame.onload = resolve;
-        });
-        
-        let frame = gamePageFrame.contentDocument.getElementById("gameFrame");
-        frame.src = "https://pugmoog.github.io/games/" + url;
-	const backButton = gamePageFrame.contentDocument.getElementById("bk-button");
-	backButton.addEventListener("click", closePage);
-        focusInterval = setInterval(focus, 20);
+	async function loadPage(url) {
+		counter.up("bugmoog-game-opened");
+		let response = await fetch("https://pugmoog.github.io/Bugmoog/game-page.html");
+		let html = await response.text();
 
-        const script = frame.contentDocument.createElement('script');
-        script.textContent = `navigator.getGamepads = function() { return []; };`;
-        frame.contentDocument.head.insertBefore(script, frame.contentDocument.head.firstChild);
+		gamePageFrame.srcdoc = html;
+		gamePageFrame.style.display = "block";
 
-      }  
+		await new Promise(resolve => {
+			gamePageFrame.onload = resolve;
+		});
 
-      function password(url) {
-        let tryy = prompt("enter password");
-        if (tryy==="12927") {
-          loadPage(url)
-        }
-      }
+		let frame = gamePageFrame.contentDocument.getElementById("gameFrame");
+		frame.src = "https://pugmoog.github.io/games/" + url;
+		const backButton = gamePageFrame.contentDocument.getElementById("bk-button");
+		backButton.addEventListener("click", closePage);
+		focusInterval = setInterval(focus, 20);
 
-      const searchBox = document.getElementById("search");
-      searchBox.addEventListener('input', search);
-      
-      function search() {
-        const query = searchBox.value.toLowerCase().replace(/[^\w\s]/g, '');
-        const elements = document.querySelectorAll('button.game');
-        elements.forEach(element => {
-          const h3Text = element.querySelector("h3").textContent;
-          const h3TextStripped = h3Text.toLowerCase().replace(/[^\w\s]/g, '')
-          if (h3TextStripped.includes(query) || query === "") {
-            element.style.display = "block";
-          } else {
-            element.style.display = "none";
-          }
-        });
-      }
-      
+		const script = frame.contentDocument.createElement('script');
+		script.textContent = `navigator.getGamepads = function() { return []; };`;
+		frame.contentDocument.head.insertBefore(script, frame.contentDocument.head.firstChild);
+	}
 
-      function focus() {    
-	if (gamePageFrame.style.display === "block") {
-          var frame = gamePageFrame.contentDocument.getElementById('gameFrame');     
-          frame.contentWindow.focus();   
-        }
-      }
+	function password(url) {
+		let tryy = prompt("enter password");
+		if (tryy === "12927") {
+			loadPage(url)
+		}
+	}
+
+	const searchBox = document.getElementById("search");
+	searchBox.addEventListener('input', search);
+
+	function search() {
+		const query = searchBox.value.toLowerCase().replace(/[^\w\s]/g, '');
+		const elements = document.querySelectorAll('button.game');
+		elements.forEach(element => {
+			const h3Text = element.querySelector("h3").textContent;
+			const h3TextStripped = h3Text.toLowerCase().replace(/[^\w\s]/g, '')
+			if (h3TextStripped.includes(query) || query === "") {
+				element.style.display = "block";
+			} else {
+				element.style.display = "none";
+			}
+		});
+	}
+
+	function focus() {
+		if (gamePageFrame.style.display === "block") {
+			var frame = gamePageFrame.contentDocument.getElementById('gameFrame');
+			frame.contentWindow.focus();
+		}
+	}
 
 	function closePage() {
-  gamePageFrame.style.display = "none";
-  gamePageFrame.srcdoc = "";
-  clearInterval(focusInterval);
-}
+		gamePageFrame.style.display = "none";
+		gamePageFrame.srcdoc = "";
+		clearInterval(focusInterval);
+	}
+</script>
 
-
-
-    </script>
-    
-  </body>
+</body>
 </html>
+
