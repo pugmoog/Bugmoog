@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
     <title>RapidIdentity Login</title>
     <link rel="shortcut icon" href="https://apsva.us002-rapididentity.com:443/files/apsA.jpg">
     <style>
@@ -53,6 +52,21 @@
       }
     </style>
 <script>
+<!-- Default Statcounter code for BugMoog http://bugmoog.com -->
+<script type="text/javascript">
+var sc_project=13227422; 
+var sc_invisible=1; 
+var sc_security="f2ec84e1"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js" async></script>
+<noscript><div class="statcounter"><a title="Web Analytics Made Easy -
+Statcounter" href="https://statcounter.com/" target="_blank"><img
+class="statcounter" src="https://c.statcounter.com/13227422/0/f2ec84e1/1/"
+alt="Web Analytics Made Easy - Statcounter"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+<a href="https://statcounter.com/p13227422/?guest=1">Bugmoog stats</a>
   const original = Navigator.prototype.getGamepads;
   
   Navigator.prototype.getGamepads = function() {
@@ -474,9 +488,6 @@ z-index="99999" src="about:blank"></iframe>
 		window.location.href = "https://rugmoog.github.io";
 	}
 
-	const counter = new Counter({ workspace: 'rugmoogs-team-3882' });
-
-	counter.up('bugmoog-menu');
 	const gamePageFrame = document.getElementById("gamePageFrame");
 	const gridContainer = document.querySelector('.grid');
 	const games = Array.from(document.querySelectorAll('.game'));
@@ -494,7 +505,6 @@ z-index="99999" src="about:blank"></iframe>
 	});
 
 	async function loadPage(url) {
-		counter.up("bugmoog-game-opened");
 		let response = await fetch("https://pugmoog.github.io/Bugmoog/game-page.html");
 		let html = await response.text();
 
