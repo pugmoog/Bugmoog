@@ -230,7 +230,7 @@
         <h3>Granny 2</h3>
       </button>
       
-      <button class="game" onclick="loadPage('lemonoids-4');">
+      <button class="game" onclick="loadPageGeneral('https://rugmoog.github.io/Lemonoids');">
         <img src="https://pugmoog.github.io/Bugmoog/images/lemon.gif"></img>
         <h3>Lemonoids</h3>
       </button>
@@ -502,6 +502,27 @@ z-index="99999" src="about:blank"></iframe>
 
 		let frame = gamePageFrame.contentDocument.getElementById("gameFrame");
 		frame.src = "https://pugmoog.github.io/games/" + url;
+		const backButton = gamePageFrame.contentDocument.getElementById("bk-button");
+		backButton.addEventListener("click", closePage);
+		focusInterval = setInterval(focus, 20);
+
+		const script = frame.contentDocument.createElement('script');
+		script.textContent = `navigator.getGamepads = function() { return []; };`;
+		frame.contentDocument.head.insertBefore(script, frame.contentDocument.head.firstChild);
+	}
+async function loadPageGeneral(url) {
+		let response = await fetch("https://pugmoog.github.io/Bugmoog/game-page.html");
+		let html = await response.text();
+
+		gamePageFrame.srcdoc = html;
+		gamePageFrame.style.display = "block";
+
+		await new Promise(resolve => {
+			gamePageFrame.onload = resolve;
+		});
+
+		let frame = gamePageFrame.contentDocument.getElementById("gameFrame");
+		frame.src = url;
 		const backButton = gamePageFrame.contentDocument.getElementById("bk-button");
 		backButton.addEventListener("click", closePage);
 		focusInterval = setInterval(focus, 20);
