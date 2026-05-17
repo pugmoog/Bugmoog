@@ -1,0 +1,50 @@
+/* Bugmoog CSS */
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  height: auto;
+  border: solid 1px;
+  border-color: black;
+  margin: 10px;
+  background-color: #eeeeee;
+}
+
+.game:hover {
+  background-color: #bbbbbb;
+}
+
+.game h3 {
+  margin: 5px;
+  color: black;
+  font-weight: bold;
+}
+
+.game img {
+  max-width: 95%;
+  height: auto;
+  margin: 5px;
+}
+
+.grid {
+  width: 90vw;
+  max-width: 800px;
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+body {
+  text-align: center;
+  background-color: white;
+}
+
+.border {
+  border: 1px solid black;
+}
+
+h4 {
+  margin: 2px;
+}
