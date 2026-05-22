@@ -51,12 +51,8 @@ async function loadPageGeneral(url) {
   encodeURIComponent(url);
   gamePageFrame.style.display = "block";
 
-  await new Promise(resolve => {
-    gamePageFrame.onload = resolve;
-  });
+});
 
-  const backButton = gamePageFrame.contentDocument.getElementById("bk-button");
-  backButton.addEventListener("click", closePage);
   focusInterval = setInterval(focus, 20);
 }
 function password(url) {
