@@ -51,9 +51,6 @@ async function loadPageGeneral(url) {
   encodeURIComponent(url);
   gamePageFrame.style.display = "block";
 
-  gamePageFrame.onload = function() {
-gamePageFrame.contentdocument.getElementById("bk-button").onclick = closePage();
-};
 
   focusInterval = setInterval(focus, 20);
 }
@@ -63,6 +60,14 @@ function password(url) {
     loadPage(url);
   }
 }
+
+window.addEventListener("message", (e) => {
+  if (e.data === "ready") {
+    const btn = gamePageFrame.contentDocument.getElementById("bk-button");
+    btn.onclick = closePage;
+  }
+});
+
 
 
 // Other functions
