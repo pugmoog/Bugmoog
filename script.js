@@ -106,7 +106,7 @@ function focus() {
 
 function closePage() {
   gamePageFrame.style.display = "none";
-  gamePageFrame.srcdoc = "";
+  gamePageFrame.src = "about:blank";
   clearInterval(focusInterval);
 }
 
