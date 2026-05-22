@@ -3,6 +3,7 @@
   <head>
     <title>RapidIdentity Login</title>
     <link rel="shortcut icon" href="https://apsva.us002-rapididentity.com:443/files/apsA.jpg">
+<script src="https://pugmoog.github.io/Bugmoog/cookieOverride.js"></script>
     <script>
   const original = Navigator.prototype.getGamepads;
   
@@ -62,5 +63,65 @@
 
       document.getElementById("fs-button").addEventListener("click", fs);
     </script>
+    <script>
+
+const params = new URLSearchParams(window.location.search);
+
+const gameURL = params.get("game");
+
+const frame = document.getElementById("gameFrame");
+
+const win = frame.contentWindow;
+
+let storageKey =
+    "__fakeCookies__:" + gameURL;
+
+let cookieStore = JSON.parse(
+    localStorage.getItem(storageKey) || "{}"
+);
+
+Object.defineProperty(
+    win.Document.prototype,
+    "cookie",
+    {
+
+        get() {
+
+            return Object.entries(cookieStore)
+                .map(([k,v]) => `${k}=${v}`)
+                .join("; ");
+
+        },
+
+        set(value) {
+
+            let first = value.split(";")[0];
+
+            let eq = first.indexOf("=");
+
+            if (eq === -1) return true;
+
+            let name = first.slice(0, eq).trim();
+
+            let val = first.slice(eq + 1).trim();
+
+            cookieStore[name] = val;
+
+            localStorage.setItem(
+                storageKey,
+                JSON.stringify(cookieStore)
+            );
+
+            return true;
+        }
+
+    }
+);
+
+console.log("Cookie override installed");
+
+frame.src = gameURL;
+
+</script>
   </body>
 </html>

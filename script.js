@@ -8,8 +8,8 @@ if (window.location.href === "https://pugmoog.github.io/Bugmoog/menu.html") {
   window.gamePageFrame = document.getElementById("gamePageFrame");
   window.gamesGrid = document.querySelector('.grid');
   window.focusInterval;
-  const searchBox = document.getElementById("search");
-  searchBox.addEventListener('input', search);
+  window.searchBox = document.getElementById("search");
+  window.searchBox.addEventListener('input', search);
   const original = Navigator.prototype.getGamepads;
   Navigator.prototype.getGamepads = function () {
     try {
@@ -42,25 +42,22 @@ async function loadPage(url) {
   loadPageGeneral("https://pugmoog.github.io/Bugmoog/games/" + url)
 }
 async function loadPageGeneral(url) {
-  let response = await fetch("https://pugmoog.github.io/Bugmoog/game-page.html");
-  let html = await response.text();
+  if (gamePageFrame.style.display==="block") {
+    return;
+  }
 
-  gamePageFrame.srcdoc = html;
+  gamePageFrame.src =
+  "https://pugmoog.github.io/Bugmoog/game-page.html?game=" +
+  encodeURIComponent(url);
   gamePageFrame.style.display = "block";
 
   await new Promise(resolve => {
     gamePageFrame.onload = resolve;
   });
 
-  let frame = gamePageFrame.contentDocument.getElementById("gameFrame");
-  frame.src = url;
   const backButton = gamePageFrame.contentDocument.getElementById("bk-button");
   backButton.addEventListener("click", closePage);
   focusInterval = setInterval(focus, 20);
-
-  const script = frame.contentDocument.createElement('script');
-  script.textContent = `navigator.getGamepads = function() { return []; };`;
-  frame.contentDocument.head.insertBefore(script, frame.contentDocument.head.firstChild);
 }
 function password(url) {
   let tryy = prompt("enter password");
