@@ -86,8 +86,15 @@ function search() {
 }
 
 function focus() {
-  if (gamePageFrame.style.display === "block") {
-    var frame = gamePageFrame.contentDocument.getElementById('gameFrame');
+  if (gamePageFrame.style.display !== "block") return;
+
+  const doc = gamePageFrame.contentDocument;
+  if (!doc) return;
+
+  const frame = doc.getElementById('gameFrame');
+  if (!frame) return;
+
+  if (frame.contentWindow) {
     frame.contentWindow.focus();
   }
 }

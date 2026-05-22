@@ -64,11 +64,8 @@
       document.getElementById("fs-button").addEventListener("click", fs);
 
 
-      window.addEventListener("message", (e) => {
-  if (e.data === "ready") {
-    const btn = gamePageFrame.contentDocument.getElementById("bk-button");
-    btn.onclick = closePage;
-  }
+      window.addEventListener("DOMContentLoaded", () => {
+  window.parent.postMessage("ready", "*");
 });
     </script>
     <script>
