@@ -51,7 +51,9 @@ async function loadPageGeneral(url) {
   encodeURIComponent(url);
   gamePageFrame.style.display = "block";
 
-
+  gamePageFrame.onload = function() {
+gamePageFrame.contentdocument.getElementById("bk-button").onclick = closePage();
+};
 
   focusInterval = setInterval(focus, 20);
 }
