@@ -51,7 +51,7 @@ async function loadPageGeneral(url) {
   encodeURIComponent(url);
   gamePageFrame.style.display = "block";
 
-});
+
 
   focusInterval = setInterval(focus, 20);
 }
