@@ -68,6 +68,11 @@ window.addEventListener("message", (e) => {
   }
 });
 
+window.addEventListener("message", (e) => {
+  if (e.data === "close") {
+    closePage();
+  }
+});
 
 
 // Other functions

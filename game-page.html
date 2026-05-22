@@ -64,7 +64,14 @@
       document.getElementById("fs-button").addEventListener("click", fs);
 
 
-      window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("bk-button");
+  if (btn) {
+    btn.onclick = () => {
+      window.parent.postMessage("close", "*");
+    };
+  }
+
   window.parent.postMessage("ready", "*");
 });
     </script>
