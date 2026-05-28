@@ -178,6 +178,9 @@ const games = [
   { name: "Bloons Tower Defense 3 (btd3)", id: "btd3", image: "btd3.png" },
   { name: "Soccer Skills World Cup", id: "soccer-skills-world-cup", image: "soccer-skills-world-cup.png" },
   { name: "The World's Hardest Game", id: "worlds-hardest-game", image: "whg.png" },
+  { name: "We Become What We Behold", id: "we-become-what-we-behold", image: "wbwwb.png" },
+  { name: "Bubble Shooter", id: "bubbleshooter", image: "bubbleshooter.png" },
+  { name: "Slice It All", id: "slice-it-all", image: "slice-it-all.png" },
 ];
 
 games.sort((a, b) => a.name.localeCompare(b.name));
