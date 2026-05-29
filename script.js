@@ -73,7 +73,29 @@ window.addEventListener("message", (e) => {
     closePage();
   }
 });
+window.addEventListener("message", (e) => {
+  if (e.data === "fs") {
+    fs();
+  }
+});
+      function fs() {
+        if (gamePageFrame.style.display !== "block") return;
 
+  const doc = gamePageFrame.contentDocument;
+  if (!doc) return;
+
+  const elem = doc.getElementById('gameFrame');
+  if (!elem) return;
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { 
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { 
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        }
+      }
 
 // Other functions
 function search() {
