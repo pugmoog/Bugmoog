@@ -58,14 +58,13 @@ window.addEventListener("DOMContentLoaded", () => {
     btn.onclick = () => {
       window.parent.postMessage("close", "*");
     };
-  }
-window.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("fs-button");
-  if (btn) {
-    btn.onclick = () => {
+const btnn = document.getElementById("fs-button");
+  if (btnn) {
+    btnn.onclick = () => {
       window.parent.postMessage("fs", "*");
     };
   }
+
 
   window.parent.postMessage("ready", "*");
 });
