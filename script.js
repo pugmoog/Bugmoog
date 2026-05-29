@@ -47,7 +47,7 @@ async function loadPageGeneral(url) {
   }
 
   gamePageFrame.src =
-  "https://pugmoog.github.io/Bugmoog/game-page.html?game=" +
+  "game-page.html?game=" +
   encodeURIComponent(url);
   gamePageFrame.style.display = "block";
 
@@ -75,27 +75,47 @@ window.addEventListener("message", (e) => {
 });
 window.addEventListener("message", (e) => {
   if (e.data === "fs") {
+      console.log("fsing")
     fs();
   }
 });
-      function fs() {
-        if (gamePageFrame.style.display !== "block") return;
+function fs() {
+    console.log("fs() called");
+    console.log("gamePageFrame.style.display:", gamePageFrame.style.display);
+    
+    if (gamePageFrame.style.display !== "block") {
+        console.log("RETURNING: display is not block");
+        return;
+    }
 
-  const doc = gamePageFrame.contentDocument;
-  if (!doc) return;
+    const doc = gamePageFrame.contentDocument || gamePageFrame.contentWindow?.document;
+    console.log("doc via alternative method:", doc);
+    console.log("contentDocument:", doc);
+    if (!doc) {
+        console.log("RETURNING: no contentDocument");
+        return;
+    }
 
-  const elem = doc.getElementById('gameFrame');
-  if (!elem) return;
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-        } else if (elem.mozRequestFullScreen) { 
-            elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullscreen) { 
-            elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) {
-            elem.msRequestFullscreen();
-        }
-      }
+    const elem = doc.getElementById('gameFrame');
+    console.log("gameFrame element:", elem);
+    if (!elem) {
+        console.log("RETURNING: gameFrame element not found");
+        return;
+    }
+
+    console.log("Attempting fullscreen...");
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen().catch(err => console.error("Fullscreen error:", err));
+    } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+    } else {
+        console.log("RETURNING: no fullscreen method available");
+    }
+}
 
 // Other functions
 function search() {
