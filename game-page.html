@@ -32,7 +32,7 @@
         tabindex='0'
       id='gameFrame'
       allowfullscreen 
-      allow="gamepad *;"
+      allow="gamepad *;fullscreen;"
       style='
         position:fixed;
         left: 0;
@@ -62,7 +62,7 @@ window.addEventListener("DOMContentLoaded", () => {
 const btnn = document.getElementById("fs-button");
   if (btnn) {
     btnn.onclick = () => {
-      window.parent.postMessage("fs", "*");
+      gameFrame.requestFullscreen();
     };
   }
 

@@ -142,7 +142,7 @@ function focus() {
   if (!frame) return;
 
   if (frame.contentWindow) {
-    frame.contentWindow.focus();
+    frame.focus();
   }
 }
 
