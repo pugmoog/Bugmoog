@@ -47,7 +47,7 @@ async function loadPageGeneral(url) {
   }
 
   gamePageFrame.src =
-  "https://pugmoog.github.io/Bugmoog/game-page.html?game=" +
+  "game-page.html?game=" +
   encodeURIComponent(url);
   gamePageFrame.style.display = "block";
 
