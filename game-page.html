@@ -62,7 +62,7 @@ window.addEventListener("DOMContentLoaded", () => {
 const btnn = document.getElementById("fs-button");
   if (btnn) {
     btnn.onclick = () => {
-      document.getElementById('gameFrame').requestFullscreen();
+      document.getElementById('gameFrame').contentWindow.requestFullscreen();
     };
   }
 
