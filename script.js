@@ -93,6 +93,17 @@ function fs() {
         gamePageFrame.requestFullscreen().catch(err => console.error("Fullscreen error:", err));
     }
 }
+document.addEventListener('fullscreenchange',  (e) => {
+    const fse = document.fullscreenElement;
+    if (fse === gamePageFrame) {
+        gamePageFrame.contentWindow.postMessage({ type:'fullscreen', state:'entered' }, '*');
+    } else {
+        console.log("exiting?");
+        gamePageFrame.contentWindow.postMessage({ type:'fullscreen', state:'exited' }, '*');
+    }
+
+});
+
 
 // Other functions
 function search() {
@@ -112,15 +123,8 @@ function search() {
 function focus() {
   if (gamePageFrame.style.display !== "block") return;
 
-  const doc = gamePageFrame.contentDocument;
-  if (!doc) return;
-
-  const frame = doc.getElementById('gameFrame');
-  if (!frame) return;
-
-  if (frame.contentWindow) {
-    frame.focus();
-  }
+  gamePageFrame.focus();
+  
 }
 
 function closePage() {

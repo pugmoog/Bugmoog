@@ -50,18 +50,19 @@
     <script>
 
 
-        function onFullscreenChange() {
-          const fsEl = document.fullscreenElement;
-          if (fsEl === document.getElementById("gameFrame")) {
+        function onFullscreenChange(state) {
+            console.log("detected fs change", state);
+          if (state === 'entered') {
               document.getElementById("bk-button").style.display = "none";
               document.getElementById("fs-button").style.display = "none";
-          } else if (!fsEl) {
+              console.log("removed buttons");
+          } else {
               document.getElementById("bk-button").style.display = "block";
               document.getElementById("fs-button").style.display = "block";
+              console.log("readded buttons");
           }
         }
 
-        document.addEventListener('fullscreenchange', onFullscreenChange);
 
 window.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("bk-button");
@@ -80,6 +81,11 @@ const btnn = document.getElementById("fs-button");
 
   window.parent.postMessage("ready", "*");
 });
+        
+        window.addEventListener("message", (e) => {
+            console.log("messege recieved", e.data);
+            onFullscreenChange(e.data.state);
+        });
     </script>
     <script>
 
