@@ -88,32 +88,9 @@ function fs() {
         return;
     }
 
-    const doc = gamePageFrame.contentDocument || gamePageFrame.contentWindow?.document;
-    console.log("doc via alternative method:", doc);
-    console.log("contentDocument:", doc);
-    if (!doc) {
-        console.log("RETURNING: no contentDocument");
-        return;
-    }
-
-    const elem = doc.getElementById('gameFrame');
-    console.log("gameFrame element:", elem);
-    if (!elem) {
-        console.log("RETURNING: gameFrame element not found");
-        return;
-    }
-
     console.log("Attempting fullscreen...");
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen().catch(err => console.error("Fullscreen error:", err));
-    } else if (elem.mozRequestFullScreen) {
-        elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) {
-        elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-        elem.msRequestFullscreen();
-    } else {
-        console.log("RETURNING: no fullscreen method available");
+    if (gamePageFrame.requestFullscreen) {
+        gamePageFrame.requestFullscreen().catch(err => console.error("Fullscreen error:", err));
     }
 }
 

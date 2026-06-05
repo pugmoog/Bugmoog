@@ -26,8 +26,8 @@
 </script>
   </head>
   <body style="background-color:white">
-    <button style='width:60px;height:6vh;position:fixed;top:0;left:0;z-index:3;background-color:rgba(200,200,200,0.6);color:black' id='fs-button'>FS</button>
-    <button style='width:100px;height:6vh;position:fixed;top:0;left:60px;z-index:2;background-color:rgba(200,200,200,0.6);color:black' id='bk-button'>BACK</button>
+    <button style='width:60px;height:6vh;position:fixed;top:0;left:0;z-index:3;background-color:rgba(200,200,200,0.6);color:black;display:block;' id='fs-button'>FS</button>
+    <button style='width:100px;height:6vh;position:fixed;top:0;left:60px;z-index:2;background-color:rgba(200,200,200,0.6);color:black;display:block;' id='bk-button'>BACK</button>
     <iframe
         tabindex='0'
       id='gameFrame'
@@ -50,7 +50,18 @@
     <script>
 
 
+        function onFullscreenChange() {
+          const fsEl = document.fullscreenElement;
+          if (fsEl === document.getElementById("gameFrame")) {
+              document.getElementById("bk-button").style.display = "none";
+              document.getElementById("fs-button").style.display = "none";
+          } else if (!fsEl) {
+              document.getElementById("bk-button").style.display = "block";
+              document.getElementById("fs-button").style.display = "block";
+          }
+        }
 
+        document.addEventListener('fullscreenchange', onFullscreenChange);
 
 window.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("bk-button");
