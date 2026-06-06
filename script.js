@@ -2,7 +2,7 @@
 if (window.location.href === "https://pugmoog.github.io/Bugmoog/menu.html") {
   window.location.href = "https://rugmoog.github.io";
 }
-
+const weburl = "https://pugmoog.github.io/Bugmoog/";
 // Setup
 (() => {
   window.gamePageFrame = document.getElementById("gamePageFrame");
@@ -47,7 +47,7 @@ async function loadPageGeneral(url) {
   }
 
   gamePageFrame.src =
-  "https://pugmoog.github.io/Bugmoog/game-page.html?game=" +
+  weburl+"game-page.html?game=" +
   encodeURIComponent(url);
   gamePageFrame.style.display = "block";
 
@@ -122,8 +122,10 @@ function search() {
 
 function focus() {
   if (gamePageFrame.style.display !== "block") return;
-
-  gamePageFrame.focus();
+    console.log("focusing");
+    try {gamePageFrame.focus(); } catch(err) {
+        alert(err.message || err);
+    }
   
 }
 
