@@ -48,7 +48,7 @@
       src='about:blank'>
     </iframe>
     <script>
-
+        setInterval(() => {document.getElementById("gameFrame").focus()}, 20)
 
         function onFullscreenChange(state) {
             console.log("detected fs change", state);
