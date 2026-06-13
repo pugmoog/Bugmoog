@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Merger</title>
+</head>
+<body>
+    <h1>Loading and combining parts...</h1>
+    <script>
+        const parts = ['part-aa', 'part-ab', 'part-ac']; // Add all your parts
+        
+        Promise.all(
+            parts.map(part => fetch(part).then(r => r.text()))
+        ).then(contents => {
+            const combined = contents.join('');
+            document.open();
+            document.write(combined);
+            document.close();
+        }).catch(err => {
+            document.write('Error: ' + err.message);
+        });
+    </script>
+</body>
+</html>
