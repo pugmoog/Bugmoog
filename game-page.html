@@ -4,36 +4,38 @@
     <title>RapidIdentity Login</title>
     <link rel="shortcut icon" href="https://apsva.us002-rapididentity.com:443/files/apsA.jpg">
     <script>
-  const original = Navigator.prototype.getGamepads;
-  
-  Navigator.prototype.getGamepads = function() {
-    try {
-      return original ? original.call(this) : [];
-    } catch (e) {
-      console.warn('Gamepad blocked, returning empty');
-      return [];
-    }
-  };
-  
-  navigator.getGamepads = function() {
-    try {
-      return original ? original.call(navigator) : [];
-    } catch (e) {
-      console.warn('Gamepad blocked, returning empty');
-      return [];
-    }
-  };
-</script>
+      const original = Navigator.prototype.getGamepads;
+
+      Navigator.prototype.getGamepads = function() {
+        try {
+          return original ? original.call(this) : [];
+        } catch (e) {
+          console.warn('Gamepad blocked, returning empty');
+          return [];
+        }
+      };
+
+      navigator.getGamepads = function() {
+        try {
+          return original ? original.call(navigator) : [];
+        } catch (e) {
+          console.warn('Gamepad blocked, returning empty');
+          return [];
+        }
+      };
+    </script>
   </head>
+
   <body style="background-color:white">
-    <button style='width:60px;height:6vh;position:fixed;top:0;left:0;z-index:3;background-color:rgba(200,200,200,0.6);color:black;display:block;' id='fs-button'>FS</button>
-    <button style='width:100px;height:6vh;position:fixed;top:0;left:60px;z-index:2;background-color:rgba(200,200,200,0.6);color:black;display:block;' id='bk-button'>BACK</button>
+    <button style="width:60px;height:6vh;position:fixed;top:0;left:0;z-index:3;background-color:rgba(200,200,200,0.6);color:black;display:block;" id="fs-button">FS</button>
+    <button style="width:100px;height:6vh;position:fixed;top:0;left:60px;z-index:2;background-color:rgba(200,200,200,0.6);color:black;display:block;" id="bk-button">BACK</button>
+
     <iframe
-        tabindex='0'
-      id='gameFrame'
-      allowfullscreen 
+      tabindex="0"
+      id="gameFrame"
+      allowfullscreen
       allow="gamepad *;fullscreen;"
-      style='
+      style="
         position:fixed;
         left: 0;
         top: 0;
@@ -44,108 +46,89 @@
         padding: 0;
         border: none;
         z-index: 1
-      ' 
-      src='about:blank'>
+      "
+      src="about:blank">
     </iframe>
-    <script>
-        setInterval(() => {document.getElementById("gameFrame").focus()}, 20)
 
-        function onFullscreenChange(state) {
-            console.log("detected fs change", state);
-          if (state === 'entered') {
-              document.getElementById("bk-button").style.display = "none";
-              document.getElementById("fs-button").style.display = "none";
-              console.log("removed buttons");
-          } else {
-              document.getElementById("bk-button").style.display = "block";
-              document.getElementById("fs-button").style.display = "block";
-              console.log("readded buttons");
-          }
+    <script>
+      setInterval(() => {
+        document.getElementById("gameFrame").focus();
+      }, 20);
+
+      function onFullscreenChange(state) {
+        console.log("detected fs change", state);
+        if (state === 'entered') {
+          document.getElementById("bk-button").style.display = "none";
+          document.getElementById("fs-button").style.display = "none";
+          console.log("removed buttons");
+        } else {
+          document.getElementById("bk-button").style.display = "block";
+          document.getElementById("fs-button").style.display = "block";
+          console.log("readded buttons");
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("bk-button");
+        if (btn) {
+          btn.onclick = () => {
+            window.parent.postMessage("close", "*");
+          };
         }
 
+        const btnn = document.getElementById("fs-button");
+        if (btnn) {
+          btnn.onclick = () => {
+            window.parent.postMessage("fs", "*");
+          };
+        }
 
-window.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("bk-button");
-  if (btn) {
-    btn.onclick = () => {
-      window.parent.postMessage("close", "*");
-    };
-    }
-const btnn = document.getElementById("fs-button");
-  if (btnn) {
-    btnn.onclick = () => {
-        window.parent.postMessage("fs", "*");
-    };
-  }
+        window.parent.postMessage("ready", "*");
+      });
 
-
-  window.parent.postMessage("ready", "*");
-});
-        
-        window.addEventListener("message", (e) => {
-            console.log("messege recieved", e.data);
-            onFullscreenChange(e.data.state);
-        });
+      window.addEventListener("message", (e) => {
+        console.log("message received", e.data);
+        onFullscreenChange(e.data.state);
+      });
     </script>
+
     <script>
+      const params = new URLSearchParams(window.location.search);
+      const gameURL = params.get("game");
+      const frame = document.getElementById("gameFrame");
+      const win = frame.contentWindow;
 
-const params = new URLSearchParams(window.location.search);
+      let storageKey = "__fakeCookies__:" + gameURL;
+      let cookieStore = JSON.parse(localStorage.getItem(storageKey) || "{}");
 
-const gameURL = params.get("game");
-
-const frame = document.getElementById("gameFrame");
-
-const win = frame.contentWindow;
-
-let storageKey =
-    "__fakeCookies__:" + gameURL;
-
-let cookieStore = JSON.parse(
-    localStorage.getItem(storageKey) || "{}"
-);
-
-Object.defineProperty(
-    win.Document.prototype,
-    "cookie",
-    {
-
-        get() {
-
+      Object.defineProperty(
+        win.Document.prototype,
+        "cookie",
+        {
+          get() {
             return Object.entries(cookieStore)
-                .map(([k,v]) => `${k}=${v}`)
-                .join("; ");
+              .map(([k, v]) => `${k}=${v}`)
+              .join("; ");
+          },
 
-        },
-
-        set(value) {
-
+          set(value) {
             let first = value.split(";")[0];
-
             let eq = first.indexOf("=");
 
             if (eq === -1) return true;
 
             let name = first.slice(0, eq).trim();
-
             let val = first.slice(eq + 1).trim();
 
             cookieStore[name] = val;
-
-            localStorage.setItem(
-                storageKey,
-                JSON.stringify(cookieStore)
-            );
+            localStorage.setItem(storageKey, JSON.stringify(cookieStore));
 
             return true;
+          }
         }
+      );
 
-    }
-);
-
-console.log("Cookie override installed");
-
-frame.src = gameURL;
-
-</script>
+      frame.src = gameURL;
+    </script>
   </body>
 </html>

@@ -2,7 +2,9 @@
 if (window.location.href === "https://pugmoog.github.io/Bugmoog/menu.html") {
   window.location.href = "https://rugmoog.github.io";
 }
-const weburl = "https://pugmoog.github.io/Bugmoog/";
+
+const weburl = "";
+
 // Setup
 (() => {
   window.gamePageFrame = document.getElementById("gamePageFrame");
@@ -10,7 +12,9 @@ const weburl = "https://pugmoog.github.io/Bugmoog/";
   window.focusInterval;
   window.searchBox = document.getElementById("search");
   window.searchBox.addEventListener('input', search);
+
   const original = Navigator.prototype.getGamepads;
+
   Navigator.prototype.getGamepads = function () {
     try {
       return original ? original.call(this) : [];
@@ -19,6 +23,7 @@ const weburl = "https://pugmoog.github.io/Bugmoog/";
       return [];
     }
   };
+
   navigator.getGamepads = function () {
     try {
       return original ? original.call(navigator) : [];
@@ -27,6 +32,7 @@ const weburl = "https://pugmoog.github.io/Bugmoog/";
       return [];
     }
   };
+
   Navigator.getGamepads = function () {
     try {
       return original ? original.call(navigator) : [];
@@ -39,21 +45,20 @@ const weburl = "https://pugmoog.github.io/Bugmoog/";
 
 // Game loading
 async function loadPage(url) {
-  loadPageGeneral("https://pugmoog.github.io/Bugmoog/games/" + url)
+  loadPageGeneral("https://pugmoog.github.io/Bugmoog/games/" + url);
 }
+
 async function loadPageGeneral(url) {
-  if (gamePageFrame.style.display==="block") {
+  if (gamePageFrame.style.display === "block") {
     return;
   }
 
-  gamePageFrame.src =
-  weburl+"game-page.html?game=" +
-  encodeURIComponent(url);
+  gamePageFrame.src = weburl + "game-page.html?game=" + encodeURIComponent(url);
   gamePageFrame.style.display = "block";
-
 
   focusInterval = setInterval(focus, 20);
 }
+
 function password(url) {
   let tryy = prompt("enter password");
   if (tryy === "12927") {
@@ -73,37 +78,38 @@ window.addEventListener("message", (e) => {
     closePage();
   }
 });
+
 window.addEventListener("message", (e) => {
   if (e.data === "fs") {
-      console.log("fsing")
+    console.log("fsing");
     fs();
   }
 });
+
 function fs() {
-    console.log("fs() called");
-    console.log("gamePageFrame.style.display:", gamePageFrame.style.display);
-    
-    if (gamePageFrame.style.display !== "block") {
-        console.log("RETURNING: display is not block");
-        return;
-    }
+  console.log("fs() called");
+  console.log("gamePageFrame.style.display:", gamePageFrame.style.display);
 
-    console.log("Attempting fullscreen...");
-    if (gamePageFrame.requestFullscreen) {
-        gamePageFrame.requestFullscreen().catch(err => console.error("Fullscreen error:", err));
-    }
+  if (gamePageFrame.style.display !== "block") {
+    console.log("RETURNING: display is not block");
+    return;
+  }
+
+  console.log("Attempting fullscreen...");
+  if (gamePageFrame.requestFullscreen) {
+    gamePageFrame.requestFullscreen().catch(err => console.error("Fullscreen error:", err));
+  }
 }
-document.addEventListener('fullscreenchange',  (e) => {
-    const fse = document.fullscreenElement;
-    if (fse === gamePageFrame) {
-        gamePageFrame.contentWindow.postMessage({ type:'fullscreen', state:'entered' }, '*');
-    } else {
-        console.log("exiting?");
-        gamePageFrame.contentWindow.postMessage({ type:'fullscreen', state:'exited' }, '*');
-    }
 
+document.addEventListener('fullscreenchange', (e) => {
+  const fse = document.fullscreenElement;
+  if (fse === gamePageFrame) {
+    gamePageFrame.contentWindow.postMessage({ type: 'fullscreen', state: 'entered' }, '*');
+  } else {
+    console.log("exiting?");
+    gamePageFrame.contentWindow.postMessage({ type: 'fullscreen', state: 'exited' }, '*');
+  }
 });
-
 
 // Other functions
 function search() {
@@ -121,12 +127,15 @@ function search() {
 }
 
 function focus() {
-  if (gamePageFrame.style.display !== "block") return;
-    console.log("focusing");
-    try {gamePageFrame.focus(); } catch(err) {
-        alert(err.message || err);
-    }
-  
+  if (gamePageFrame.style.display !== "block") {
+    return;
+  }
+  console.log("focusing");
+  try {
+    gamePageFrame.focus();
+  } catch(err) {
+    alert(err.message || err);
+  }
 }
 
 function closePage() {
@@ -136,7 +145,6 @@ function closePage() {
 }
 
 // Load game buttons
-
 const games = [
   { name: "Baldi's Basics", id: "baldis-basics", image: "baldis-basics.png" },
   { name: "Ballistic", id: "Ballistic", image: "ballistic.png" },
@@ -206,6 +214,23 @@ const games = [
   { name: "We Become What We Behold", id: "we-become-what-we-behold", image: "wbwwb.png" },
   { name: "Bubble Shooter", id: "bubbleshooter", image: "bubbleshooter.png" },
   { name: "Slice It All", id: "slice-it-all", image: "slice-it-all.png" },
+  { name: "A Dance of Fire and Ice", id: "adofai", image: "adofai.png" },
+  { name: "Clover Pit", id: "cloverpit", image: "cloverpit.png" },
+  { name: "Volley Random", id: "volley-random", image: "volley-random.png" },
+  { name: "Super Mario World", id: "super-mario-world", image: "super-mario-world.png" },
+  { name: "Basketball Stars", id: "basketball-stars", image: "basketball-stars.png" },
+  { name: "GeoGuessr", id: "geoguessr", image: "geoguessr.png" },
+  { name: "Terraria", id: "terreria", image: "terreria.png" },
+  { name: "Icy Purple Head", id: "icy-purple-head", image: "icy-purple-head.png" },
+  { name: "Cluster Rush", id: "cluster-rush", image: "cluster-rush.png" },
+  { name: "Big Tower Tiny Square", id: "big-tower-tiny-square", image: "big-tower-tiny-square.png" },
+  { name: "Bloons Tower Defense 4", id: "btd4", image: "btd4.png" },
+  { name: "Super Mario 64", id: "sm64", image: "sm64.png" },
+  { name: "Trimps", id: "trimps", image: "trimps.png" },
+  { name: "Mario", id: "mario", image: "mario.png" },
+  { name: "Tetris", id: "tetris", image: "tetris.png" },
+  { name: "Curve Ball 3D", id: "curve-ball-3d", image: "curve-ball-3d.png" },
+  { name: "Google Snake", id: "google-snake", image: "snake.png" },
 ];
 
 games.sort((a, b) => a.name.localeCompare(b.name));
@@ -217,7 +242,7 @@ games.forEach(game => {
     <img src='https://pugmoog.github.io/Bugmoog/images/${game.image}'>
     <h3>${game.name}</h3>
   `;
-  
+
   if (game.id) {
     element.onclick = () => loadPage(game.id);
   } else if (game.menu) {
@@ -225,13 +250,6 @@ games.forEach(game => {
   } else if (game.special) {
     element.onclick = new Function(game.special);
   }
-  
+
   gamesGrid.appendChild(element);
 });
-
-
-
-
-
-
-

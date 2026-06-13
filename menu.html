@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,54 +7,89 @@
   </head>
 
   <body>
-    <h2 style="color:green">Added Saving Progress!</h2>
-    <h1>BugMoog v4.6</h1>
-    <p>By Pug Moog. <a href="https://pugmoog.com">pugmoog.com</a>
-    <br>
-    To get BugMoog, go to <br>
-    <a href="https://rugmoog.github.io"><strong>R</strong>ugmoog.github.io</a><br>
-    with an <strong>R.</strong>
+    <h2 style="color:green">Shoutout to Jackson Boyd for not deserving a shoutout<br><br>Also, I fixed fs and keyboard and I added <l style="color:red">17 GAMES</l></h2>
+    <h1>BugMoog v4.7</h1>
+    <p>
+      By Pug Moog. <a href="https://pugmoog.com">pugmoog.com</a>
+      <br>
+      To get BugMoog, go to <br>
+      <a href="https://rugmoog.github.io"><strong>R</strong>ugmoog.github.io</a><br>
+      with an <strong>R.</strong>
     </p>
     <a href="https://forms.gle/jrbnDkp1dAAcPUbk6" target="_blank"><button>Have a game suggestion?</button></a><br>
     <br>
-    <details><summary style="color:red; font-size:25px; font-weight: bold">
-      Update log</summary><p>
-</p><h4>v4.1</h4><p>
-- Fixed bugs<br>
-- combined Minecraft into one<br>
-- added retro bowl college
-</p><h4>v4.2</h4><p>
-- New granny & granny 2 icons<br>
-- Added an update log<br>
-- Games now in alphabetical order<br>
-- Added backyard baseball, binding of isaac, GD world toxic factory, Riddle School, and puppet hockey<br>
-- Was not able to add brawl stars, stick ranger, or Hammy Home
-</p><h4>v4.3</h4><p>
-- Updated Lemonoids
-- Tried really hard but inevitably failed to overcome my laziness and add the games people suggested in the form
-</p><h4>v4.4</h4><p>
-- Fixed lemonoids bug
-- get together list for plans
-</p><h4>v4.5</h4><p>
-- remove backyard baseball because it doesn't work on safari
-- Add riddle transfer 1 & 2, BTD3, Stacktris, and soccer skills world cup
-- was not able to add fifa mobile, unfortunately. was also not able to add Operation Epic Furious, even more unfortunately. That game is gold.
-</p><h4>v4.6</h4><p>
-- Added saving progress (i didnt think it was possible)
-- Added Bubble shooter, slice it all, and we become what we behold
-</p>
-</details><br>
+    <details>
+      <summary style="color:red; font-size:25px; font-weight: bold">Update log</summary>
+      <p></p>
+      <h4>v4.1</h4>
+      <p>
+        - Fixed bugs<br>
+        - combined Minecraft into one<br>
+        - added retro bowl college
+      </p>
+      <h4>v4.2</h4>
+      <p>
+        - New granny & granny 2 icons<br>
+        - Added an update log<br>
+        - Games now in alphabetical order<br>
+        - Added backyard baseball, binding of isaac, GD world toxic factory, Riddle School, and puppet hockey<br>
+        - Was not able to add brawl stars, stick ranger, or Hammy Home<br>
+      </p>
+      <h4>v4.3</h4>
+      <p>
+        - Updated Lemonoids<br>
+        - Tried really hard but inevitably failed to overcome my laziness and add the games people suggested in the form
+      </p>
+      <h4>v4.4</h4>
+      <p>
+        - Fixed lemonoids bug<br>
+        - get together list for plans<br>
+      </p>
+      <h4>v4.5</h4>
+      <p>
+        - remove backyard baseball because it doesn't work on safari<br>
+        - Add riddle transfer 1 & 2, BTD3, Stacktris, and soccer skills world cup<br>
+        - was not able to add fifa mobile, unfortunately. was also not able to add Operation Epic Furious, even more unfortunately. That game is gold.<br>
+      </p>
+      <h4>v4.6</h4>
+      <p>
+        - Added saving progress (i didnt think it was possible)<br>
+        - Added Bubble shooter, slice it all, and we become what we behold<br>
+      </p>
+      <h4>v4.7</h4>
+      <p>
+        - Fullscreen and keyboard work again (that took SOOO long)<br>
+        - Added 17 games:
+        <ul>
+          <li>A Dance of Fire and Ice</li>
+          <li>Clover Pit</li>
+          <li>Volley Random</li>
+          <li>Super Mario World</li>
+          <li>Basketball Stars</li>
+          <li>GeoGuessr</li>
+          <li>Terraria</li>
+          <li>Icy Purple Head</li>
+          <li>Cluster Rush</li>
+          <li>Big Tower Tiny Square</li>
+          <li>Bloons Tower Defense 4</li>
+          <li>Super Mario 64</li>
+          <li>Trimps</li>
+          <li>Mario</li>
+          <li>Tetris</li>
+          <li>Curve Ball 3D</li>
+          <li>Google Snake</li>
+        </ul>
+      </p>
+    </details>
+    <br>
 
+    <input type="text" placeholder="Search" name="search" id="search">
+    <button onclick="document.getElementById('search').value = '';search();">Clear</button>
 
-
-  <input type="text" placeholder="Search" name="search" id="search"></input>
-  <button onclick="document.getElementById('search').value = '';search();">Clear</button>
-    
     <div class="grid"></div>
-    
-    <iframe id="gamePageFrame" tabindex="0" style="display:none;position:fixed;left:0;top:0;width:100vw;height:100vh" 
-z-index="99999" src="about:blank" allow="fullscreen;" allowfullscreen></iframe>
-    
+
+    <iframe id="gamePageFrame" tabindex="0" style="display:none;position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:99999" src="about:blank" allow="fullscreen;" allowfullscreen></iframe>
+
     <dialog id="fnafMenu">
       Pick a FNAF Game:
       <br><button onclick="document.getElementById('fnafMenu').close();loadPage('fnaf1');">FNAF 1</button>
@@ -63,7 +97,7 @@ z-index="99999" src="about:blank" allow="fullscreen;" allowfullscreen></iframe>
       <br><button onclick="document.getElementById('fnafMenu').close();loadPage('fnaf3');">FNAF 3</button>
       <br><button onclick="document.getElementById('fnafMenu').close();loadPage('fnaf4');">FNAF 4</button>
     </dialog>
-    
+
     <dialog id="riddleMenu">
       Pick a Riddle School Game:
       <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddleschool1');">Riddle School 1</button>
@@ -74,23 +108,25 @@ z-index="99999" src="about:blank" allow="fullscreen;" allowfullscreen></iframe>
       <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddletransfer1');">Riddle Transfer 1</button>
       <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddletransfer2');">Riddle Transfer 2</button>
     </dialog>
+
     <!-- https://pugmoog.github.io/Bugmoog/ -->
     <script src="https://pugmoog.github.io/Bugmoog/script.js"></script>
 
-<!-- Default Statcounter code for BugMoog -->
-<script type="text/javascript">
-var sc_project=13227422; 
-var sc_invisible=1; 
-var sc_security="f2ec84e1"; 
-</script>
-<script type="text/javascript"
-src="https://www.statcounter.com/counter/counter.js" async></script>
-<noscript><div class="statcounter"><a title="Web Analytics"
-href="https://statcounter.com/" target="_blank"><img class="statcounter"
-src="https://c.statcounter.com/13227422/0/f2ec84e1/1/" alt="Web Analytics"
-referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-<!-- End of Statcounter Code -->
-<a href="https://statcounter.com/p13227422/?guest=1">Bugmoog stats</a>
-</body>
+    <!-- Default Statcounter code for BugMoog -->
+    <script type="text/javascript">
+      var sc_project=13227422;
+      var sc_invisible=1;
+      var sc_security="f2ec84e1";
+    </script>
+    <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript>
+      <div class="statcounter">
+        <a title="Web Analytics" href="https://statcounter.com/" target="_blank">
+          <img class="statcounter" src="https://c.statcounter.com/13227422/0/f2ec84e1/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade">
+        </a>
+      </div>
+    </noscript>
+    <!-- End of Statcounter Code -->
+    <a href="https://statcounter.com/p13227422/?guest=1">Bugmoog stats</a>
+  </body>
 </html>
-
