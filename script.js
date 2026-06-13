@@ -3,7 +3,7 @@ if (window.location.href === "https://pugmoog.github.io/Bugmoog/menu.html") {
   window.location.href = "https://rugmoog.github.io";
 }
 
-const weburl = "";
+const weburl = "https://pugmoog.github.io/Bugmoog/";
 
 // Setup
 (() => {
