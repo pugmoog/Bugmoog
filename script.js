@@ -15,16 +15,17 @@ const weburl = "https://pugmoog.github.io/Bugmoog/";
 
 
   Navigator.prototype.getGamepads = function () {
+    console.log("gamepad blocked, returning empty");
     return [];
-    }
   };
 
   navigator.getGamepads = function () {
+    console.log("gamepad blocked, returning empty");
     return [];
-    }
   };
 
   Navigator.getGamepads = function () {
+    console.log("gamepad blocked, returning empty");
     return [];
   };
 })();
