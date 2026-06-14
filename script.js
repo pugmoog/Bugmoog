@@ -95,12 +95,12 @@ document.addEventListener('fullscreenchange', (e) => {
 
 // Other functions
 function search() {
-  document.querySelectorAll('.category-button');
+  let elements = document.querySelectorAll('.category-button');
   elements.forEach(element => {
     element.style.backgroundColor = "#eeeeee";
   });
   const query = searchBox.value.toLowerCase().replace(/[^\w\s]/g, '');
-  const elements = document.querySelectorAll('button.game');
+  elements = document.querySelectorAll('button.game');
   elements.forEach(element => {
     const h3Text = element.querySelector("h3").textContent;
     const h3TextStripped = h3Text.toLowerCase().replace(/[^\w\s]/g, '');
