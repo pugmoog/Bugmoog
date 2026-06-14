@@ -14,20 +14,15 @@ const weburl = "https://pugmoog.github.io/Bugmoog/";
   window.searchBox.addEventListener('input', search);
 
 
-  Navigator.prototype.getGamepads = function () {
-    console.log("gamepad blocked, returning empty");
-    return [];
-  };
-
-  navigator.getGamepads = function () {
-    console.log("gamepad blocked, returning empty");
-    return [];
-  };
-
-  Navigator.getGamepads = function () {
-    console.log("gamepad blocked, returning empty");
-    return [];
-  };
+  const navProto = Object.getPrototypeOf(navigator);
+  Object.defineProperty(navProto, 'getGamepads', {
+    value: function () {
+      console.log('gamepad blocked, returning empty');
+      return [];
+    },
+    configurable: true,
+    writable: true,
+  });
 })();
 
 // Game loading
