@@ -204,7 +204,7 @@ const games = [
   { name: "Volley Random", id: "volley-random", image: "volley-random.png", category: "Casual" },
   { name: "Super Mario World", id: "super-mario-world", image: "super-mario-world.png", category: "Action" },
   { name: "Basketball Stars", id: "basketball-stars", image: "basketball-stars.png", category: "Casual" },
-  { name: "Terraria", id: "terraria", image: "terreria.png", category: "Action" },
+  { name: "Terraria", id: "terreria", image: "terreria.png", category: "Action" },
   { name: "Icy Purple Head", id: "icy-purple-head", image: "icy-purple-head.png", category: "Action" },
   { name: "Cluster Rush", id: "cluster-rush", image: "cluster-rush.png", category: "Action" },
   { name: "Big Tower Tiny Square", id: "big-tower-tiny-square", image: "big-tower-tiny-square.png", category: "Action" },
