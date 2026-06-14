@@ -92,15 +92,9 @@
     </script>
 
     <script>
-        const navProto = Object.getPrototypeOf(navigator);
-        Object.defineProperty(navProto, 'getGamepads', {
-          value: function () {
-            console.log('gamepad blocked, returning empty');
-            return [];
-          },
-          configurable: true,
-          writable: true,
-        });
+      Navigator.prototype.getGamepads = () => [];
+      navigator.getGamepads = () => [];
+      Navigator.getGamepads = () => [];
       const params = new URLSearchParams(window.location.search);
       const gameURL = params.get("game");
       const frame = document.getElementById("gameFrame");
