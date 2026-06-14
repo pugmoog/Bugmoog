@@ -92,15 +92,15 @@
     </script>
 
     <script>
-        frame.onload = () => {
-          // Patch the iframe's Navigator directly
-          const win = frame.contentWindow;
-          win.Navigator.prototype.getGamepads = () => [];
-          win.navigator.getGamepads = () => [];
-        };
       const params = new URLSearchParams(window.location.search);
       const gameURL = params.get("game");
       const frame = document.getElementById("gameFrame");
+      frame.onload = () => {
+        // Patch the iframe's Navigator directly
+        const win = frame.contentWindow;
+        win.Navigator.prototype.getGamepads = () => [];
+        win.navigator.getGamepads = () => [];
+      };
       const win = frame.contentWindow;
 
       let storageKey = "__fakeCookies__:" + gameURL;
