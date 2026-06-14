@@ -218,7 +218,6 @@ const games = [
 ];
 
 
-
 games.sort((a, b) => a.name.localeCompare(b.name));
 
 games.forEach(game => {
