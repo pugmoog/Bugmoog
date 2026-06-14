@@ -33,7 +33,6 @@
     <iframe
       tabindex="0"
       id="gameFrame"
-      allowfullscreen
       allow="gamepad *;fullscreen;"
       style="
         position:fixed;
@@ -93,6 +92,15 @@
     </script>
 
     <script>
+        const navProto = Object.getPrototypeOf(navigator);
+        Object.defineProperty(navProto, 'getGamepads', {
+          value: function () {
+            console.log('gamepad blocked, returning empty');
+            return [];
+          },
+          configurable: true,
+          writable: true,
+        });
       const params = new URLSearchParams(window.location.search);
       const gameURL = params.get("game");
       const frame = document.getElementById("gameFrame");

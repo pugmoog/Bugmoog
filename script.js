@@ -250,6 +250,7 @@ elements.forEach(element => {
 
 
 function category(e) {
+    document.getElementById('search').value = '';search();
     const sender = e.target;
     const catName = sender.textContent;
     let elements = document.querySelectorAll('.category-button');
