@@ -49,13 +49,6 @@ function password(url) {
 }
 
 window.addEventListener("message", (e) => {
-  if (e.data === "ready") {
-    const btn = gamePageFrame.contentDocument.getElementById("bk-button");
-    btn.onclick = closePage;
-  }
-});
-
-window.addEventListener("message", (e) => {
   if (e.data === "close") {
     closePage();
   }

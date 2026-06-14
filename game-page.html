@@ -60,6 +60,7 @@
           document.getElementById("bk-button").style.display = "none";
           document.getElementById("fs-button").style.display = "none";
           console.log("removed buttons");
+          document.getElementById("gameFrame").contentWindow.focus();
         } else {
           document.getElementById("bk-button").style.display = "block";
           document.getElementById("fs-button").style.display = "block";
@@ -81,8 +82,6 @@
             window.parent.postMessage("fs", "*");
           };
         }
-
-        window.parent.postMessage("ready", "*");
       });
 
       window.addEventListener("message", (e) => {
@@ -100,6 +99,7 @@
         const win = frame.contentWindow;
         win.Navigator.prototype.getGamepads = () => [];
         win.navigator.getGamepads = () => [];
+        win.Navigator.getGamepads = () => [];
       };
       const win = frame.contentWindow;
 
