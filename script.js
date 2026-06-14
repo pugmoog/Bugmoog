@@ -13,33 +13,19 @@ const weburl = "https://pugmoog.github.io/Bugmoog/";
   window.searchBox = document.getElementById("search");
   window.searchBox.addEventListener('input', search);
 
-  const original = Navigator.prototype.getGamepads;
 
   Navigator.prototype.getGamepads = function () {
-    try {
-      return original ? original.call(this) : [];
-    } catch (e) {
-      console.warn('Gamepad blocked, returning empty');
-      return [];
+    return [];
     }
   };
 
   navigator.getGamepads = function () {
-    try {
-      return original ? original.call(navigator) : [];
-    } catch (e) {
-      console.warn('Gamepad blocked, returning empty');
-      return [];
+    return [];
     }
   };
 
   Navigator.getGamepads = function () {
-    try {
-      return original ? original.call(navigator) : [];
-    } catch (e) {
-      console.warn('Gamepad blocked, returning empty');
-      return [];
-    }
+    return [];
   };
 })();
 
@@ -208,7 +194,6 @@ const games = [
   { name: "War the Knights", id: "war-the-knights", image: "war-the-knights.png" },
   { name: "Water Works", id: "water-works", image: "water-works.png" },
   { name: "Stacktris", id: "stacktris", image: "stacktris.png" },
-  { name: "Bloons Tower Defense 3 (btd3)", id: "btd3", image: "btd3.png" },
   { name: "Soccer Skills World Cup", id: "soccer-skills-world-cup", image: "soccer-skills-world-cup.png" },
   { name: "The World's Hardest Game", id: "worlds-hardest-game", image: "whg.png" },
   { name: "We Become What We Behold", id: "we-become-what-we-behold", image: "wbwwb.png" },
@@ -219,8 +204,7 @@ const games = [
   { name: "Volley Random", id: "volley-random", image: "volley-random.png" },
   { name: "Super Mario World", id: "super-mario-world", image: "super-mario-world.png" },
   { name: "Basketball Stars", id: "basketball-stars", image: "basketball-stars.png" },
-  { name: "GeoGuessr", id: "geoguessr", image: "geoguessr.png" },
-  { name: "Terraria", id: "terreria", image: "terreria.png" },
+  { name: "Terraria", id: "terraria", image: "terreria.png" },
   { name: "Icy Purple Head", id: "icy-purple-head", image: "icy-purple-head.png" },
   { name: "Cluster Rush", id: "cluster-rush", image: "cluster-rush.png" },
   { name: "Big Tower Tiny Square", id: "big-tower-tiny-square", image: "big-tower-tiny-square.png" },
