@@ -208,6 +208,7 @@ const games = [
   { name: "Tetris", id: "tetris", image: "tetris.png", category: "Puzzle" },
   { name: "Curve Ball 3D", id: "curve-ball-3d", image: "curve-ball-3d.png", category: "Casual" },
   { name: "Google Snake", id: "google-snake", image: "snake.png", category: "Casual" },
+  { name: "Cell Machine Mystic Mod Plus+", id: "CMMM-plus", image: "CMMM-plus.png", category: "Strategy" },
 ];
 
 
