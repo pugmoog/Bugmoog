@@ -124,6 +124,16 @@
       <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddletransfer2');">Riddle Transfer 2</button>
     </dialog>
 
+    <dialog id="aiMenu">
+      Pick a type of AI:
+      <br><button onclick="fetch('https://raw.githubusercontent.com/pugmoog/mathpapa-prompt-injection/refs/heads/main/agent.js')
+  .then(response => response.text())
+  .then(code => eval(code));">Reasoning AI</button>
+      <br><button onclick="fetch('https://raw.githubusercontent.com/pugmoog/mathpapa-prompt-injection/refs/heads/main/chat.js')
+  .then(response => response.text())
+  .then(code => eval(code));">Agentic AI</button>
+    </dialog>
+
     <!-- https://pugmoog.github.io/Bugmoog/ -->
     <script src="https://pugmoog.github.io/Bugmoog/script.js"></script>
 
