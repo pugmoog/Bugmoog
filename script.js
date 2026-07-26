@@ -24,7 +24,7 @@ const weburl = "https://pugmoog.github.io/Bugmoog/";
     writable: true,
   });
 })();
-if (window.location.hostname==="mathpapa.com")  {
+if (window.location.hostname==="www.mathpapa.com")  {
   const menu = document.getElementById("aiMenu");
   menu.showModal();
 }
