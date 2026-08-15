@@ -24,10 +24,6 @@ const weburl = "https://pugmoog.github.io/Bugmoog/";
     writable: true,
   });
 })();
-if (window.location.hostname==="www.mathpapa.com")  {
-  const menu = document.getElementById("aiMenu");
-  menu.showModal();
-}
 
 // Game loading
 async function loadPage(url) {
