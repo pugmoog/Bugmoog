@@ -94,17 +94,105 @@
       const params = new URLSearchParams(window.location.search);
       const gameURL = params.get("game");
       const frame = document.getElementById("gameFrame");
+      const hostStorage = window.localStorage;
+
+      const localStorageKey = "__fakeLocalStorage__:" + gameURL;
+      let localStorageData;
+      try {
+        localStorageData = JSON.parse(hostStorage.getItem(localStorageKey) || "{}");
+      } catch {
+        localStorageData = {};
+      }
+
+      function saveLocalStorage() {
+        hostStorage.setItem(localStorageKey, JSON.stringify(localStorageData));
+      }
+
+      const localStorageShim = new Proxy({}, {
+        get(target, property, receiver) {
+          if (property === "length") return Object.keys(localStorageData).length;
+          if (property === "getItem") {
+            return key => Object.prototype.hasOwnProperty.call(localStorageData, String(key))
+              ? localStorageData[String(key)]
+              : null;
+          }
+          if (property === "setItem") {
+            return (key, value) => {
+              localStorageData[String(key)] = String(value);
+              saveLocalStorage();
+            };
+          }
+          if (property === "removeItem") {
+            return key => {
+              delete localStorageData[String(key)];
+              saveLocalStorage();
+            };
+          }
+          if (property === "clear") {
+            return () => {
+              localStorageData = {};
+              saveLocalStorage();
+            };
+          }
+          if (property === "key") {
+            return index => Object.keys(localStorageData)[Number(index)] ?? null;
+          }
+          if (property === Symbol.toStringTag) return "Storage";
+          if (typeof property === "string" && Object.prototype.hasOwnProperty.call(localStorageData, property)) {
+            return localStorageData[property];
+          }
+          return Reflect.get(target, property, receiver);
+        },
+
+        set(target, property, value) {
+          if (typeof property !== "string") return Reflect.set(target, property, value);
+          localStorageData[property] = String(value);
+          saveLocalStorage();
+          return true;
+        },
+
+        deleteProperty(target, property) {
+          if (typeof property === "string") {
+            delete localStorageData[property];
+            saveLocalStorage();
+          }
+          return true;
+        },
+
+        ownKeys() {
+          return Object.keys(localStorageData);
+        },
+
+        getOwnPropertyDescriptor(target, property) {
+          if (typeof property === "string" && Object.prototype.hasOwnProperty.call(localStorageData, property)) {
+            return { configurable: true, enumerable: true, writable: true, value: localStorageData[property] };
+          }
+          return Reflect.getOwnPropertyDescriptor(target, property);
+        }
+      });
+
+      function installLocalStorageShim(targetWindow) {
+        Object.defineProperty(targetWindow, "localStorage", {
+          configurable: true,
+          get: () => localStorageShim
+        });
+      }
+
       frame.onload = () => {
-        // Patch the iframe's Navigator directly
-        const win = frame.contentWindow;
-        win.Navigator.prototype.getGamepads = () => [];
-        win.navigator.getGamepads = () => [];
-        win.Navigator.getGamepads = () => [];
+        try {
+          // Reinstall after navigation so saves made during gameplay use the wrapper's storage.
+          installLocalStorageShim(frame.contentWindow);
+          frame.contentWindow.Navigator.prototype.getGamepads = () => [];
+          frame.contentWindow.navigator.getGamepads = () => [];
+          frame.contentWindow.Navigator.getGamepads = () => [];
+        } catch (error) {
+          console.warn("Could not patch a cross-origin game frame", error);
+        }
       };
       const win = frame.contentWindow;
 
-      let storageKey = "__fakeCookies__:" + gameURL;
-      let cookieStore = JSON.parse(localStorage.getItem(storageKey) || "{}");
+      let cookieStorageKey = "__fakeCookies__:" + gameURL;
+      let cookieStore = JSON.parse(hostStorage.getItem(cookieStorageKey) || "{}");
 
       Object.defineProperty(
         win.Document.prototype,
@@ -126,13 +214,15 @@
             let val = first.slice(eq + 1).trim();
 
             cookieStore[name] = val;
-            localStorage.setItem(storageKey, JSON.stringify(cookieStore));
+            hostStorage.setItem(cookieStorageKey, JSON.stringify(cookieStore));
 
             return true;
           }
         }
       );
 
+      // Install once on the initial about:blank document, then again in onload.
+      installLocalStorageShim(win);
       frame.src = gameURL;
     </script>
   </body>
