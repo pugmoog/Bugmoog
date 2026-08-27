@@ -6,7 +6,7 @@
 <body>
     <h1>Loading and combining parts...</h1>
     <script>
-        const parts = ['part-aa', 'part-ab', 'part-ac']; // Add all your parts
+        const parts = ['1.txt', '2.txt']; // Add all your parts
         
         Promise.all(
             parts.map(part => fetch(part).then(r => r.text()))

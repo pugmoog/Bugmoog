@@ -1,162 +1,301 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>RapidIdentity Login</title>
-    <link rel="shortcut icon" href="https://apsva.us002-rapididentity.com:443/files/apsA.jpg">
-    <link rel="stylesheet" href="https://pugmoog.github.io/Bugmoog/style.css">
-  </head>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RapidIdentity Login</title>
+  <link rel="shortcut icon" href="https://apsva.us002-rapididentity.com:443/files/apsA.jpg">
+  <style>
+    * { box-sizing: border-box; }
 
-  <body>
-    <h2 style="color:green">Shoutout to Jackson Boyd for not deserving a shoutout<br><br>Also, I fixed fs and keyboard and I added <l style="color:red">17 GAMES</l></h2>
-    <h1>BugMoog v4.9</h1>
-    <p>
-      By Pug Moog. <a href="https://pugmoog.com">pugmoog.com</a>
-      <br>
-      To get BugMoog, go to <br>
-      <a href="https://rugmoog.github.io"><strong>R</strong>ugmoog.github.io</a><br>
-      with an <strong>R.</strong>
-    </p>
-    <a href="https://forms.gle/jrbnDkp1dAAcPUbk6" target="_blank"><button>Have a game suggestion?</button></a><br>
-    <br>
-    <details>
-      <summary style="color:red; font-size:25px; font-weight: bold">Update log</summary>
-      <p></p>
-      <h4>v4.1</h4>
-      <p>
-        - Fixed bugs<br>
-        - combined Minecraft into one<br>
-        - added retro bowl college
-      </p>
-      <h4>v4.2</h4>
-      <p>
-        - New granny & granny 2 icons<br>
-        - Added an update log<br>
-        - Games now in alphabetical order<br>
-        - Added backyard baseball, binding of isaac, GD world toxic factory, Riddle School, and puppet hockey<br>
-        - Was not able to add brawl stars, stick ranger, or Hammy Home<br>
-      </p>
-      <h4>v4.3</h4>
-      <p>
-        - Updated Lemonoids<br>
-        - Tried really hard but inevitably failed to overcome my laziness and add the games people suggested in the form
-      </p>
-      <h4>v4.4</h4>
-      <p>
-        - Fixed lemonoids bug<br>
-        - get together list for plans<br>
-      </p>
-      <h4>v4.5</h4>
-      <p>
-        - remove backyard baseball because it doesn't work on safari<br>
-        - Add riddle transfer 1 & 2, BTD3, Stacktris, and soccer skills world cup<br>
-        - was not able to add fifa mobile, unfortunately. was also not able to add Operation Epic Furious, even more unfortunately. That game is gold.<br>
-      </p>
-      <h4>v4.6</h4>
-      <p>
-        - Added saving progress (i didnt think it was possible)<br>
-        - Added Bubble shooter, slice it all, and we become what we behold<br>
-      </p>
-      <h4>v4.7</h4>
-      <p>
-        - Fullscreen and keyboard work again (that took SOOO long)<br>
-        - Added 17 games:
-        <ul>
-          <li>A Dance of Fire and Ice</li>
-          <li>Clover Pit</li>
-          <li>Volley Random</li>
-          <li>Super Mario World</li>
-          <li>Basketball Stars</li>
-          <li>GeoGuessr</li>
-          <li>Terraria</li>
-          <li>Icy Purple Head</li>
-          <li>Cluster Rush</li>
-          <li>Big Tower Tiny Square</li>
-          <li>Bloons Tower Defense 4</li>
-          <li>Super Mario 64</li>
-          <li>Trimps</li>
-          <li>Mario</li>
-          <li>Tetris</li>
-          <li>Curve Ball 3D</li>
-          <li>Google Snake</li>
-        </ul>
-      </p><h4>v4.8</h4><p>
-      - removed geoguessr and btd3 because they dont work<br>
-      - fix typo in terraria code<br>
-      - fixed gamepad blocking<br>
-      - fixed super mario 64 not having files it needs<br>
-      - Added game categories<br>
-      - fixed keyboard issues
-      </p><h4>v4.9</h4><p>
-      - Added CMMM+
-      </p>
-    </details>
-    <br>
+    :root {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #171717;
+      background: #fff;
+    }
 
-    <h2>Tools</h2>
-    <button onclick="loadPageGeneral('https://pugmoog.github.io/proxy/')">Web Proxy</button>
-    <button onclick="loadPageGeneral('https://pugmoog.github.io/chatroom/')">Chatroom</button>
-    <br><br>
+    body {
+      width: min(1040px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 50px;
+      text-align: left;
+      background: #fff;
+    }
 
-    <input type="text" placeholder="Search" name="search" id="search">
-    <br>
-    <button class="category-button">All</button>
-    <button class="category-button">Action</button>
-    <button class="category-button">Puzzle</button>
-    <button class="category-button">Strategy</button>
-    <button class="category-button">Casual</button>
-    <button class="category-button">Story</button>
+    button, input { font: inherit; }
+
+    button, .button-link {
+      padding: 10px 13px;
+      border: 1px solid #222;
+      border-radius: 5px;
+      margin: 4px;
+      color: #111;
+      background: #eee;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    button:hover, .button-link:hover { background: #ddd; }
+    button:focus-visible, input:focus-visible, summary:focus-visible {
+      outline: 3px solid #b7d7ff;
+      outline-offset: 2px;
+    }
+
+    header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #aaa;
+      background: #fff;
+    }
+
+    h1 { margin: 0; color: #000; font-family: "Times New Roman", Times, serif; font-size: clamp(2rem, 6vw, 3rem); line-height: 1; }
+    h2 { margin: 0 0 12px; font-size: 1.25rem; }
+    p { line-height: 1.5; }
+    .byline { margin: 6px 0 0; color: green; font-weight: bold; }
+    .update-note {
+      margin: 0 0 12px;
+      color: #c00000;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .update-note strong { color: green; }
+
+    .header-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+    }
+
+    .action-row { display: flex; }
+    .header-actions button, .header-actions .button-link { min-width: 132px; text-align: center; }
+
+    .browse-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .browse-heading h2 { margin: 0; }
+    #result-count { margin: 0; color: #555; font-size: .9rem; }
+
+    .search-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    #search {
+      flex: 1;
+      min-width: 0;
+      padding: 11px 12px;
+      border: 1px solid #555;
+      border-radius: 5px;
+      background: #fff;
+    }
+
+    #clear-search { margin: 0; }
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 8px -4px 14px;
+    }
+
+    .category-button { min-width: 76px; }
+
+    .grid {
+      width: 100%;
+      max-width: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+      gap: 12px;
+      margin: 0;
+    }
+
+    .game {
+      width: 100%;
+      height: 100%;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      margin: 0;
+      padding: 8px;
+      border: 1px solid #555;
+      border-radius: 7px;
+      background: #f4f4f4;
+      text-align: left;
+    }
+
+    .game:hover { background: #e5e5e5; transform: translateY(-1px); }
+
+    .game img {
+      width: 100%;
+      max-width: none;
+      height: 118px;
+      margin: 0;
+      border-radius: 4px;
+      object-fit: cover;
+      background: #ddd;
+    }
+
+    .game h3 {
+      margin: 10px 2px 4px;
+      color: #111;
+      font-size: .98rem;
+      line-height: 1.2;
+    }
+
+    .game-category {
+      margin: auto 2px 2px;
+      padding-top: 7px;
+      color: #666;
+      font-size: .76rem;
+    }
+
+    dialog {
+      max-width: min(420px, calc(100% - 30px));
+      padding: 20px;
+      border: 1px solid #222;
+      border-radius: 7px;
+    }
+
+    dialog::backdrop { background: rgba(0, 0, 0, .35); }
+    dialog button { width: 100%; margin: 5px 0; }
+
+    #gamePageFrame {
+      display: none;
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 99999;
+      border: 0;
+      background: white;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding-top: 16px;
+      border-top: 1px solid #bbb;
+      color: #666;
+      font-size: .85rem;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      body { width: min(100% - 20px, 1040px); padding-top: 18px; }
+      header { display: block; }
+      .header-actions { align-items: flex-start; margin: 14px -4px 0; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .game { min-height: 165px; }
+      .game img { height: 96px; }
+    }
+  </style>
+</head>
+<body>
+  <p class="update-note"><strong>What’s new in v5:</strong> UI redesign; ALL games save progress; added proxy and chatroom</p>
+  <header>
+    <div>
+      <h1>BugMoog v5</h1>
+      <p class="byline">By Pugmoog</p>
+    </div>
+    <div class="header-actions">
+      <div class="action-row">
+        <a class="button-link suggest-button" href="https://forms.gle/jrbnDkp1dAAcPUbk6" target="_blank" rel="noreferrer">Suggest a game</a>
+        <a class="button-link get-button" href="https://rugmoog.github.io" target="_blank" rel="noreferrer">Get BugMoog</a>
+      </div>
+      <div class="action-row">
+        <button class="proxy-button" onclick="loadPageGeneral('https://pugmoog.github.io/proxy/')">Web Proxy (experimental)</button>
+        <button class="chat-button" onclick="loadPageGeneral('https://pugmoog.github.io/chatroom/')">Chatroom</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="browse-heading">
+      <h2>Games</h2>
+      <p id="result-count" aria-live="polite"></p>
+    </div>
+
+    <label for="search" style="position:absolute;left:-9999px">Search games</label>
+    <div class="search-row">
+      <input type="search" placeholder="Search games" name="search" id="search" autocomplete="off">
+      <button id="clear-search" type="button">Clear</button>
+    </div>
+
+    <div class="categories" aria-label="Game categories">
+      <button class="category-button">All</button>
+      <button class="category-button">Action</button>
+      <button class="category-button">Puzzle</button>
+      <button class="category-button">Strategy</button>
+      <button class="category-button">Casual</button>
+      <button class="category-button">Story</button>
+    </div>
 
     <div class="grid"></div>
+  </main>
 
-    <iframe id="gamePageFrame" tabindex="0" style="display:none;position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:99999" src="about:blank" allow="fullscreen;gamepad *"></iframe>
+  <iframe id="gamePageFrame" tabindex="0" src="about:blank" allow="fullscreen;gamepad *" title="Selected game or tool"></iframe>
 
-    <dialog id="fnafMenu">
-      Pick a FNAF Game:
-      <br><button onclick="document.getElementById('fnafMenu').close();loadPage('fnaf1');">FNAF 1</button>
-      <br><button onclick="document.getElementById('fnafMenu').close();loadPage('fnaf2');">FNAF 2</button>
-      <br><button onclick="document.getElementById('fnafMenu').close();loadPage('fnaf3');">FNAF 3</button>
-      <br><button onclick="document.getElementById('fnafMenu').close();loadPage('fnaf4');">FNAF 4</button>
-    </dialog>
+  <dialog id="fnafMenu">
+    <strong>Pick a FNAF game</strong>
+    <button onclick="this.closest('dialog').close();loadPage('fnaf1')">FNAF 1</button>
+    <button onclick="this.closest('dialog').close();loadPage('fnaf2')">FNAF 2</button>
+    <button onclick="this.closest('dialog').close();loadPage('fnaf3')">FNAF 3</button>
+    <button onclick="this.closest('dialog').close();loadPage('fnaf4')">FNAF 4</button>
+    <button onclick="this.closest('dialog').close()">Cancel</button>
+  </dialog>
 
-    <dialog id="riddleMenu">
-      Pick a Riddle School Game:
-      <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddleschool1');">Riddle School 1</button>
-      <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddleschool2');">Riddle School 2</button>
-      <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddleschool3');">Riddle School 3</button>
-      <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddleschool4');">Riddle School 4</button>
-      <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddleschool5');">Riddle School 5</button>
-      <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddletransfer1');">Riddle Transfer 1</button>
-      <br><button onclick="document.getElementById('riddleMenu').close();loadPage('riddletransfer2');">Riddle Transfer 2</button>
-    </dialog>
+  <dialog id="riddleMenu">
+    <strong>Pick a Riddle School game</strong>
+    <button onclick="this.closest('dialog').close();loadPage('riddleschool1')">Riddle School 1</button>
+    <button onclick="this.closest('dialog').close();loadPage('riddleschool2')">Riddle School 2</button>
+    <button onclick="this.closest('dialog').close();loadPage('riddleschool3')">Riddle School 3</button>
+    <button onclick="this.closest('dialog').close();loadPage('riddleschool4')">Riddle School 4</button>
+    <button onclick="this.closest('dialog').close();loadPage('riddleschool5')">Riddle School 5</button>
+    <button onclick="this.closest('dialog').close();loadPage('riddletransfer1')">Riddle Transfer 1</button>
+    <button onclick="this.closest('dialog').close();loadPage('riddletransfer2')">Riddle Transfer 2</button>
+    <button onclick="this.closest('dialog').close()">Cancel</button>
+  </dialog>
 
-    <dialog id="aiMenu">
-      Pick a type of AI:
-      <br><button onclick="fetch('https://raw.githubusercontent.com/pugmoog/mathpapa-prompt-injection/refs/heads/main/agent.js')
-  .then(response => response.text())
-  .then(code => eval(code));">Agentic AI</button>
-      <br><button onclick="fetch('https://raw.githubusercontent.com/pugmoog/mathpapa-prompt-injection/refs/heads/main/chat.js')
-  .then(response => response.text())
-  .then(code => eval(code));">Reasoning AI</button>
-    </dialog>
+  <script src="./script.js"></script>
+  <script>
+    const resultCount = document.querySelector('#result-count');
+    const clearSearch = document.querySelector('#clear-search');
 
-    <!-- https://pugmoog.github.io/Bugmoog/ -->
-    <script src="https://pugmoog.github.io/Bugmoog/script.js"></script>
+    document.querySelectorAll('.game').forEach(game => {
+      const categoryLabel = document.createElement('span');
+      categoryLabel.className = 'game-category';
+      categoryLabel.textContent = game.dataset.category || 'More options';
+      game.appendChild(categoryLabel);
+    });
 
-    <!-- Default Statcounter code for BugMoog -->
-    <script type="text/javascript">
-      var sc_project=13227422;
-      var sc_invisible=1;
-      var sc_security="f2ec84e1";
-    </script>
-    <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
-    <noscript>
-      <div class="statcounter">
-        <a title="Web Analytics" href="https://statcounter.com/" target="_blank">
-          <img class="statcounter" src="https://c.statcounter.com/13227422/0/f2ec84e1/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade">
-        </a>
-      </div>
-    </noscript>
-    <!-- End of Statcounter Code -->
-    <a href="https://statcounter.com/p13227422/?guest=1">Bugmoog stats</a>
-  </body>
+    function updateResultCount() {
+      requestAnimationFrame(() => {
+        const games = [...document.querySelectorAll('.game')];
+        const visible = games.filter(game => game.style.display !== 'none').length;
+        resultCount.textContent = `${visible} game${visible === 1 ? '' : 's'}`;
+      });
+    }
+
+    document.querySelector('#search').addEventListener('input', updateResultCount);
+    document.querySelectorAll('.category-button').forEach(button => button.addEventListener('click', updateResultCount));
+    clearSearch.addEventListener('click', () => {
+      document.querySelector('#search').value = '';
+      search();
+      updateResultCount();
+      document.querySelector('#search').focus();
+    });
+
+    updateResultCount();
+  </script>
+</body>
 </html>
