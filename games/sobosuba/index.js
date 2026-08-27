@@ -90,8 +90,9 @@ const Features = {
 		if (!Features.isFetchAvailable()) {
 			missing.push('Fetch - Check web browser version');
 		}
+
 		if (!Features.isSecureContext()) {
-			missing.push('Secure Context - Check web server configuration (use HTTPS)');
+			missing.push('no https D:');
 		}
 
 		if (supportsThreads) {

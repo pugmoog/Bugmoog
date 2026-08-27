@@ -109,7 +109,167 @@ body {
 			<div id="status-notice"></div>
 		</div>
 
-		<script src="index.js"></script>
+		<script>
+// sobosuba currently listens for mouse input. Translate one-finger touches
+// into the same mouse event sequence so aiming and launching work on mobile.
+(function () {
+	const canvas = document.getElementById('canvas');
+	let activeTouch = null;
+	let lastX = 0;
+	let lastY = 0;
+	let pressTouch = null;
+	let latestTouch = null;
+	let mouseDown = false;
+	let releasedBeforePress = false;
+	let pressTimer = null;
+	let gestureGeneration = 0;
+
+	function findTouch(event) {
+		for (const touch of event.changedTouches) {
+			if (touch.identifier === activeTouch) return touch;
+		}
+		return null;
+	}
+
+	function moveMouse(touch, buttons) {
+		window.dispatchEvent(new PointerEvent('pointermove', {
+			bubbles: true,
+			clientX: touch.clientX,
+			clientY: touch.clientY,
+			movementX: touch.clientX - lastX,
+			movementY: touch.clientY - lastY,
+			button: -1,
+			buttons: buttons,
+			pointerType: 'mouse',
+			pressure: buttons ? (touch.force || 0.5) : 0,
+		}));
+		lastX = touch.clientX;
+		lastY = touch.clientY;
+	}
+
+	function copyTouch(touch) {
+		return {
+			clientX: touch.clientX,
+			clientY: touch.clientY,
+			force: touch.force,
+		};
+	}
+
+	function releaseMouse() {
+		if (!mouseDown || !latestTouch) return;
+		moveMouse(latestTouch, 1);
+		window.dispatchEvent(new MouseEvent('mouseup', {
+			bubbles: true,
+			clientX: latestTouch.clientX,
+			clientY: latestTouch.clientY,
+			button: 0,
+			buttons: 0,
+		}));
+		mouseDown = false;
+		activeTouch = null;
+		pressTouch = null;
+		latestTouch = null;
+		releasedBeforePress = false;
+	}
+
+	function pressMouse(generation) {
+		pressTimer = null;
+		if (generation !== gestureGeneration || !pressTouch) return;
+		canvas.dispatchEvent(new MouseEvent('mousedown', {
+			bubbles: true,
+			clientX: pressTouch.clientX,
+			clientY: pressTouch.clientY,
+			button: 0,
+			buttons: 1,
+		}));
+		mouseDown = true;
+		if (latestTouch.clientX !== pressTouch.clientX || latestTouch.clientY !== pressTouch.clientY) {
+			moveMouse(latestTouch, 1);
+		}
+		if (releasedBeforePress) releaseMouse();
+	}
+
+	function schedulePress() {
+		const generation = gestureGeneration;
+		const startedAt = performance.now();
+		requestAnimationFrame(function () {
+			requestAnimationFrame(function () {
+				if (generation !== gestureGeneration) return;
+				const remainingDelay = Math.max(0, 100 - (performance.now() - startedAt));
+				pressTimer = window.setTimeout(() => pressMouse(generation), remainingDelay);
+			});
+		});
+	}
+
+	canvas.addEventListener('touchstart', function (event) {
+		if (event.changedTouches.length === 0) return;
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		if (activeTouch !== null) return;
+		const touch = event.changedTouches[0];
+		activeTouch = touch.identifier;
+		gestureGeneration += 1;
+		pressTouch = copyTouch(touch);
+		latestTouch = copyTouch(touch);
+		moveMouse(pressTouch, 0);
+		schedulePress();
+	}, { capture: true, passive: false });
+
+	canvas.addEventListener('touchmove', function (event) {
+		const touch = findTouch(event);
+		if (!touch) {
+			if (activeTouch !== null) {
+				event.preventDefault();
+				event.stopImmediatePropagation();
+			}
+			return;
+		}
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		latestTouch = copyTouch(touch);
+		if (mouseDown) moveMouse(latestTouch, 1);
+	}, { capture: true, passive: false });
+
+	function releaseTouch(event) {
+		const touch = findTouch(event);
+		if (!touch) {
+			if (activeTouch !== null) {
+				event.preventDefault();
+				event.stopImmediatePropagation();
+			}
+			return;
+		}
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		latestTouch = copyTouch(touch);
+		if (mouseDown) {
+			releaseMouse();
+		} else {
+			releasedBeforePress = true;
+		}
+	}
+
+	function cancelTouch(event) {
+		const touch = findTouch(event);
+		if (!touch) return;
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		gestureGeneration += 1;
+		if (pressTimer !== null) window.clearTimeout(pressTimer);
+		pressTimer = null;
+		latestTouch = copyTouch(touch);
+		if (mouseDown) releaseMouse();
+		activeTouch = null;
+		pressTouch = null;
+		latestTouch = null;
+		releasedBeforePress = false;
+	}
+
+	canvas.addEventListener('touchend', releaseTouch, { capture: true, passive: false });
+	canvas.addEventListener('touchcancel', cancelTouch, { capture: true, passive: false });
+}());
+		</script>
+		<script src="index.js?v=5-touch-fix-1"></script>
 		<script>
 const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":10307088,"index.wasm":39513091},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
@@ -193,9 +353,8 @@ const engine = new Engine(GODOT_CONFIG);
 				console.error('Error while registering service worker:', err);
 			});
 		} else {
-			// Display the message as usual
-			const missingMsg = 'Error\nThe following features required to run Godot projects on the Web are missing:\n';
-			displayFailureNotice(missingMsg + missing.join('\n'));
+			// Display the message as usual NOTTTT!!
+			displayFailureNotice("no https D: - triggered from index.html");
 		}
 	} else {
 		setStatusMode('progress');
