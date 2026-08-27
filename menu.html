@@ -266,7 +266,12 @@
     <button onclick="this.closest('dialog').close()">Cancel</button>
   </dialog>
 
-  <script src="./script.js"></script>
+  <script>
+    const bugmoogScript = location.protocol === 'file:'
+      ? './script.js'
+      : 'https://pugmoog.github.io/Bugmoog/script.js';
+    document.write('<script src="' + bugmoogScript + '"><\/script>');
+  </script>
   <script>
     const resultCount = document.querySelector('#result-count');
     const clearSearch = document.querySelector('#clear-search');
