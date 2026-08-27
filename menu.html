@@ -214,7 +214,7 @@
       </div>
       <div class="action-row">
         <button class="proxy-button" onclick="loadPageGeneral('https://pugmoog.github.io/proxy/')">Web Proxy (experimental)</button>
-        <button class="chat-button" onclick="loadPageGeneral('https://pugmoog.github.io/chatroom/')">Chatroom</button>
+        <button class="chat-button" onclick="loadChatroom()">Chatroom</button>
       </div>
     </div>
   </header>
@@ -273,6 +273,14 @@
     document.write('<script src="' + bugmoogScript + '"><\/script>');
   </script>
   <script>
+    function loadChatroom() {
+      if (gamePageFrame.style.display === 'block') return;
+      const chatUrl = 'https://pugmoog.github.io/chatroom/';
+      gamePageFrame.src = weburl + 'game-page.html?deviceIdentity=1&game=' + encodeURIComponent(chatUrl);
+      gamePageFrame.style.display = 'block';
+      focusInterval = setInterval(focus, 20);
+    }
+
     const resultCount = document.querySelector('#result-count');
     const clearSearch = document.querySelector('#clear-search');
 

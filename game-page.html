@@ -93,6 +93,12 @@
     <script>
       const params = new URLSearchParams(window.location.search);
       const gameURL = params.get("game");
+      let frameURL = gameURL;
+      if (params.get("deviceIdentity") === "1") {
+        const markedURL = new URL(gameURL, location.href);
+        markedURL.hash = "device-identity";
+        frameURL = markedURL.href;
+      }
       const frame = document.getElementById("gameFrame");
       const hostStorage = window.localStorage;
 
@@ -223,7 +229,7 @@
 
       // Install once on the initial about:blank document, then again in onload.
       installLocalStorageShim(win);
-      frame.src = gameURL;
+      frame.src = frameURL;
     </script>
   </body>
 </html>
