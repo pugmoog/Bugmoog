@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Bugmoog statistics helper</title></head>
+<body>
+<script>
+(() => {
+  const API = "https://d3txi12i3pqbxm.cloudfront.net/bugmoog-stats/api";
+  const STORAGE_KEY = "bugmoog-analytics-id";
+  let visitorId = localStorage.getItem(STORAGE_KEY);
+  if (!/^[a-f0-9-]{20,80}$/i.test(visitorId || "")) {
+    visitorId = crypto.randomUUID();
+    localStorage.setItem(STORAGE_KEY, visitorId);
+  }
+
+  async function request(path, options = {}) {
+    const response = await fetch(`${API}${path}${path.includes("?") ? "&" : "?"}t=${Date.now()}`, {
+      cache: "no-store",
+      ...options
+    });
+    if (!response.ok) throw new Error(`Statistics request failed (${response.status}).`);
+    return response.json();
+  }
+
+  window.addEventListener("message", async event => {
+    if (event.source !== parent) return;
+    const message = event.data;
+    if (message?.type === "bugmoog-stats-event") {
+      request("/event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ event: message.event, subject: message.subject, visitorId }),
+        keepalive: true
+      }).catch(() => {});
+    }
+    if (message?.type === "bugmoog-stats-popularity-request") {
+      try {
+        const data = await request("/popularity");
+        const games = Object.fromEntries(data.games.map(game => [game.id, game.opens]));
+        parent.postMessage({ type: "bugmoog-stats-popularity", games }, "*");
+      } catch {}
+    }
+  });
+
+  parent.postMessage({ type: "bugmoog-stats-ready" }, "*");
+})();
+</script>
+</body>
+</html>

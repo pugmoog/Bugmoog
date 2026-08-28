@@ -17,12 +17,12 @@
     body {
       width: min(1040px, calc(100% - 28px));
       margin: 0 auto;
-      padding: 28px 0 50px;
+      padding: 12px 0 50px;
       text-align: left;
       background: #fff;
     }
 
-    button, input { font: inherit; }
+    button, input, select { font: inherit; }
 
     button, .button-link {
       padding: 10px 13px;
@@ -55,11 +55,17 @@
     h2 { margin: 0 0 12px; font-size: 1.25rem; }
     p { line-height: 1.5; }
     .byline { margin: 6px 0 0; color: green; font-weight: bold; }
+
     .update-note {
-      margin: 0 0 12px;
+      margin-bottom: 40px;
       color: #c00000;
       font-weight: bold;
       text-align: center;
+      border-radius: 10px;
+      border: 1px solid black;
+      padding: 15px;
+      background-color: #f1f1f1;
+      line-height: 1.5em
     }
 
     .update-note strong { color: green; }
@@ -109,6 +115,22 @@
     }
 
     .category-button { min-width: 76px; }
+
+    .sort-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 4px 4px 4px auto;
+      font-size: .9rem;
+    }
+
+    #sort-games {
+      padding: 9px 28px 9px 9px;
+      border: 1px solid #555;
+      border-radius: 5px;
+      color: #111;
+      background: #fff;
+    }
 
     .grid {
       width: 100%;
@@ -198,10 +220,35 @@
       .game { min-height: 165px; }
       .game img { height: 96px; }
     }
+    highlight {
+        background: #dadada;
+        border-radius: 6px;
+        padding: 0.15em 0.35em;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 0.9em;
+    }
+    e {
+        color: #aaaaaa;
+        margin-left:  7px;
+        margin-right: 7px
+    }
   </style>
 </head>
 <body>
-  <p class="update-note"><strong>What’s new in v5:</strong> UI redesign; ALL games save progress; added proxy and chatroom; added GunSpin, Warfare 1944, sobosuba, and Walkable Cities</p>
+
+  <div class="update-note">
+      <strong>What’s new in v5: </strong><e>|</e>
+      UI redesign <e>|</e>
+      ALL games save progress <e>|</e>
+      Added proxy and chatroom <e>|</e>
+      Added games:
+          <highlight>GunSpin</highlight>
+          <highlight>Warfare 1944</highlight>
+          <highlight>Sobosuba</highlight>
+          <highlight>Pickles</highlight>
+          <highlight>Walkable Cities</highlight>
+  </div>
+
   <header>
     <div>
       <h1>BugMoog v5</h1>
@@ -213,7 +260,7 @@
         <a class="button-link get-button" href="https://rugmoog.github.io" target="_blank" rel="noreferrer">Get BugMoog</a>
       </div>
       <div class="action-row">
-        <button class="proxy-button" onclick="loadPageGeneral('https://pugmoog.github.io/proxy/')">Web Proxy (experimental)</button>
+        <button class="proxy-button" onclick="trackBugmoogEvent('proxy_open', 'proxy');loadPageGeneral('https://pugmoog.github.io/proxy/')">Web Proxy (experimental)</button>
         <button class="chat-button" onclick="loadChatroom()">Chatroom</button>
       </div>
     </div>
@@ -238,6 +285,16 @@
       <button class="category-button">Strategy</button>
       <button class="category-button">Casual</button>
       <button class="category-button">Story</button>
+      <label class="sort-control" for="sort-games">Sort
+        <select id="sort-games">
+          <option value="az">A–Z</option>
+          <option value="za">Z–A</option>
+          <option value="random">Random</option>
+          <option value="popular">Most Popular</option>
+          <option value="unpopular">Least Popular</option>
+          <option value="newest">Newest</option>
+        </select>
+      </label>
     </div>
 
     <div class="grid"></div>
@@ -269,12 +326,13 @@
   <script>
     const bugmoogScript = location.protocol === 'file:'
       ? './script.js'
-      : 'https://pugmoog.github.io/Bugmoog/script.js';
+      : 'https://pugmoog.github.io/Bugmoog/script.js?v=5-stats-sort-1';
     document.write('<script src="' + bugmoogScript + '"><\/script>');
   </script>
   <script>
     function loadChatroom() {
       if (gamePageFrame.style.display === 'block') return;
+      trackBugmoogEvent('chat_open', 'chat');
       const chatUrl = 'https://pugmoog.github.io/chatroom/';
       gamePageFrame.src = weburl + 'game-page.html?deviceIdentity=1&game=' + encodeURIComponent(chatUrl);
       gamePageFrame.style.display = 'block';
@@ -310,5 +368,6 @@
 
     updateResultCount();
   </script>
+  <footer><a href="https://pugmoog.github.io/bugmoog-stats/" target="_blank" rel="noreferrer">Stats</a></footer>
 </body>
 </html>
