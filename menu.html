@@ -260,7 +260,7 @@
         <a class="button-link get-button" href="https://rugmoog.github.io" target="_blank" rel="noreferrer">Get BugMoog</a>
       </div>
       <div class="action-row">
-        <button class="proxy-button" onclick="trackBugmoogEvent('proxy_open', 'proxy');loadPageGeneral('https://pugmoog.github.io/proxy/')">Web Proxy (experimental)</button>
+        <button class="proxy-button" onclick="trackBugmoogEvent('proxy_open', 'proxy');loadPageGeneral('https://d3txi12i3pqbxm.cloudfront.net/chet/proxy/')">Web Proxy (experimental)</button>
         <button class="chat-button" onclick="loadChatroom()">Chatroom</button>
       </div>
     </div>
@@ -333,7 +333,7 @@
     function loadChatroom() {
       if (gamePageFrame.style.display === 'block') return;
       trackBugmoogEvent('chat_open', 'chat');
-      const chatUrl = 'https://pugmoog.github.io/chatroom/';
+      const chatUrl = 'https://d3txi12i3pqbxm.cloudfront.net/chet/chat/';
       gamePageFrame.src = weburl + 'game-page.html?deviceIdentity=1&game=' + encodeURIComponent(chatUrl);
       gamePageFrame.style.display = 'block';
       focusInterval = setInterval(focus, 20);
@@ -368,6 +368,6 @@
 
     updateResultCount();
   </script>
-  <footer><a href="https://pugmoog.github.io/bugmoog-stats/" target="_blank" rel="noreferrer">Stats</a></footer>
+  <footer><a href="bugmoog-stats/" target="_blank" rel="noreferrer">Stats</a></footer>
 </body>
 </html>
