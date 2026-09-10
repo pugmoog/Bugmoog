@@ -1,95 +1,144 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bugmoog Stats</title>
-  <link rel="stylesheet" href="stats.css?v=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BugMoog Stats</title>
+  <link rel="stylesheet" href="stats.css?v=5-stats-2" />
 </head>
 <body>
-  <header class="site-header">
-    <div>
-      <h1>Bugmoog Stats</h1>
-      <p>Anonymous counts for a small personal project.</p>
-    </div>
-    <a href="../menu.html">Back to Bugmoog</a>
-  </header>
+<h1>BugMoog Stats</h1>
+<div id="settings">
+  <section class="options-block">
+    <h2>Settings</h2>
 
-  <main>
-    <section class="report-controls" aria-labelledby="report-heading">
-      <div class="section-heading">
-        <div><p class="kicker">Report</p><h2 id="report-heading">Choose a time and what to compare</h2></div>
-        <button id="refresh" class="primary" type="button">Update graph</button>
-      </div>
+    <label>Start Time</label>
+    <input type="datetime-local" id="start-time">
+    <br>
+    <label>End Time</label>
+    <input type="datetime-local" id="end-time">
+    <br><br>
 
-      <div class="quick-ranges" aria-label="Quick date ranges">
-        <button type="button" data-days="1">Today</button>
-        <button type="button" data-days="7">7 days</button>
-        <button type="button" data-days="30" class="active">30 days</button>
-        <button type="button" data-days="90">90 days</button>
-        <button type="button" data-days="all">All recorded</button>
-      </div>
+    <label>Precision</label>
+    <select id="precision">
+      <option>Hours</option>
+      <option>Days</option>
+      <option>Weeks</option>
+    </select>
 
-      <div class="control-grid">
-        <label>From (UTC)<input id="from" type="datetime-local" step="3600"></label>
-        <label>To (UTC)<input id="to" type="datetime-local" step="3600"></label>
-        <label>Measure<select id="metric"><option value="opens">Opens</option><option value="uniqueDevices">Unique-device intervals</option></select></label>
-        <label>Precision<select id="resolution"><option value="auto">Automatic</option><option value="hour">Hours</option><option value="day">Days</option></select></label>
-      </div>
+    <br><br>
 
-      <div class="report-tabs" role="tablist" aria-label="Report type">
-        <button type="button" role="tab" data-view="timeline" aria-selected="true">Timeline</button>
-        <button type="button" role="tab" data-view="week" aria-selected="false">Average week</button>
-        <button type="button" role="tab" data-view="day" aria-selected="false">Average day</button>
-      </div>
-      <p class="view-help" id="view-help"></p>
-    </section>
+    <label>Preset</label>
+    <select id="preset">
+      <option>Select a preset</option>
+      <option>Today</option>
+      <option>Last week (hourly)</option>
+      <option>Last week (daily)</option>
+      <option>Last 30 days</option>
+      <option>Last 90 days</option>
+    </select>
 
-    <p id="status" role="status">Loading statistics…</p>
+    <br><br>
 
-    <section class="summary" aria-label="Totals in selected range">
-      <div><span>Bugmoog opens</span><strong id="total-bugmoog">—</strong></div>
-      <div><span>Game opens</span><strong id="total-games">—</strong></div>
-      <div><span>Chat opens</span><strong id="total-chat">—</strong></div>
-      <div><span>Proxy opens</span><strong id="total-proxy">—</strong></div>
-    </section>
+    <label>Mode</label>
+    <select id="mode">
+      <option>Normal</option>
+      <option>Average day</option>
+      <option>Average week</option>
+    </select>
+  </section>
 
-    <div class="workspace">
-      <aside class="series-panel">
-        <div class="section-heading compact"><div><p class="kicker">Lines</p><h2>Compare activity</h2></div><button id="clear-series" type="button">Clear</button></div>
-        <div id="general-series" class="check-list">
-          <label><input type="checkbox" value="bugmoog" checked><span class="swatch" style="--line:#3157a4"></span>Bugmoog opens</label>
-          <label><input type="checkbox" value="all-games"><span class="swatch" style="--line:#cb4b35"></span>All game opens</label>
-          <label><input type="checkbox" value="chat"><span class="swatch" style="--line:#2c8a55"></span>Chat opens</label>
-          <label><input type="checkbox" value="proxy"><span class="swatch" style="--line:#8a4ca8"></span>Proxy opens</label>
-        </div>
-        <div class="games-heading"><strong>Individual games</strong><button id="top-games" type="button">Top 5</button></div>
-        <input id="game-search" type="search" placeholder="Find a game" aria-label="Find a game">
-        <div id="game-series" class="check-list games"></div>
-      </aside>
 
-      <section class="chart-panel">
-        <div class="chart-heading">
-          <div><p class="kicker" id="chart-kicker">Timeline</p><h2 id="chart-title">Bugmoog opens</h2></div>
-          <div class="chart-actions"><span id="chart-range"></span><button id="graph-only" type="button">Graph only</button></div>
-        </div>
-        <div id="legend" class="legend"></div>
-        <div class="chart-wrap">
-          <svg id="chart" viewBox="0 0 960 430" role="img" aria-labelledby="chart-title"></svg>
-          <div id="tooltip" role="status"></div>
-        </div>
-        <p id="chart-note" class="note"></p>
-      </section>
+
+  <section class="options-block">
+  <h2>Show</h2>
+
+    <div id="show-header">
+      <small style="writing-mode: vertical-rl;">Opens</small>
+      <small style="writing-mode: vertical-rl;">Devices</small>
     </div>
 
-    <section class="table-section">
-      <div class="section-heading compact"><div><p class="kicker">Ranking</p><h2>Games in this range</h2></div><span id="game-count"></span></div>
-      <div class="table-wrap"><table><thead><tr><th>#</th><th>Game</th><th>Opens</th><th>Unique-device intervals</th><th>Share</th></tr></thead><tbody id="game-table"></tbody></table></div>
-      <p class="note">Unique-device intervals are deduplicated inside each stored hour or day, then added together. They are not an all-time unique-person count.</p>
-    </section>
-  </main>
+    <h4>Main</h4>
 
-  <button id="exit-graph" type="button">Exit graph-only view</button>
-  <script src="stats.js?v=1"></script>
+    <div id="show-bm">
+      <input type="checkbox" class="opens">
+      <input type="checkbox" class="devices">
+      <span>BugMoog Opens</span>
+    </div>
+
+    <div id="show-game">
+      <input type="checkbox" class="opens">
+      <input type="checkbox" class="devices">
+      <span>Game Opens</span>
+    </div>
+
+    <div id="show-chat">
+      <input type="checkbox" class="opens">
+      <input type="checkbox" class="devices">
+      <span>Chatroom Opens</span>
+    </div>
+
+    <h4>
+    Individual Games
+    <button id="select-all-game-opens">O</button> <!-- O=select all opens; D=select all devices; X=deselect all -->
+    <button id="select-all-game-devices">D</button>
+    <button id="deselect-all-games">X</button>
+    </h4>
+
+    <div class="game-row">
+      <input type="checkbox" class="opens">
+      <input type="checkbox" class="devices">
+      <span>Starship Arena</span>
+    </div>
+
+    <div class="game-row">
+      <input type="checkbox" class="opens">
+      <input type="checkbox" class="devices">
+      <span>Pixel Quest</span>
+    </div>
+
+    <div class="game-row">
+      <input type="checkbox" class="opens">
+      <input type="checkbox" class="devices">
+      <span>Dungeon Raiders</span>
+    </div>
+
+    <div class="game-row">
+      <input type="checkbox" class="opens">
+      <input type="checkbox" class="devices">
+      <span>Racing Rivals</span>
+    </div>
+
+    <div class="game-row">
+      <input type="checkbox" class="opens">
+      <input type="checkbox" class="devices">
+      <span>Island Survival</span>
+    </div>
+
+    <div class="game-row">
+      <input type="checkbox" class="opens">
+      <input type="checkbox" class="devices">
+      <span>Island Survival 2</span>
+    </div>
+
+    <div class="game-row">
+      <input type="checkbox" class="opens">
+      <input type="checkbox" class="devices">
+      <span>Island Survival 3</span>
+    </div>
+  </section>
+</div>
+
+  <h2>Analytics</h2>
+  <button id="refresh">Refresh</button>
+  <p id="status" role="status">Loading…</p>
+  <div class="chart-wrap"><canvas id="chart" aria-label="Selected activity over time" role="img"></canvas></div>
+  <p id="note"></p>
+  <div id="totals"></div>
+  <div id="leaderboards"></div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <script src="stats.js?v=5-stats-2"></script>
+
+
 </body>
 </html>

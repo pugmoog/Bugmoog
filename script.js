@@ -289,7 +289,7 @@ function popularityFor(game) {
 }
 
 function sortGames() {
-  const mode = document.querySelector("#sort-games")?.value || "az";
+  const mode = document.querySelector("#sort-games")?.value || "random";
   const elements = [...gamesGrid.querySelectorAll(".game")];
   const byName = (a, b) => a._gameData.name.localeCompare(b._gameData.name);
   if (mode === "random") {

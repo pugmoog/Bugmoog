@@ -288,10 +288,10 @@
         <select id="sort-games">
           <option value="az">A–Z</option>
           <option value="za">Z–A</option>
-          <option value="random">Random</option>
+          <option value="random" selected>Random</option>
           <option value="popular">Most Popular</option>
           <option value="unpopular">Least Popular</option>
-          <option value="newest" selected>Newest</option>
+          <option value="newest">Newest</option>
         </select>
       </label>
     </div>
@@ -325,7 +325,7 @@
   <script>
     const bugmoogScript = location.protocol === 'file:'
       ? './script.js'
-      : 'https://pugmoog.github.io/Bugmoog/script.js?v=5-stats-sort-1';
+      : 'https://pugmoog.github.io/Bugmoog/script.js?v=5-stats-random-2';
     document.write('<script src="' + bugmoogScript + '"><\/script>');
   </script>
   <script>
