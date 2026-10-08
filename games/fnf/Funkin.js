@@ -4824,9 +4824,11 @@ ApplicationMain.create = function(config) {
 	app.createWindow(attributes);
 	var preloader = new openfl_display_Preloader(new flixel_system_FlxPreloader());
 	app.__preloader.onProgress.add(function(loaded,total) {
+		if(window.fnfLoading) window.fnfLoading.progress(loaded,total);
 		preloader.update(loaded,total);
 	});
 	app.__preloader.onComplete.add(function() {
+		if(window.fnfLoading) window.fnfLoading.starting();
 		preloader.start();
 	});
 	var stage = (js_Boot.__cast(app.__window , openfl_display_Window)).stage;
@@ -4854,6 +4856,7 @@ ApplicationMain.create = function(config) {
 ApplicationMain.start = function(stage) {
 	try {
 		Main.main();
+		if(window.fnfLoading) window.fnfLoading.done();
 		stage.dispatchEvent(new openfl_events_Event("resize",false,false));
 		if(stage.window.__fullscreen) {
 			stage.dispatchEvent(new openfl_events_FullScreenEvent("fullScreen",false,false,true,true));
@@ -93089,8 +93092,8 @@ var lime__$internal_backend_html5_HTML5Window = function(parent) {
 		element.addEventListener("touchmove",$bind(this,this.handleTouchEvent),true);
 		element.addEventListener("touchend",$bind(this,this.handleTouchEvent),true);
 		element.addEventListener("touchcancel",$bind(this,this.handleTouchEvent),true);
-		element.addEventListener("gamepadconnected",$bind(this,this.handleGamepadEvent),true);
-		element.addEventListener("gamepaddisconnected",$bind(this,this.handleGamepadEvent),true);
+
+
 	}
 	this.createContext();
 	if(parent.context.type == "webgl") {
@@ -107802,13 +107805,8 @@ lime_ui_Joystick.__disconnect = function(id) {
 	}
 };
 lime_ui_Joystick.__getDeviceData = function() {
-	if(navigator.getGamepads) {
-		return navigator.getGamepads();
-	} else if(navigator.webkitGetGamepads) {
-		return navigator.webkitGetGamepads();
-	} else {
-		return null;
-	}
+	// Keyboard-only build: avoid the Gamepad API in restricted iframes.
+	return [];
 };
 lime_ui_Joystick.prototype = {
 	connected: null
