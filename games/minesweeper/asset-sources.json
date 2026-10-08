@@ -1,0 +1,151 @@
+[
+  {
+    "path": "images/branding/googleg/1x/googleg_standard_color_128dp.png",
+    "source": "https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png",
+    "bytes": 3428
+  },
+  {
+    "path": "images/icons/material/system/1x/done_black_16dp.png",
+    "source": "https://www.minesweepergoogle.com/images/icons/material/system/1x/done_black_16dp.png",
+    "bytes": 122
+  },
+  {
+    "path": "images/icons/material/system/2x/close_white_24dp.png",
+    "source": "https://www.minesweepergoogle.com/images/icons/material/system/2x/close_white_24dp.png",
+    "bytes": 204
+  },
+  {
+    "path": "images/icons/material/system/2x/refresh_white_24dp.png",
+    "source": "https://www.minesweepergoogle.com/images/icons/material/system/2x/refresh_white_24dp.png",
+    "bytes": 463
+  },
+  {
+    "path": "images/icons/material/system/2x/volume_off_white_24dp.png",
+    "source": "https://www.minesweepergoogle.com/images/icons/material/system/2x/volume_off_white_24dp.png",
+    "bytes": 532
+  },
+  {
+    "path": "images/icons/material/system/2x/volume_up_white_24dp.png",
+    "source": "https://www.minesweepergoogle.com/images/icons/material/system/2x/volume_up_white_24dp.png",
+    "bytes": 455
+  },
+  {
+    "path": "kpui/social/fb_32x32.png",
+    "source": "https://www.minesweepergoogle.com/kpui/social/fb_32x32.png",
+    "bytes": 846
+  },
+  {
+    "path": "kpui/social/twitter_32x32.png",
+    "source": "https://www.minesweepergoogle.com/kpui/social/twitter_32x32.png",
+    "bytes": 414
+  },
+  {
+    "path": "logos/fnbx/minesweeper/clock_icon.png",
+    "source": "https://www.minesweepergoogle.com/logos/fnbx/minesweeper/clock_icon.png",
+    "bytes": 3599
+  },
+  {
+    "path": "logos/fnbx/minesweeper/flag_icon.png",
+    "source": "https://www.minesweepergoogle.com/logos/fnbx/minesweeper/flag_icon.png",
+    "bytes": 623
+  },
+  {
+    "path": "logos/fnbx/minesweeper/flag_plant.png",
+    "source": "https://www.google.com/logos/fnbx/minesweeper/flag_plant.png",
+    "bytes": 1042
+  },
+  {
+    "path": "logos/fnbx/minesweeper/game_audio.bin",
+    "source": "https://www.google.com/logos/fnbx/minesweeper/game_audio.bin",
+    "bytes": 136911
+  },
+  {
+    "path": "logos/fnbx/minesweeper/incorrect_flag.png",
+    "source": "https://www.minesweepergoogle.com/logos/fnbx/minesweeper/incorrect_flag.png",
+    "bytes": 434
+  },
+  {
+    "path": "logos/fnbx/minesweeper/lose_screen.png",
+    "source": "https://www.minesweepergoogle.com/logos/fnbx/minesweeper/lose_screen.png",
+    "bytes": 2895
+  },
+  {
+    "path": "logos/fnbx/minesweeper/music_audio.bin",
+    "source": "https://www.google.com/logos/fnbx/minesweeper/music_audio.bin",
+    "bytes": 400680
+  },
+  {
+    "path": "logos/fnbx/minesweeper/shovel_icon.png",
+    "source": "https://www.minesweepergoogle.com/logos/fnbx/minesweeper/shovel_icon.png",
+    "bytes": 1506
+  },
+  {
+    "path": "logos/fnbx/minesweeper/trophy_icon.png",
+    "source": "https://www.minesweepergoogle.com/logos/fnbx/minesweeper/trophy_icon.png",
+    "bytes": 2882
+  },
+  {
+    "path": "logos/fnbx/minesweeper/tutorial_desktop_dig.png",
+    "source": "https://www.minesweepergoogle.com/logos/fnbx/minesweeper/tutorial_desktop_dig.png",
+    "bytes": 4654
+  },
+  {
+    "path": "logos/fnbx/minesweeper/tutorial_desktop_flag.png",
+    "source": "https://www.minesweepergoogle.com/logos/fnbx/minesweeper/tutorial_desktop_flag.png",
+    "bytes": 3691
+  },
+  {
+    "path": "logos/fnbx/minesweeper/win_screen.png",
+    "source": "https://www.minesweepergoogle.com/logos/fnbx/minesweeper/win_screen.png",
+    "bytes": 11446
+  },
+  {
+    "path": "ui/v1/menu/checkmark2.png",
+    "source": "https://www.minesweepergoogle.com/ui/v1/menu/checkmark2.png",
+    "bytes": 186
+  },
+  {
+    "path": "fonts/roboto-500-0.ttf",
+    "source": "https://fonts.gstatic.com/s/roboto/v51/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWub2bVmUiA8.ttf",
+    "bytes": 44796
+  },
+  {
+    "path": "images/icons/material/system/1x/email_grey600_24dp.png",
+    "source": "https://www.google.com/images/icons/material/system/1x/email_grey600_24dp.png"
+  },
+  {
+    "path": "index.html",
+    "source": "https://www.minesweepergoogle.com/gameapp.html",
+    "modified": true
+  },
+  {
+    "path": "game1.js",
+    "source": "https://www.minesweepergoogle.com/game1.js",
+    "modified": true
+  },
+  {
+    "path": "game2.js",
+    "source": "https://www.minesweepergoogle.com/game2.js",
+    "modified": false
+  },
+  {
+    "path": "game3.js",
+    "source": "https://www.minesweepergoogle.com/game3.js",
+    "modified": false
+  },
+  {
+    "path": "game4.js",
+    "source": "https://www.minesweepergoogle.com/game4.js",
+    "modified": false
+  },
+  {
+    "path": "game5.js",
+    "source": "https://www.minesweepergoogle.com/game5.js",
+    "modified": false
+  },
+  {
+    "path": "game6.js",
+    "source": "https://www.minesweepergoogle.com/game6.js",
+    "modified": false
+  }
+]

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Powder Toy 100.1.400</title>
+<style>body{margin:0;background:#111;color:#eee;font:14px system-ui;display:grid;justify-items:center}#status{padding:16px;white-space:pre-wrap}canvas{max-width:100%;image-rendering:pixelated;outline:none}canvas[hidden]{display:none}</style>
+</head>
+<body>
+<div id="status" role="status">Loading The Powder Toy…</div>
+<canvas id="canvas" tabindex="0" hidden></canvas>
+<script src="coi-serviceworker.js"></script>
+<script>
+const canvas=document.getElementById('canvas'),statusText=document.getElementById('status');
+function showError(error){statusText.hidden=false;statusText.textContent='Unable to start: '+(error?.message||error);console.error(error);}
+window.mark_presentable=()=>{canvas.hidden=false;statusText.hidden=true;canvas.focus();};
+canvas.addEventListener('contextmenu',event=>event.preventDefault());
+canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();showError('Graphics context lost. Reload the page.');});
+window.addEventListener('error',event=>showError(event.message||'A required file failed to load.'));
+window.addEventListener('unhandledrejection',event=>showError(event.reason));
+if(!window.crossOriginIsolated||typeof SharedArrayBuffer==='undefined'){
+ if(location.protocol==='file:'){showError('Open this folder on localhost or HTTPS static hosting. Browsers cannot run this threaded build directly from file://.');}else{statusText.textContent='Preparing browser isolation… This page will reload automatically.';setTimeout(()=>{if(!window.crossOriginIsolated)showError('Browser isolation did not initialize. Reload once, or check whether service workers are blocked.');},15000);}
+}else{
+ const script=document.createElement('script');script.src='powder.js';
+ script.onerror=()=>showError('Could not load powder.js.');
+ script.onload=()=>{window.create_powder({canvas,print:console.log,printErr:console.error,onAbort:showError}).then(module=>{window.powder=module;}).catch(showError);};
+ document.head.appendChild(script);
+}
+</script>
+</body>
+</html>

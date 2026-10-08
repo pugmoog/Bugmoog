@@ -166,6 +166,14 @@ function closePage() {
 
 // Load game buttons
 const games = [
+  { name: "The Powder Toy", id: "the-powder-toy", image: "the-powder-toy.png", category: "Casual", added: "2026-10-08" },
+  { name: "Moto X3M", id: "moto-x3m", image: "moto-x3m.png", category: "Action", added: "2026-10-08" },
+  { name: "Gun Mayhem 3", id: "gun-mayhem-3", image: "gun-mayhem-3.png", category: "Action", added: "2026-10-08" },
+  { name: "Granny 3", id: "granny-3", image: "granny-3.png", category: "Story", added: "2026-10-08" },
+  { name: "Friday Night Funkin’ Megapack", id: "fnf", image: "fnf.png", category: "Action", added: "2026-10-08" },
+  { name: "Doodle Jump", id: "doodlejump", image: "doodlejump.png", category: "Action", added: "2026-10-08" },
+  { name: "Don't Shoot the Puppy", id: "dont-shoot-the-puppy", image: "dont-shoot-the-puppy.png", category: "Puzzle", added: "2026-10-08" },
+  { name: "Do Not Stop!", id: "do-not-stop", image: "do-not-stop.png", category: "Action", added: "2026-10-08" },
   { name: "Baldi's Basics", id: "baldis-basics", image: "baldis-basics.png", category: "Story", added: "2026-05-16" },
   { name: "Ballistic", id: "Ballistic", image: "ballistic.png", category: "Action", added: "2026-05-16" },
   { name: "Basket Random", id: "basket-random", image: "basket-random.png", category: "Casual", added: "2026-05-16" },
