@@ -1,0 +1,191 @@
+diff --git a/meson.build b/meson.build
+index dad30d7..7b25f2b 100644
+--- a/meson.build
++++ b/meson.build
+@@ -225,7 +225,7 @@ project_link_args = []
+ project_cpp_args = []
+ 
+ fftw_dep = dependency('fftw3f', static: is_static)
+-threads_dep = dependency('threads')
++threads_dep = []
+ if host_platform == 'emscripten'
+ 	app_exe_jssafe = app_exe.underscorify()
+ 	png_dep = []
+@@ -241,7 +241,6 @@ if host_platform == 'emscripten'
+ 		'-s', 'FS_DEBUG',
+ 		'-s', 'MODULARIZE',
+ 		'-s', 'EXPORT_NAME=create_' + app_exe_jssafe,
+-		'-Wl,-u,_emscripten_run_callback_on_thread',
+ 		'-lidbfs.js',
+ 		'--source-map-base=./',
+ 	]
+@@ -249,7 +248,6 @@ if host_platform == 'emscripten'
+ 		'-s', 'USE_SDL=2',
+ 		'-s', 'USE_BZIP2=1',
+ 		'-s', 'USE_LIBPNG',
+-		'-s', 'USE_PTHREADS',
+ 		'-s', 'DISABLE_EXCEPTION_CATCHING=0',
+ 		'-gsource-map',
+ 	]
+diff --git a/src/gui/game/GameModel.cpp b/src/gui/game/GameModel.cpp
+index 90fa9c2..1a3aab5 100644
+--- a/src/gui/game/GameModel.cpp
++++ b/src/gui/game/GameModel.cpp
+@@ -112,7 +112,7 @@ GameModel::GameModel(GameView *newView):
+ 	rendererSettings.gravityFieldEnabled = prefs.Get("Renderer.GravityField", false);
+ 	rendererSettings.decorationLevel = prefs.Get("Renderer.Decorations", true) ? RendererSettings::decorationEnabled : RendererSettings::decorationDisabled;
+ 	rendererSettings.gridCheckerboard = prefs.Get("Renderer.GridCheckerboard", false);
+-	threadedRendering = prefs.Get("Renderer.SeparateThread", true);
++	threadedRendering = false; // Single-thread web build.
+ 
+ 	//Load config into simulation
+ 	edgeMode = prefs.Get("Simulation.EdgeMode", NUM_EDGEMODES, EDGE_VOID);
+@@ -338,7 +338,7 @@ void GameModel::SetTemperatureScale(TempScale temperatureScale)
+ 
+ void GameModel::SetThreadedRendering(bool newThreadedRendering)
+ {
+-	threadedRendering = newThreadedRendering;
++	threadedRendering = false; // Cannot enable worker rendering in this build.
+ }
+ 
+ void GameModel::SetAmbientAirTemperature(float ambientAirTemp)
+diff --git a/src/gui/game/GameView.cpp b/src/gui/game/GameView.cpp
+index 1bdf771..b88322f 100644
+--- a/src/gui/game/GameView.cpp
++++ b/src/gui/game/GameView.cpp
+@@ -2165,7 +2165,7 @@ void GameView::OnDraw()
+ {
+ 	Graphics * g = GetGraphics();
+ 
+-	auto threadedRenderingAllowed = c->ThreadedRenderingAllowed();
++	const bool threadedRenderingAllowed = false; // Single-thread web build.
+ 	if (wantFrame)
+ 	{
+ 		wantFrame = false;
+@@ -2752,34 +2752,7 @@ void GameView::RendererThread()
+ 
+ void GameView::StartRendererThread()
+ {
+-	bool start = false;
+-	bool notify = false;
+-	{
+-		std::lock_guard lk(rendererThreadMx);
+-		if (rendererThreadState == rendererThreadAbsent)
+-		{
+-			rendererThreadSim = std::make_unique<RenderableSimulation>();
+-			rendererThreadResult = std::make_unique<RendererFrame>();
+-			rendererThreadState = rendererThreadRunning;
+-			start = true;
+-		}
+-		else if (rendererThreadState == rendererThreadPaused)
+-		{
+-			rendererThreadState = rendererThreadRunning;
+-			notify = true;
+-		}
+-	}
+-	if (start)
+-	{
+-		rendererThread = std::thread([this]() {
+-			RendererThread();
+-		});
+-		notify = true;
+-	}
+-	if (notify)
+-	{
+-		DispatchRendererThread();
+-	}
++	// Disabled in the single-thread web build.
+ }
+ 
+ void GameView::StopRendererThread()
+diff --git a/src/gui/options/OptionsView.cpp b/src/gui/options/OptionsView.cpp
+index 380337a..8e32d88 100644
+--- a/src/gui/options/OptionsView.cpp
++++ b/src/gui/options/OptionsView.cpp
+@@ -423,6 +423,7 @@ OptionsView::OptionsView() : ui::Window(ui::Point(-1, -1), ui::Point(320, 340))
+ 	threadedRendering = addCheckbox(0, "Separate rendering thread", "May increase framerate when fancy effects are in use", [this] {
+ 		c->SetThreadedRendering(threadedRendering->GetChecked());
+ 	});
++	threadedRendering->Enabled = false;
+ 	decoSpace = addDropDown("Colour space used by decoration tools", {
+ 		{ "sRGB", DECOSPACE_SRGB },
+ 		{ "Linear", DECOSPACE_LINEAR },
+diff --git a/src/simulation/gravity/Fft.cpp b/src/simulation/gravity/Fft.cpp
+index 027c335..e4b1114 100644
+--- a/src/simulation/gravity/Fft.cpp
++++ b/src/simulation/gravity/Fft.cpp
+@@ -74,29 +74,17 @@ GravityImpl::~GravityImpl()
+ 
+ void GravityImpl::Dispatch()
+ {
+-	{
+-		std::unique_lock lk(stateMx);
+-		working = true;
+-	}
+-	stateCv.notify_one();
++	Work();
+ }
+ 
+ void GravityImpl::Stop()
+ {
+-	{
+-		std::unique_lock lk(stateMx);
+-		shouldStop = true;
+-	}
+-	stateCv.notify_one();
+-	thr.join();
++
+ }
+ 
+ void GravityImpl::Wait()
+ {
+-	std::unique_lock lk(stateMx);
+-	stateCv.wait(lk, [this]() {
+-		return !working;
+-	});
++
+ }
+ 
+ void GravityImpl::Work()
+@@ -183,27 +171,7 @@ void GravityImpl::Init()
+ 	//clear padded gravmap
+ 	std::fill(massBig.get(), massBig.get() + blocks.X * blocks.Y, 0.f);
+ 
+-	thr = std::thread([this]() {
+-		while (true)
+-		{
+-			{
+-				std::unique_lock lk(stateMx);
+-				stateCv.wait(lk, [this]() {
+-					return working || shouldStop;
+-				});
+-				if (shouldStop)
+-				{
+-					break;
+-				}
+-			}
+-			Work();
+-			{
+-				std::unique_lock lk(stateMx);
+-				working = false;
+-			}
+-			stateCv.notify_one();
+-		}
+-	});
++
+ }
+ 
+ void Gravity::Exchange(GravityOutput &gravOut, GravityInput &gravIn, bool forceRecalc)
+diff --git a/src/tasks/Task.cpp b/src/tasks/Task.cpp
+index 50d5300..35dcb88 100644
+--- a/src/tasks/Task.cpp
++++ b/src/tasks/Task.cpp
+@@ -12,7 +12,7 @@ void Task::AddTaskListener(TaskListener * listener)
+ void Task::Start()
+ {
+ 	before();
+-	std::thread([this]() { doWork_wrapper(); }).detach();
++	doWork_wrapper(); // Single-thread web build: complete work before polling results.
+ }
+ 
+ int Task::GetProgress()

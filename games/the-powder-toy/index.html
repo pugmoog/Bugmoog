@@ -1,31 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Powder Toy 100.1.400</title>
-<style>body{margin:0;background:#111;color:#eee;font:14px system-ui;display:grid;justify-items:center}#status{padding:16px;white-space:pre-wrap}canvas{max-width:100%;image-rendering:pixelated;outline:none}canvas[hidden]{display:none}</style>
-</head>
-<body>
-<div id="status" role="status">Loading The Powder Toy…</div>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Powder Toy — Single Thread</title>
+<style>html,body{margin:0;background:#111;color:#eee;font:14px system-ui}body{display:flex;flex-direction:column;align-items:center;width:100%;min-width:0}#loading{padding:20px;max-width:90vw;overflow-wrap:anywhere}progress{width:100%}canvas{max-width:100vw;height:auto;image-rendering:pixelated;outline:none}canvas[hidden],#loading[hidden]{display:none}</style></head><body>
+<div id="loading" role="status"><div id="status">Loading game engine…</div><progress id="progress" max="100"></progress><button id="retry" hidden onclick="location.reload()">Reload</button></div>
 <canvas id="canvas" tabindex="0" hidden></canvas>
-<script src="coi-serviceworker.js"></script>
 <script>
-const canvas=document.getElementById('canvas'),statusText=document.getElementById('status');
-function showError(error){statusText.hidden=false;statusText.textContent='Unable to start: '+(error?.message||error);console.error(error);}
-window.mark_presentable=()=>{canvas.hidden=false;statusText.hidden=true;canvas.focus();};
-canvas.addEventListener('contextmenu',event=>event.preventDefault());
-canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();showError('Graphics context lost. Reload the page.');});
-window.addEventListener('error',event=>showError(event.message||'A required file failed to load.'));
-window.addEventListener('unhandledrejection',event=>showError(event.reason));
-if(!window.crossOriginIsolated||typeof SharedArrayBuffer==='undefined'){
- if(location.protocol==='file:'){showError('Open this folder on localhost or HTTPS static hosting. Browsers cannot run this threaded build directly from file://.');}else{statusText.textContent='Preparing browser isolation… This page will reload automatically.';setTimeout(()=>{if(!window.crossOriginIsolated)showError('Browser isolation did not initialize. Reload once, or check whether service workers are blocked.');},15000);}
-}else{
- const script=document.createElement('script');script.src='powder.js';
- script.onerror=()=>showError('Could not load powder.js.');
- script.onload=()=>{window.create_powder({canvas,print:console.log,printErr:console.error,onAbort:showError}).then(module=>{window.powder=module;}).catch(showError);};
- document.head.appendChild(script);
+const canvas=document.getElementById('canvas'),loading=document.getElementById('loading'),statusText=document.getElementById('status'),progress=document.getElementById('progress');
+let lastProgress=Date.now(),ready=false,failed=false;
+function showError(error){failed=true;clearInterval(watchdog);loading.hidden=false;statusText.textContent='Unable to start: '+(error?.message||error);progress.hidden=true;document.getElementById('retry').hidden=false;console.error(error);}
+const watchdog=setInterval(()=>{if(!ready&&!failed&&Date.now()-lastProgress>90000){statusText.textContent='Still waiting. Loading may be stalled; you can wait or reload.';document.getElementById('retry').hidden=false;}},5000);
+window.mark_presentable=()=>{if(failed)return;ready=true;clearInterval(watchdog);canvas.hidden=false;loading.hidden=true;canvas.focus();};
+canvas.addEventListener('contextmenu',e=>e.preventDefault());
+canvas.addEventListener('pointerdown',()=>canvas.focus());
+window.addEventListener('error',e=>{if(e.message)showError(e.message);});
+window.addEventListener('unhandledrejection',e=>showError(e.reason));
+async function start(){
+ if(location.protocol==='file:')throw Error('Open this folder through localhost or HTTPS, rather than double-clicking index.html.');
+ statusText.textContent='Downloading game…';
+ const response=await fetch('powder.wasm');if(!response.ok)throw Error('powder.wasm: HTTP '+response.status);
+ const total=Number(response.headers.get('content-length')),chunks=[];let received=0;
+ const reader=response.body.getReader();
+ while(true){const {done,value}=await reader.read();if(done)break;chunks.push(value);received+=value.length;lastProgress=Date.now();if(total){progress.value=Math.round(received/total*100);}statusText.textContent='Downloading game… '+(received/1048576).toFixed(1)+' MB'+(total?' / '+(total/1048576).toFixed(1)+' MB':'');}
+ const wasmBinary=new Uint8Array(received);let offset=0;for(const chunk of chunks){wasmBinary.set(chunk,offset);offset+=chunk.length;}
+ statusText.textContent='Starting game…';progress.removeAttribute('value');lastProgress=Date.now();
+ window.powder=await create_powder({canvas,wasmBinary,print:console.log,printErr:console.error,onAbort:showError});
 }
-</script>
-</body>
-</html>
+const script=document.createElement('script');script.src='powder.js';script.onload=()=>start().catch(showError);script.onerror=()=>showError('Could not load powder.js');document.body.appendChild(script);
+</script></body></html>

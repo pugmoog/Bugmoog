@@ -1,0 +1,19 @@
+Build tools used:
+  Emscripten SDK 4.0.10
+  Meson 1.12.1
+  Ninja 1.13.2
+  CMake 4.4.4 (for Emscripten ports)
+
+Extract modified-source.tar.gz, activate Emscripten, and enter powder-single-source.
+The prebuilt upstream tpt-libs v20251019131007 dependencies are included.
+Dependency sources: https://github.com/The-Powder-Toy/tpt-libs/tree/v20251019131007
+Emscripten automatically downloads/builds its SDL2, libpng, zlib and bzip2 ports.
+
+meson setup build-single --cross-file .github/emscripten-ghactions.ini \
+  --buildtype=release -Dstatic=prebuilt -Dhttp=false -Dlua=lua5.2 \
+  -Dplatform_clipboard=false -Dcan_install=no -Dshared_data_folder=false
+ninja -C build-single -j 6
+
+Copy build-single/powder.js and build-single/powder.wasm beside index.html.
+For an original checkout instead, checkout v100.1.400 and apply single-thread.patch
+before running the commands above.
