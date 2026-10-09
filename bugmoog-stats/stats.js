@@ -1,6 +1,7 @@
 const $ = s => document.querySelector(s);
 const HOUR = 3600000, DAY = 24 * HOUR;
-const API = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || /^192\.168\./.test(location.hostname)
+const API = location.pathname.startsWith('/chet/bugmoog-stats')
+  ? '/chet/bugmoog-stats/api/stats' : location.hostname === 'localhost' || location.hostname === '127.0.0.1' || /^192\.168\./.test(location.hostname)
   ? '/api/stats' : 'https://d3txi12i3pqbxm.cloudfront.net/chet/bugmoog-stats/api/stats';
 const format = n => Number(n).toLocaleString(undefined, { maximumFractionDigits: 2 });
 const chartDate = time => {
@@ -179,7 +180,8 @@ function render() {
     ranked.forEach((s,i)=>{const tr=document.createElement('tr');for(const text of [s.total===null?'—':i+1,s.name,s.total===null?'Unavailable':format(s.total)]) {const td=document.createElement('td');td.textContent=text;tr.append(td);}table.append(tr);});
     $('#leaderboards').append(section);
   }
-  $('#note').textContent='Date inputs use your local time; graph buckets use UTC.'+(hourly&&from<effectiveFrom?' Hourly data starts '+new Date(effectiveFrom).toISOString().slice(0,10)+'.':'');
+  $('#history-warning').hidden=data.deviceCountsComplete!==false;
+  $('#note').textContent='Devices totals count each ID once across the selected range, including across games for All games. Graph points count each ID once per interval. Date inputs use your local time; graph buckets use UTC.'+(hourly&&from<effectiveFrom?' Hourly data starts '+new Date(effectiveFrom).toISOString().slice(0,10)+'.':'');
   status(!series.length?'Select an Opens or Devices checkbox to draw a line.':!rows.length?'No recorded activity in this range.':'');
 }
 $('#refresh').addEventListener('click',load);

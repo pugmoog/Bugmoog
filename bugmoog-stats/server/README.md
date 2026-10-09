@@ -5,3 +5,7 @@ Small SQLite analytics service. Recent activity is stored per hour, event, and a
 `GET /chet/bugmoog-stats/api/report/<from-ms>/<to-ms>/<hour|day|week>` returns graph rows and range-wide summaries. A null subject represents the event-wide total, deduplicated across games. Weeks begin Monday in UTC. Historical data compacted before this migration has unavailable device counts (`null`), not estimated counts. The original statistics, popularity, event, and health routes remain compatible.
 
 Browser requests are restricted to the configured allowed origins. Run with Node.js 24 and configure `DATA_DIR`, `HOST`, `PORT`, and `ALLOWED_ORIGINS` as appropriate.
+
+Device totals are distinct across the complete requested range, independent of graph resolution. Hourly graphs retain their 31-day limit, but summaries include archived days. The legacy stats route uses the same deduplicated range totals (`uniqueDevices` and its compatibility alias `uniqueDeviceBuckets`).
+
+Reports include `deviceCountsComplete`; the dashboard warns when a selected range includes historical records without identity coverage. Opens remain available. Deploy `server.js` to the service directory and `index.html`, `stats.js`, and `stats.css` together to `PUBLIC_DIR`. Both the server-hosted dashboard and GitHub Pages use the report endpoint. Run `npm test` for deduplication and compaction regression checks.

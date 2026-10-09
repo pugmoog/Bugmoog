@@ -71,7 +71,9 @@ function apiError(status, message) {
 
 function applyCors(req, res) {
   const origin = req.headers.origin;
-  if (!origin || !ALLOWED_ORIGINS.has(origin)) return false;
+  // Same-origin dashboard GET requests do not send an Origin header.
+  if (!origin) return ["GET", "HEAD"].includes(req.method);
+  if (!ALLOWED_ORIGINS.has(origin)) return false;
   res.setHeader("Access-Control-Allow-Origin", origin);
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
@@ -91,12 +93,17 @@ function sendJson(res, status, value) {
 }
 
 function serveFrontend(req, res, pathname) {
-  if (!["GET", "HEAD"].includes(req.method) || !["/chet/bugmoog-stats/", "/chet/bugmoog-stats/index.html"].includes(pathname)) return false;
-  const filePath = path.join(PUBLIC_DIR, "index.html");
+  const files = {"/chet/bugmoog-stats/": ["index.html", "text/html"],
+    "/chet/bugmoog-stats/index.html": ["index.html", "text/html"],
+    "/chet/bugmoog-stats/stats.js": ["stats.js", "text/javascript"],
+    "/chet/bugmoog-stats/stats.css": ["stats.css", "text/css"]};
+  const file = files[pathname];
+  if (!["GET", "HEAD"].includes(req.method) || !file) return false;
+  const filePath = path.join(PUBLIC_DIR, file[0]);
   if (!fs.existsSync(filePath)) throw apiError(503, "Statistics frontend is not installed.");
   const size = fs.statSync(filePath).size;
   res.writeHead(200, {
-    "Content-Type": "text/html; charset=utf-8",
+    "Content-Type": `${file[1]}; charset=utf-8`,
     "Content-Length": size,
     "Cache-Control": "no-store",
     "X-Content-Type-Options": "nosniff",
@@ -188,24 +195,10 @@ function queryRows(from, to, resolution) {
   return { rows, cutoff };
 }
 
-function totals() {
-  const combined = new Map();
-  const add = row => {
-    const key = `${row.event}\u0000${row.subject}`;
-    const current = combined.get(key) || { event: row.event, subject: row.subject, opens: 0, uniqueDeviceBuckets: 0 };
-    current.opens += Number(row.opens);
-    current.uniqueDeviceBuckets += Number(row.uniqueDevices);
-    combined.set(key, current);
-  };
-  for (const row of db.prepare(`SELECT s.event_code AS eventCode,s.name AS subject,SUM(h.opens) AS opens,
-    COUNT(DISTINCT h.visitor_hash) AS uniqueDevices FROM hourly_visitors h JOIN subjects s ON s.id=h.subject_id GROUP BY h.subject_id`).all()) {
-    add({ ...row, event: EVENT_NAMES.get(row.eventCode) });
-  }
-  for (const row of db.prepare(`SELECT s.event_code AS eventCode,s.name AS subject,SUM(d.opens) AS opens,
-    SUM(d.unique_devices) AS uniqueDevices FROM daily_totals d JOIN subjects s ON s.id=d.subject_id GROUP BY d.subject_id`).all()) {
-    add({ ...row, event: EVENT_NAMES.get(row.eventCode) });
-  }
-  return [...combined.values()].sort((a, b) => b.opens - a.opens || a.subject.localeCompare(b.subject));
+function totals(from = 0, to = now() + 1) {
+  return report(from, to, "day").summary.filter(row => row.subject !== null)
+    .map(row => ({...row, uniqueDeviceBuckets: row.uniqueDevices}))
+    .sort((a, b) => b.opens - a.opens || a.subject.localeCompare(b.subject));
 }
 
 // Return exact distinct-device counts without ever returning visitor hashes.
@@ -239,10 +232,11 @@ function report(from, to, resolution) {
     CAST((time - ${offset}) / ${size} AS INTEGER) * ${size} + ${offset} AS bucket,
     ${fields} FROM expanded GROUP BY bucket,event_code,subject ORDER BY bucket`).all(params);
   const summary = db.prepare(`${common} SELECT ${fields}
-    FROM expanded GROUP BY event_code,subject`).all(params);
+    FROM expanded GROUP BY event_code,subject`).all({$from:from,$to:to,$daily:1});
   const normalize = row => ({...row,event:EVENT_NAMES.get(row.event_code),event_code:undefined});
   return {from,to,effectiveFrom,resolution,hourlySince:cutoff,
     rows:rows.map(normalize),summary:summary.map(normalize),
+    deviceCountsComplete: !summary.some(row => row.uniqueDevices === null),
     games:db.prepare('SELECT name FROM subjects WHERE event_code=2 ORDER BY name').all().map(r=>r.name)};
 }
 
@@ -296,7 +290,7 @@ const server = http.createServer(async (req, res) => {
       const resolution = ["auto", "hour", "day"].includes(url.searchParams.get("resolution")) ? url.searchParams.get("resolution") : "auto";
       if (from >= to) throw apiError(400, "Invalid date range.");
       const result = queryRows(from, to, resolution);
-      return sendJson(res, 200, { from, to, resolution, hourlySince: result.cutoff, rows: result.rows, totals: totals() });
+      return sendJson(res, 200, { from, to, resolution, hourlySince: result.cutoff, rows: result.rows, totals: totals(from, to) });
     }
 
     if (req.method === "GET" && url.pathname === "/chet/bugmoog-stats/api/popularity") {

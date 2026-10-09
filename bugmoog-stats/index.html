@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BugMoog Stats</title>
-  <link rel="stylesheet" href="stats.css?v=5-stats-2" />
+  <link rel="stylesheet" href="stats.css?v=6-distinct-devices" />
 </head>
 <body>
 <h1>BugMoog Stats</h1>
@@ -134,10 +134,11 @@
   <p id="status" role="status">Loading…</p>
   <div class="chart-wrap"><canvas id="chart" aria-label="Selected activity over time" role="img"></canvas></div>
   <p id="note"></p>
+  <p id="history-warning" hidden><small>Some historical data in this range lacks device identities. Affected device totals are unavailable; opens are still shown.</small></p>
   <div id="totals"></div>
   <div id="leaderboards"></div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
-  <script src="stats.js?v=5-stats-2"></script>
+  <script src="stats.js?v=6-distinct-devices"></script>
 
 
 </body>
