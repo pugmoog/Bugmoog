@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <style>html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none}#gameFrame{overscroll-behavior:contain}</style>
     <title>RapidIdentity Login</title>
     <link rel="shortcut icon" href="https://apsva.us002-rapididentity.com:443/files/apsA.jpg">
     <script>
@@ -39,9 +41,9 @@
         position:fixed;
         left: 0;
         top: 0;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
         margin: 0;
         padding: 0;
         border: none;
@@ -51,9 +53,9 @@
     </iframe>
 
     <script>
-      setInterval(() => {
-        document.getElementById("gameFrame").focus();
-      }, 20);
+      document.getElementById('gameFrame').addEventListener('load', () => {
+        if (matchMedia('(pointer: fine)').matches) document.getElementById('gameFrame').focus({ preventScroll: true });
+      });
 
       function onFullscreenChange(state) {
         console.log("detected fs change", state);

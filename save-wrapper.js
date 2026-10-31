@@ -139,25 +139,38 @@
   function installWorkers(target, prefix, notify, scope, base) {
     if (!target.Worker) return;
     const NativeWorker = target.Worker;
+    // Keep inline worker source available without importing a second blob URL.
+    // WebKit can fail that import before the game receives its first reply.
+    const blobs = new Map();
+    const createURL = target.URL.createObjectURL.bind(target.URL);
+    const revokeURL = target.URL.revokeObjectURL.bind(target.URL);
+    target.URL.createObjectURL = blob => {
+      const url = createURL(blob);
+      if (blob instanceof target.Blob) blobs.set(url, blob);
+      return url;
+    };
+    target.URL.revokeObjectURL = url => { blobs.delete(String(url)); revokeURL(url); };
     function Worker(url, options = {}) {
       const absolute = new target.URL(String(url), base).href;
       const module = options.type === 'module';
-      const source = `const notify=(type,name)=>postMessage({__bugmoogWorker:true,type,name});
+      const inline = blobs.get(absolute);
+      const source = `(() => {const notify=(type,name)=>postMessage({__bugmoogWorker:true,type,name});
         (${scope.toString()})(self,${JSON.stringify(prefix)},notify);
         const base=${JSON.stringify(absolute)};
         const nativeFetch=self.fetch;self.fetch=(input,options)=>nativeFetch(typeof input==='string'?new URL(input,base).href:input,options);
         const NativeRequest=self.Request;self.Request=class extends NativeRequest{constructor(input,options){super(typeof input==='string'?new URL(input,base).href:input,options)}};
         ${module ? '' : 'const nativeImport=self.importScripts;self.importScripts=(...urls)=>nativeImport(...urls.map(u=>new URL(u,base).href));'}
         (${installWorkers.toString()})(self,${JSON.stringify(prefix)},notify,${scope.toString()},base);
-        ${module ? 'import(base).catch(e=>{notify("warning","A game worker failed to start: "+e.message);throw e;});' : 'importScripts(base);'}`;
-      const blob = target.URL.createObjectURL(new target.Blob([source], { type: 'text/javascript' }));
+        ${inline ? '' : module ? 'import(base).catch(e=>{notify("warning","A game worker failed to start: "+e.message);throw e;});' : 'importScripts(base);'}
+        })();\n`;
+      const blob = createURL(new target.Blob(inline ? [source, inline] : [source], { type: 'text/javascript' }));
       const worker = new NativeWorker(blob, options);
       worker.addEventListener('message', e => {
         if (!e.data?.__bugmoogWorker) return;
         e.stopImmediatePropagation(); notify(e.data.type, e.data.name);
       });
       worker.addEventListener('error', () => notify('warning', 'A game worker failed; its progress may be incomplete.'));
-      setTimeout(() => target.URL.revokeObjectURL(blob), 60000);
+      setTimeout(() => revokeURL(blob), 60000);
       return worker;
     }
     Worker.prototype = NativeWorker.prototype;

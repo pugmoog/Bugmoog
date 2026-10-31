@@ -198,6 +198,7 @@
       inset: 0;
       width: 100vw;
       height: 100vh;
+      height: 100dvh;
       z-index: 99999;
       border: 0;
       background: white;
@@ -281,8 +282,8 @@
       </div>
       <div class="action-row">
         <button class="chat-button" onclick="loadChatroom()">Chatroom</button>
+        <button id="saves-button">Saves</button>
       </div>
-      <div class="action-row"><button id="saves-button">Saves</button></div>
     </div>
   </header>
   <p id="save-error" role="alert" hidden></p>
@@ -374,8 +375,8 @@
       trackBugmoogEvent('chat_open', 'chat');
       const chatUrl = 'https://d3txi12i3pqbxm.cloudfront.net/chet/chat/';
       gamePageFrame.src = weburl + 'game-page.html?deviceIdentity=1&game=' + encodeURIComponent(chatUrl);
+      openGameViewport();
       gamePageFrame.style.display = 'block';
-      focusInterval = setInterval(focus, 20);
     }
 
     const resultCount = document.querySelector('#result-count');

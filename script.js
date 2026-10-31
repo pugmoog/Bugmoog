@@ -51,7 +51,6 @@ window.addEventListener("message", event => {
 (() => {
   window.gamePageFrame = document.getElementById("gamePageFrame");
   window.gamesGrid = document.querySelector('.grid');
-  window.focusInterval;
   window.searchBox = document.getElementById("search");
   window.searchBox.addEventListener('input', search);
 
@@ -83,10 +82,11 @@ async function loadPageGeneral(url) {
   try { await window.BugmoogSaves.prepare(url); }
   catch (error) { window.BugmoogSaves.error(error); launchingGame = false; return; }
   gamePageFrame.src = weburl + "game-page.html?game=" + encodeURIComponent(url);
+  openGameViewport();
   gamePageFrame.style.display = "block";
   launchingGame = false;
 
-  focusInterval = setInterval(focus, 20);
+
 }
 
 function password(url) {
@@ -153,16 +153,20 @@ function search() {
   });
 }
 
-function focus() {
-  if (gamePageFrame.style.display !== "block") {
-    return;
-  }
-  console.log("focusing");
-  try {
-    gamePageFrame.focus();
-  } catch(err) {
-    alert(err.message || err);
-  }
+let gameViewport = null;
+function openGameViewport() {
+  if (gameViewport) return;
+  gameViewport = { x: scrollX, y: scrollY, html: document.documentElement.style.cssText, body: document.body.style.cssText };
+  document.documentElement.style.overflow = 'hidden';
+  document.documentElement.style.overscrollBehavior = 'none';
+  Object.assign(document.body.style, { position: 'fixed', top: -gameViewport.y + 'px', left: -gameViewport.x + 'px', width: '100%', overflow: 'hidden', overscrollBehavior: 'none' });
+}
+function restoreGameViewport() {
+  if (!gameViewport) return;
+  const previous = gameViewport; gameViewport = null;
+  document.documentElement.style.cssText = previous.html;
+  document.body.style.cssText = previous.body;
+  window.scrollTo(previous.x, previous.y);
 }
 
 let closingGame = false;
@@ -173,7 +177,7 @@ async function closePage() {
   catch (error) { window.BugmoogSaves.error(error); closingGame = false; return; }
   gamePageFrame.style.display = "none";
   gamePageFrame.src = "about:blank";
-  clearInterval(focusInterval);
+  restoreGameViewport();
   closingGame = false;
 }
 
