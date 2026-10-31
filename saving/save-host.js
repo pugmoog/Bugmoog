@@ -2,9 +2,8 @@
 (() => {
   'use strict';
   const C = window.BugmoogSaveCommon;
-  const session = C.uuid();
   const frame = document.getElementById('gamePageFrame');
-  const assetBase = new URL('.', document.currentScript.src);
+  const assetBase = new URL('../', document.currentScript.src);
   const allowedOrigin = assetBase.origin;
   const pending = new Map();
   let dbPromise, active = null, channel = null, lastError = '', operation = false;
@@ -34,41 +33,28 @@
   }
   const empty = game => ({ game, local: {}, cookies: {}, databases: [], warnings: [], revision: 0, updatedAt: null });
   async function claim(game) {
-    const db = await openDB(), tx = db.transaction(['games', 'leases'], 'readwrite'), complete = C.done(tx);
-    const leases = tx.objectStore('leases');
-    const oldLease = await C.req(leases.get(game));
-    if (oldLease && oldLease.session !== session && oldLease.expires > Date.now()) {
-      tx.abort(); await complete.catch(() => {}); throw new Error('This game is open in another Bugmoog tab. Close it there first.');
-    }
-    leases.put({ game, session, expires: Date.now() + 45000 });
+    const db = await openDB(), tx = db.transaction('games', 'readonly'), complete = C.done(tx);
     const record = await C.req(tx.objectStore('games').get(game));
     await complete;
     return record || empty(game);
   }
   async function release() {
     if (!active) return;
-    const game = active.game; active = null; lastError = ''; document.getElementById('save-error').hidden = true; channel?.close(); channel = null;
+    active = null; lastError = ''; document.getElementById('save-error').hidden = true; channel?.close(); channel = null;
     for (const { reject, timer } of pending.values()) { clearTimeout(timer); reject(new Error('Game closed.')); }
     pending.clear();
-    const db = await openDB(), tx = db.transaction('leases', 'readwrite'), complete = C.done(tx), store = tx.objectStore('leases');
-    const lease = await C.req(store.get(game));
-    if (lease?.session === session) store.delete(game);
-    await complete;
+
   }
   async function write(record) {
     C.validate(record);
     if (!active || record.game !== active.game) throw new Error('Wrong save destination.');
-    const db = await openDB(), tx = db.transaction(['games', 'leases'], 'readwrite'), complete = C.done(tx);
-    const leases = tx.objectStore('leases'), games = tx.objectStore('games');
-    const lease = await C.req(leases.get(record.game));
+    const db = await openDB(), tx = db.transaction('games', 'readwrite'), complete = C.done(tx);
+    const games = tx.objectStore('games');
     const old = await C.req(games.get(record.game));
-    if (lease?.session !== session || (old?.revision || 0) !== active.revision) {
-      tx.abort(); await complete.catch(() => {}); throw new Error('Another tab changed this save. Export this game before reloading.');
-    }
-    const revision = active.revision + 1;
+    // Tabs may play independently. The last completed save wins atomically.
+    const revision = (old?.revision || 0) + 1;
     games.put({ ...record, revision, updatedAt: new Date().toISOString() });
-    leases.put({ game: record.game, session, expires: Date.now() + 45000 });
-    await complete; active.revision = revision;
+    await complete;
     lastError = ''; document.getElementById('save-error').hidden = true;
   }
   function request(type) {
@@ -106,20 +92,9 @@
     frame.contentWindow.postMessage({ type: 'bugmoog-save-connect', record: active.record }, allowedOrigin, [pair.port2]);
   }
   window.addEventListener('message', connect);
-  setInterval(async () => {
-    if (!active) return;
-    try {
-      const db = await openDB(), tx = db.transaction('leases', 'readwrite'), complete = C.done(tx), store = tx.objectStore('leases');
-      const lease = await C.req(store.get(active.game));
-      if (lease?.session === session) store.put({ ...lease, expires: Date.now() + 45000 });
-      await complete;
-    } catch (err) { error(err); }
-  }, 10000);
   async function archive() {
     await request('flush');
-    const db = await openDB(), tx = db.transaction(['games', 'leases'], 'readonly'), complete = C.done(tx);
-    const other = (await C.req(tx.objectStore('leases').getAll())).filter(x => x.session !== session && x.expires > Date.now());
-    if (other.length) throw new Error('Close games in your other Bugmoog tabs before exporting.');
+    const db = await openDB(), tx = db.transaction('games', 'readonly'), complete = C.done(tx);
     const games = await C.req(tx.objectStore('games').getAll()); await complete;
     if (lastError) throw new Error(lastError);
     for (const record of games) delete record.cachePrefix;
@@ -136,15 +111,22 @@
   }
   async function show() {
     dialog.showModal(); output.textContent = '';
+    await refreshList();
+  }
+  async function refreshList() {
     const list = document.getElementById('save-list'); list.replaceChildren();
     try {
       const saved = await archive();
       for (const record of saved.games) {
         const row = document.createElement('li');
-        row.textContent = label(record.game) + (record.warnings.length ? ': ' + record.warnings.join('; ') : '');
+        const name = document.createElement('strong'), detail = document.createElement('span');
+        name.textContent = label(record.game);
+        detail.textContent = record.warnings.length ? record.warnings.join('; ') : record.updatedAt ? 'Saved ' + new Date(record.updatedAt).toLocaleString() : 'Progress saved';
+        row.append(name, detail);
         list.append(row);
       }
-      if (!saved.games.length) output.textContent = 'No saved progress on this website yet.';
+      document.getElementById('save-count').textContent = saved.games.length + (saved.games.length === 1 ? ' game' : ' games');
+      if (!saved.games.length) { const row = document.createElement('li'); row.textContent = 'Your saved games will appear here.'; list.append(row); }
     } catch (err) { error(err); }
   }
   async function busy(fn) {
@@ -173,7 +155,7 @@
       const row = document.createElement('label'), check = document.createElement('input');
       check.type = 'checkbox'; check.checked = true; check.value = record.game;
       row.append(check, ' ' + label(record.game) + (ids.has(record.game) ? ' — replace' : ' — add'));
-      container.append(row, document.createElement('br'));
+      container.append(row);
     }
     staged = candidate;
     document.getElementById('save-apply').hidden = false;
@@ -183,33 +165,48 @@
     if (!staged) return;
     const selected = new Set([...document.querySelectorAll('#save-import-preview input:checked')].map(x => x.value));
     if (!selected.size) throw new Error('Select at least one game.');
-    if (!confirm('Import the selected games and replace their current saves? A rollback copy will be kept.')) return;
     if (active) await window.closePage();
     if (active) throw new Error('Close the running game before importing.');
-    const db = await openDB(), tx = db.transaction(['games', 'leases', 'backups'], 'readwrite'), complete = C.done(tx);
-    const leases = await C.req(tx.objectStore('leases').getAll());
-    if (leases.some(x => x.expires > Date.now())) { tx.abort(); await complete.catch(() => {}); throw new Error('Close games in other Bugmoog tabs before importing.'); }
+    const db = await openDB(), tx = db.transaction(['games', 'backups'], 'readwrite'), complete = C.done(tx);
     const store = tx.objectStore('games'), before = await C.req(store.getAll());
     tx.objectStore('backups').put({ id: 'before-import', games: before });
     for (const record of staged.games) if (selected.has(record.game)) store.put({ ...record, revision: (before.find(x => x.game === record.game)?.revision || 0) + 1, updatedAt: new Date().toISOString() });
     await complete;
     staged = null; document.getElementById('save-import-preview').replaceChildren(); document.getElementById('save-apply').hidden = true;
-    output.textContent = 'Progress imported.';
+    await refreshList(); output.textContent = 'Progress imported.';
   }
   async function rollback() {
     if (!confirm('Restore the saves from before the last import?')) return;
     if (active) await window.closePage();
     if (active) throw new Error('Close the running game first.');
-    const db = await openDB(), tx = db.transaction(['games', 'leases', 'backups'], 'readwrite'), complete = C.done(tx);
-    const leases = await C.req(tx.objectStore('leases').getAll());
+    const db = await openDB(), tx = db.transaction(['games', 'backups'], 'readwrite'), complete = C.done(tx);
     const backup = await C.req(tx.objectStore('backups').get('before-import'));
-    if (!backup || leases.some(x => x.expires > Date.now())) {
-      tx.abort(); await complete.catch(() => {}); throw new Error(!backup ? 'No rollback copy exists.' : 'Close games in other tabs first.');
+    if (!backup) {
+      tx.abort(); await complete.catch(() => {}); throw new Error('No previous import to undo.');
     }
     const store = tx.objectStore('games'), current = await C.req(store.getAll());
     store.clear(); for (const record of backup.games) store.put(record);
     tx.objectStore('backups').put({ id: 'before-import', games: current });
-    await complete; output.textContent = 'Previous saves restored.';
+    await complete; await refreshList(); output.textContent = 'Previous saves restored.';
+  }
+  for (const button of dialog.querySelectorAll('[data-save-panel]')) {
+    button.onclick = () => {
+      const panel = document.getElementById(button.dataset.savePanel);
+      const opening = panel.hidden;
+      for (const other of dialog.querySelectorAll('[data-save-panel]')) {
+        document.getElementById(other.dataset.savePanel).hidden = true;
+        other.setAttribute('aria-expanded', 'false');
+      }
+      panel.hidden = !opening;
+      button.setAttribute('aria-expanded', String(opening));
+      document.getElementById('save-panel-divider').hidden = !opening;
+      const restore = document.getElementById('save-restore-result');
+      const restoring = opening && ['save-file-panel', 'save-code-panel'].includes(panel.id);
+      restore.hidden = !restoring;
+      if (restoring) panel.append(restore);
+      output.textContent = '';
+      if (opening && panel.id === 'save-copy-panel') busy(copyCode);
+    };
   }
   document.getElementById('saves-button').onclick = show;
   document.getElementById('save-download').onclick = () => busy(async () => {
@@ -217,22 +214,20 @@
     if (data.games.some(x => x.warnings.length) && !confirm('Some games have save limitations listed below. Download the captured progress anyway?')) return;
     download(await C.pack(data)); output.textContent = 'Save file downloaded.';
   });
-  document.getElementById('save-copy').onclick = () => busy(async () => {
+  async function copyCode() {
     const data = await archive();
-    if (data.games.some(x => x.warnings.length) && !confirm('Some games have save limitations. Copy the captured progress anyway?')) return;
     const code = C.code(await C.pack(data));
-    const input = document.getElementById('save-code'); input.value = code; input.focus(); input.select();
-    try { await navigator.clipboard.writeText(code); output.textContent = 'Save code copied.'; }
+    const input = document.getElementById('save-export-code'); input.value = code; input.focus(); input.select();
+    try { await navigator.clipboard.writeText(code); }
     catch { output.textContent = 'Copy the selected save code, or download the file.'; }
-  });
+  }
   document.getElementById('save-file').onchange = e => busy(async () => {
     const file = e.target.files[0]; if (!file) return;
     if (file.size > C.LIMIT) throw new Error('Save exceeds the 512 MB import limit.');
-    await preview(await file.text()); e.target.value = '';
+    await preview(await file.text());
   });
   document.getElementById('save-preview').onclick = () => busy(() => preview(document.getElementById('save-code').value.trim()));
   document.getElementById('save-apply').onclick = () => busy(apply);
-  document.getElementById('save-rollback').onclick = () => busy(rollback);
   window.BugmoogSaves = {
     async prepare(url) {
       const game = new URL(url, location.href).href;

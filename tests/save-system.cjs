@@ -1,7 +1,7 @@
 const {chromium}=require('playwright');const assert=require('node:assert/strict');
 // Run with Playwright installed and the local preview running on port 8765.
 const executablePath=process.env.BUGMOOG_TEST_BROWSER || undefined;
-const fixture='<!doctype html><html><head><script src="/save-runtime.js"></script><script>window.startValue=localStorage.getItem("level");window.startCookie=document.cookie;</script></head><body>Save fixture</body></html>';
+const fixture='<!doctype html><html><head><script src="/saving/save-runtime.js"></script><script>window.startValue=localStorage.getItem("level");window.startCookie=document.cookie;</script></head><body>Save fixture</body></html>';
 (async()=>{const browser=await chromium.launch({executablePath,headless:true});try{
  const context=await browser.newContext();await context.grantPermissions(['local-network-access']);const errors=[];
  context.on('page',p=>{p.on('pageerror',e=>{errors.push(e.message);console.log('ERROR',e.message)});p.on('dialog',d=>d.accept());});
@@ -42,7 +42,10 @@ const fixture='<!doctype html><html><head><script src="/save-runtime.js"></scrip
   const next=await new Promise((res,rej)=>{const r=s.add({label:'after reload'});r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
   return {name:db.name,bytes:[...result.bytes],blob:await result.blob.text(),date:result.date.toISOString(),cycle:result.cycle===result.cycle.self,map:String(result.map.get('key')),next};
  });assert.deepEqual(restored,{name:'progress',bytes:[2,65535],blob:'hello',date:'2026-10-30T00:00:00.000Z',cycle:true,map:'4',next:6});console.log('PASS startup restore and binary/schema/auto-increment roundtrip');
- const other=await menu('localhost');await other.evaluate(()=>loadPage('save-fixture/'));assert.match(await other.locator('#save-error').innerText(),/another Bugmoog tab/);assert.equal(await other.locator('#gamePageFrame').isVisible(),false);await other.close();console.log('PASS concurrent tab overwrite blocked');
+ const other=await menu('localhost');const concurrent=await launch(other);assert.equal(await concurrent.evaluate(()=>startValue),'42');
+ await concurrent.evaluate(()=>localStorage.setItem('level','other-tab'));await other.evaluate(()=>BugmoogSaves.flush());
+ assert.equal(await a.evaluate(async()=>(await BugmoogSaves.archive()).games[0].local.level),'other-tab');
+ await other.close();const reopened=await menu('localhost');const resumed=await launch(reopened);assert.equal(await resumed.evaluate(()=>startValue),'other-tab');await close(reopened);await reopened.close();console.log('PASS concurrent tabs and immediate reopening after abrupt close');
  await close(a);
  const b=await menu('127.0.0.1');g=await launch(b);assert.equal(await g.evaluate(()=>startValue),null);await g.evaluate(()=>localStorage.setItem('level','B-original'));await close(b);console.log('PASS separate websites using the same hosted game');
  await b.evaluate(async text=>{await BugmoogSaves.preview(text);await BugmoogSaves.apply();},packed);
