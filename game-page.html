@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title>RapidIdentity Login</title>
     <link rel="shortcut icon" href="https://apsva.us002-rapididentity.com:443/files/apsA.jpg">
     <script>
@@ -85,151 +86,13 @@
       });
 
       window.addEventListener("message", (e) => {
-        console.log("message received", e.data);
-        onFullscreenChange(e.data.state);
+        if (e.source === parent && e.data?.type === "fullscreen") onFullscreenChange(e.data.state);
       });
     </script>
 
-    <script>
-      const params = new URLSearchParams(window.location.search);
-      const gameURL = params.get("game");
-      let frameURL = gameURL;
-      if (params.get("deviceIdentity") === "1") {
-        const markedURL = new URL(gameURL, location.href);
-        markedURL.hash = "device-identity";
-        frameURL = markedURL.href;
-      }
-      const frame = document.getElementById("gameFrame");
-      const hostStorage = window.localStorage;
-
-      const localStorageKey = "__fakeLocalStorage__:" + gameURL;
-      let localStorageData;
-      try {
-        localStorageData = JSON.parse(hostStorage.getItem(localStorageKey) || "{}");
-      } catch {
-        localStorageData = {};
-      }
-
-      function saveLocalStorage() {
-        hostStorage.setItem(localStorageKey, JSON.stringify(localStorageData));
-      }
-
-      const localStorageShim = new Proxy({}, {
-        get(target, property, receiver) {
-          if (property === "length") return Object.keys(localStorageData).length;
-          if (property === "getItem") {
-            return key => Object.prototype.hasOwnProperty.call(localStorageData, String(key))
-              ? localStorageData[String(key)]
-              : null;
-          }
-          if (property === "setItem") {
-            return (key, value) => {
-              localStorageData[String(key)] = String(value);
-              saveLocalStorage();
-            };
-          }
-          if (property === "removeItem") {
-            return key => {
-              delete localStorageData[String(key)];
-              saveLocalStorage();
-            };
-          }
-          if (property === "clear") {
-            return () => {
-              localStorageData = {};
-              saveLocalStorage();
-            };
-          }
-          if (property === "key") {
-            return index => Object.keys(localStorageData)[Number(index)] ?? null;
-          }
-          if (property === Symbol.toStringTag) return "Storage";
-          if (typeof property === "string" && Object.prototype.hasOwnProperty.call(localStorageData, property)) {
-            return localStorageData[property];
-          }
-          return Reflect.get(target, property, receiver);
-        },
-
-        set(target, property, value) {
-          if (typeof property !== "string") return Reflect.set(target, property, value);
-          localStorageData[property] = String(value);
-          saveLocalStorage();
-          return true;
-        },
-
-        deleteProperty(target, property) {
-          if (typeof property === "string") {
-            delete localStorageData[property];
-            saveLocalStorage();
-          }
-          return true;
-        },
-
-        ownKeys() {
-          return Object.keys(localStorageData);
-        },
-
-        getOwnPropertyDescriptor(target, property) {
-          if (typeof property === "string" && Object.prototype.hasOwnProperty.call(localStorageData, property)) {
-            return { configurable: true, enumerable: true, writable: true, value: localStorageData[property] };
-          }
-          return Reflect.getOwnPropertyDescriptor(target, property);
-        }
-      });
-
-      function installLocalStorageShim(targetWindow) {
-        Object.defineProperty(targetWindow, "localStorage", {
-          configurable: true,
-          get: () => localStorageShim
-        });
-      }
-
-      frame.onload = () => {
-        try {
-          // Reinstall after navigation so saves made during gameplay use the wrapper's storage.
-          installLocalStorageShim(frame.contentWindow);
-          frame.contentWindow.Navigator.prototype.getGamepads = () => [];
-          frame.contentWindow.navigator.getGamepads = () => [];
-          frame.contentWindow.Navigator.getGamepads = () => [];
-        } catch (error) {
-          console.warn("Could not patch a cross-origin game frame", error);
-        }
-      };
-      const win = frame.contentWindow;
-
-      let cookieStorageKey = "__fakeCookies__:" + gameURL;
-      let cookieStore = JSON.parse(hostStorage.getItem(cookieStorageKey) || "{}");
-
-      Object.defineProperty(
-        win.Document.prototype,
-        "cookie",
-        {
-          get() {
-            return Object.entries(cookieStore)
-              .map(([k, v]) => `${k}=${v}`)
-              .join("; ");
-          },
-
-          set(value) {
-            let first = value.split(";")[0];
-            let eq = first.indexOf("=");
-
-            if (eq === -1) return true;
-
-            let name = first.slice(0, eq).trim();
-            let val = first.slice(eq + 1).trim();
-
-            cookieStore[name] = val;
-            hostStorage.setItem(cookieStorageKey, JSON.stringify(cookieStore));
-
-            return true;
-          }
-        }
-      );
-
-      // Install once on the initial about:blank document, then again in onload.
-      installLocalStorageShim(win);
-      frame.src = frameURL;
-    </script>
+    <p id="game-save-error" role="alert" hidden style="position:fixed;top:6vh;left:0;right:0;z-index:4;background:#fff;color:#a00000;padding:8px;margin:0"></p>
+    <script src="save-common.js?v=5.4-save1"></script>
+    <script src="save-idb.js?v=5.4-save1"></script>
+    <script src="save-wrapper.js?v=5.4-save1"></script>
   </body>
 </html>

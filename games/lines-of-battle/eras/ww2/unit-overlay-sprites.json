@@ -1,0 +1,58 @@
+{
+  "german-infantry": {
+    "width": 128,
+    "height": 128
+  },
+  "french-infantry": {
+    "width": 128,
+    "height": 128
+  },
+  "motorized": {
+    "width": 128,
+    "height": 128
+  },
+  "armored": {
+    "width": 128,
+    "height": 128
+  },
+  "british-infantry": {
+    "width": 128,
+    "height": 128
+  },
+  "american-infantry": {
+    "width": 128,
+    "height": 128
+  },
+  "soviet-infantry": {
+    "width": 128,
+    "height": 128
+  },
+  "italian-infantry": {
+    "width": 128,
+    "height": 128
+  },
+  "japanese-infantry": {
+    "width": 128,
+    "height": 128
+  },
+  "chinese-infantry": {
+    "width": 128,
+    "height": 128
+  },
+  "panzer-iv": {
+    "width": 250,
+    "height": 100
+  },
+  "char-d2": {
+    "width": 250,
+    "height": 100
+  },
+  "t-34": {
+    "width": 250,
+    "height": 100
+  },
+  "sherman": {
+    "width": 250,
+    "height": 100
+  }
+}

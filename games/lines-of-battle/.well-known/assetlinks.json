@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.sophiegames.linesofbattle",
+      "sha256_cert_fingerprints": [
+        "70:F9:0E:72:26:68:07:78:B5:D7:82:1D:91:81:F7:25:50:4B:29:3F:FF:82:95:A0:2F:06:7A:39:33:E8:38:44",
+        "AD:34:99:28:0A:13:6B:8D:10:E9:9B:7D:4E:7C:17:09:9D:1B:C6:06:28:95:4D:8F:B5:53:6F:E1:4A:1F:3F:E7"
+      ]
+    }
+  }
+]

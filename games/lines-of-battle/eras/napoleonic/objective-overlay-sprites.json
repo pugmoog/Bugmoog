@@ -1,0 +1,142 @@
+{
+  "default": {
+    "width": 64,
+    "height": 64
+  },
+  "royal-crown": {
+    "width": 64,
+    "height": 64
+  },
+  "pour-le-merite": {
+    "width": 64,
+    "height": 64
+  },
+  "austrias-venus": {
+    "width": 64,
+    "height": 64
+  },
+  "french-eagle": {
+    "width": 64,
+    "height": 64
+  },
+  "russian-cross": {
+    "width": 64,
+    "height": 64
+  },
+  "serpe-of-braganca": {
+    "width": 64,
+    "height": 64
+  },
+  "france-napoleonic-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "spain-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "ming-dynasty-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "argentina-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "mexican-empire-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "qing-dynasty-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "britain-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "prussia-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "austria-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "russia-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "japan-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "united-states-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "kingdom-of-france-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "xiangqi": {
+    "width": 64,
+    "height": 64
+  },
+  "russian-imperial-standard": {
+    "width": 64,
+    "height": 64
+  },
+  "brazilian-empire-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "ottoman-empire-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "greece-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "sweden-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "chilean-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "imperial-ottoman-standard": {
+    "width": 64,
+    "height": 64
+  },
+  "denmark-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "netherlands-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "bigly-bones": {
+    "width": 64,
+    "height": 64
+  },
+  "shogi": {
+    "width": 64,
+    "height": 64
+  },
+  "blossom-point": {
+    "width": 64,
+    "height": 64
+  },
+  "yinyang-core": {
+    "width": 64,
+    "height": 64
+  },
+  "skull": {
+    "width": 64,
+    "height": 64
+  }
+}

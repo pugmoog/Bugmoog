@@ -1,0 +1,1952 @@
+{
+  "infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "infantry-square": {
+    "width": 80,
+    "height": 80
+  },
+  "infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "grenadiers": {
+    "width": 48,
+    "height": 96
+  },
+  "grenadiers-square": {
+    "width": 80,
+    "height": 80
+  },
+  "grenadiers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "skirmishers": {
+    "width": 48,
+    "height": 96
+  },
+  "rifles": {
+    "width": 48,
+    "height": 96
+  },
+  "rockets": {
+    "width": 64,
+    "height": 128
+  },
+  "lancers": {
+    "width": 48,
+    "height": 96
+  },
+  "guards": {
+    "width": 48,
+    "height": 96
+  },
+  "guards-square": {
+    "width": 80,
+    "height": 80
+  },
+  "guards-line": {
+    "width": 40,
+    "height": 160
+  },
+  "horse-artillery": {
+    "width": 48,
+    "height": 96
+  },
+  "cuirassiers": {
+    "width": 48,
+    "height": 96
+  },
+  "chasseurs": {
+    "width": 48,
+    "height": 96
+  },
+  "chasseurs-square": {
+    "width": 80,
+    "height": 80
+  },
+  "chasseurs-line": {
+    "width": 40,
+    "height": 160
+  },
+  "cavalry": {
+    "width": 48,
+    "height": 96
+  },
+  "dragoons": {
+    "width": 48,
+    "height": 96
+  },
+  "gold-line-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "gold-hussar": {
+    "width": 48,
+    "height": 96
+  },
+  "gold-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "gold-cuirassier": {
+    "width": 48,
+    "height": 96
+  },
+  "gold-dragoon": {
+    "width": 48,
+    "height": 96
+  },
+  "gold-grenadier": {
+    "width": 48,
+    "height": 96
+  },
+  "gold-guard": {
+    "width": 48,
+    "height": 96
+  },
+  "gold-lancer": {
+    "width": 48,
+    "height": 96
+  },
+  "gold-light-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "gold-militia": {
+    "width": 48,
+    "height": 96
+  },
+  "gold-skirmisher": {
+    "width": 48,
+    "height": 96
+  },
+  "silver-line-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "silver-hussar": {
+    "width": 48,
+    "height": 96
+  },
+  "silver-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "silver-cuirassier": {
+    "width": 48,
+    "height": 96
+  },
+  "silver-dragoon": {
+    "width": 48,
+    "height": 96
+  },
+  "silver-grenadier": {
+    "width": 48,
+    "height": 96
+  },
+  "silver-guard": {
+    "width": 48,
+    "height": 96
+  },
+  "silver-lancer": {
+    "width": 48,
+    "height": 96
+  },
+  "silver-light-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "silver-militia": {
+    "width": 48,
+    "height": 96
+  },
+  "silver-skirmisher": {
+    "width": 48,
+    "height": 96
+  },
+  "bronze-line-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "bronze-hussar": {
+    "width": 48,
+    "height": 96
+  },
+  "bronze-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "bronze-cuirassier": {
+    "width": 48,
+    "height": 96
+  },
+  "bronze-dragoon": {
+    "width": 48,
+    "height": 96
+  },
+  "bronze-grenadier": {
+    "width": 48,
+    "height": 96
+  },
+  "bronze-guard": {
+    "width": 48,
+    "height": 96
+  },
+  "bronze-lancer": {
+    "width": 48,
+    "height": 96
+  },
+  "bronze-light-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "bronze-militia": {
+    "width": 48,
+    "height": 96
+  },
+  "bronze-skirmishers": {
+    "width": 48,
+    "height": 96
+  },
+  "french-italian-legion": {
+    "width": 48,
+    "height": 96
+  },
+  "french-irish-legion": {
+    "width": 48,
+    "height": 96
+  },
+  "french-swiss-legion": {
+    "width": 48,
+    "height": 96
+  },
+  "french-polish-legion": {
+    "width": 48,
+    "height": 96
+  },
+  "french-national-guard": {
+    "width": 48,
+    "height": 96
+  },
+  "french-marie-louise": {
+    "width": 48,
+    "height": 96
+  },
+  "french-dragoons": {
+    "width": 48,
+    "height": 96
+  },
+  "french-la-brigade-infernale": {
+    "width": 48,
+    "height": 96
+  },
+  "french-old-guard": {
+    "width": 48,
+    "height": 96
+  },
+  "french-horse-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "french-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "french-chasseurs": {
+    "width": 48,
+    "height": 96
+  },
+  "french-1st-cuirassier": {
+    "width": 48,
+    "height": 96
+  },
+  "french-howitzers": {
+    "width": 64,
+    "height": 128
+  },
+  "french-lancers": {
+    "width": 96,
+    "height": 128
+  },
+  "french-middle-guard": {
+    "width": 56,
+    "height": 96
+  },
+  "french-young-guard": {
+    "width": 56,
+    "height": 96
+  },
+  "french-skirmishers": {
+    "width": 48,
+    "height": 96
+  },
+  "french-polish-lancers": {
+    "width": 72,
+    "height": 96
+  },
+  "french-chasseurs-e-cheval": {
+    "width": 48,
+    "height": 96
+  },
+  "french-empress-dragoons": {
+    "width": 48,
+    "height": 96
+  },
+  "french-grenadiers-a-cheval": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-czech-infanterie": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-hungarian-infanterie": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-italian-infanterie": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-galician-infanterie": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-moravian-infanterie": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-imperial-infanterie": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-hungarian-hussar": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "austrian-hungarian-grenadiers": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-galician-uhlans": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-dragoons": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-grenadiers": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-skirmishers": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-horse-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "austrian-cuirassiers": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-chasseurs": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-howitzers": {
+    "width": 64,
+    "height": 128
+  },
+  "british-kings-dutch-brigade": {
+    "width": 48,
+    "height": 96
+  },
+  "british-kings-german-legion": {
+    "width": 48,
+    "height": 96
+  },
+  "british-scots-greys": {
+    "width": 48,
+    "height": 96
+  },
+  "british-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "british-coldstream-guards": {
+    "width": 48,
+    "height": 96
+  },
+  "highland-guard": {
+    "width": 48,
+    "height": 96
+  },
+  "the-blackwatch": {
+    "width": 48,
+    "height": 96
+  },
+  "british-69th-foot": {
+    "width": 48,
+    "height": 96
+  },
+  "british-royal-lancer": {
+    "width": 48,
+    "height": 96
+  },
+  "british-horse-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "british-rifle-brigade": {
+    "width": 48,
+    "height": 96
+  },
+  "british-cuirassier": {
+    "width": 48,
+    "height": 96
+  },
+  "british-grenadiers": {
+    "width": 48,
+    "height": 96
+  },
+  "british-skirmishers": {
+    "width": 48,
+    "height": 96
+  },
+  "british-king-german-hussars": {
+    "width": 48,
+    "height": 96
+  },
+  "valentines-line": {
+    "width": 48,
+    "height": 96
+  },
+  "valentines-guards": {
+    "width": 48,
+    "height": 96
+  },
+  "valentines-chasseurs": {
+    "width": 48,
+    "height": 96
+  },
+  "valentines-hussars": {
+    "width": 48,
+    "height": 96
+  },
+  "valentines-lancers": {
+    "width": 48,
+    "height": 96
+  },
+  "valentines-cuirassiers": {
+    "width": 48,
+    "height": 96
+  },
+  "valentines-12lb-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "valentines-horse-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "valentines-howitzers": {
+    "width": 64,
+    "height": 128
+  },
+  "british-howitzers": {
+    "width": 64,
+    "height": 128
+  },
+  "russian-uhlans": {
+    "width": 48,
+    "height": 96
+  },
+  "russian-preobrazhenskiy": {
+    "width": 48,
+    "height": 96
+  },
+  "russian-lifeguards": {
+    "width": 48,
+    "height": 96
+  },
+  "russian-chevalier-guards": {
+    "width": 48,
+    "height": 96
+  },
+  "russian-pavlogradskiy-hussars": {
+    "width": 48,
+    "height": 96
+  },
+  "russian-35th-jagers": {
+    "width": 48,
+    "height": 96
+  },
+  "russian-finland-lifeguards": {
+    "width": 48,
+    "height": 96
+  },
+  "russian-nevskiy-musketeers": {
+    "width": 48,
+    "height": 96
+  },
+  "russian-novgorod-musketeers": {
+    "width": 48,
+    "height": 96
+  },
+  "russian-siberian-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "russian-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "russian-horse-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "russian-howitzers": {
+    "width": 64,
+    "height": 128
+  },
+  "russian-dragoons": {
+    "width": 48,
+    "height": 96
+  },
+  "russian-grenadiers": {
+    "width": 48,
+    "height": 96
+  },
+  "russian-skirmishers": {
+    "width": 48,
+    "height": 96
+  },
+  "prussian-brunswick-cavalry": {
+    "width": 48,
+    "height": 96
+  },
+  "prussian-lifeguards": {
+    "width": 48,
+    "height": 96
+  },
+  "prussian-cuirassiers": {
+    "width": 48,
+    "height": 96
+  },
+  "prussian-12lb-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "prussian-brandenburg-uhlans": {
+    "width": 48,
+    "height": 96
+  },
+  "prussian-horse-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "prussian-howitzers": {
+    "width": 64,
+    "height": 128
+  },
+  "prussian-fusiliers": {
+    "width": 48,
+    "height": 96
+  },
+  "prussian-1st-east-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "prussian-1st-west-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "prussian-2nd-east-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "prussian-pomeranian-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "prussian-dragoons": {
+    "width": 48,
+    "height": 96
+  },
+  "prussian-grenadiers": {
+    "width": 48,
+    "height": 96
+  },
+  "prussian-skirmishers": {
+    "width": 48,
+    "height": 96
+  },
+  "militia": {
+    "width": 48,
+    "height": 96
+  },
+  "horse-archers": {
+    "width": 48,
+    "height": 96
+  },
+  "bashkirs": {
+    "width": 48,
+    "height": 96
+  },
+  "silladar-horse-archers": {
+    "width": 48,
+    "height": 96
+  },
+  "argentinian-mounted-grenadiers": {
+    "width": 48,
+    "height": 96
+  },
+  "argentinian-patricians": {
+    "width": 48,
+    "height": 96
+  },
+  "argentinian-pardos-y-morenos": {
+    "width": 48,
+    "height": 96
+  },
+  "italian-light-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "italian-alpine-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "italian-bersaglieri-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "italian-guards": {
+    "width": 48,
+    "height": 96
+  },
+  "brazilian-cazadores": {
+    "width": 48,
+    "height": 96
+  },
+  "brazilian-dragoes-da-idependencia": {
+    "width": 48,
+    "height": 96
+  },
+  "brazilian-emperors-guards": {
+    "width": 48,
+    "height": 96
+  },
+  "brazilian-infantaria-de-linha": {
+    "width": 48,
+    "height": 96
+  },
+  "brazilian-lanceiros-gauchos": {
+    "width": 48,
+    "height": 96
+  },
+  "east-india-12lb-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "east-india-8lb-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "east-india-bengali-sepoys": {
+    "width": 48,
+    "height": 96
+  },
+  "east-india-gardners-lancers": {
+    "width": 48,
+    "height": 96
+  },
+  "east-india-hindustani-sowars": {
+    "width": 48,
+    "height": 96
+  },
+  "east-india-horse-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "east-india-howitzers": {
+    "width": 64,
+    "height": 128
+  },
+  "east-india-madras-pioneers": {
+    "width": 48,
+    "height": 96
+  },
+  "east-india-mogul-mercenary-horse": {
+    "width": 48,
+    "height": 96
+  },
+  "east-india-native-volunteers": {
+    "width": 48,
+    "height": 96
+  },
+  "east-india-nusseree-gurkhas": {
+    "width": 48,
+    "height": 96
+  },
+  "east-india-skinners-horse": {
+    "width": 48,
+    "height": 96
+  },
+  "east-india-4lb-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "swedish-caroleans": {
+    "width": 48,
+    "height": 96
+  },
+  "swedish-cuirassiers": {
+    "width": 48,
+    "height": 96
+  },
+  "xiangqi-horse-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "xiangqi-cuirassiers": {
+    "width": 48,
+    "height": 96
+  },
+  "xiangqi-dragoons": {
+    "width": 48,
+    "height": 96
+  },
+  "xiangqi-grenadiers": {
+    "width": 48,
+    "height": 96
+  },
+  "xiangqi-guards": {
+    "width": 48,
+    "height": 96
+  },
+  "xiangqi-hussars": {
+    "width": 48,
+    "height": 96
+  },
+  "xiangqi-lancers": {
+    "width": 48,
+    "height": 96
+  },
+  "xiangqi-light-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "xiangqi-line-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "xiangqi-militia": {
+    "width": 48,
+    "height": 96
+  },
+  "hellenic-line-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "hellenic-sacred-band": {
+    "width": 48,
+    "height": 96
+  },
+  "hellenic-klefts": {
+    "width": 48,
+    "height": 96
+  },
+  "hellenic-evzones": {
+    "width": 48,
+    "height": 96
+  },
+  "hellenic-hussars": {
+    "width": 48,
+    "height": 96
+  },
+  "hellenic-lancers": {
+    "width": 48,
+    "height": 96
+  },
+  "ornate-old-guard": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-middle-guard": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-young-guard": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-chasseurs-e-cheval": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-empress-dragoons": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-grenadiers-a-cheval": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-polish-lancers": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-russian-lifeguard-jagers": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-russian-cuirassiers": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-russian-dragoons": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-russian-grenadiers": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-russian-guards": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-russian-lancers": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-russian-hussars": {
+    "width": 72,
+    "height": 128
+  },
+  "hussardous": {
+    "width": 48,
+    "height": 96
+  },
+  "hydragoon-bomb": {
+    "width": 48,
+    "height": 96
+  },
+  "serbian-revolutionary-militia": {
+    "width": 48,
+    "height": 96
+  },
+  "bavarian-chasseurs": {
+    "width": 48,
+    "height": 96
+  },
+  "bavarian-cuirassiers": {
+    "width": 48,
+    "height": 96
+  },
+  "bavarian-dragoons": {
+    "width": 48,
+    "height": 96
+  },
+  "bavarian-grenadiers": {
+    "width": 48,
+    "height": 96
+  },
+  "bavarian-guards": {
+    "width": 48,
+    "height": 96
+  },
+  "bavarian-hussars": {
+    "width": 48,
+    "height": 96
+  },
+  "bavarian-lancers": {
+    "width": 48,
+    "height": 96
+  },
+  "bavarian-line-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "bavarian-skirmishers": {
+    "width": 48,
+    "height": 96
+  },
+  "lobster-dragoons": {
+    "width": 58,
+    "height": 110
+  },
+  "lobster-cuirassiers": {
+    "width": 58,
+    "height": 110
+  },
+  "lobster-grenadiers": {
+    "width": 58,
+    "height": 110
+  },
+  "lobster-guards": {
+    "width": 58,
+    "height": 110
+  },
+  "lobster-lancers": {
+    "width": 58,
+    "height": 110
+  },
+  "lobster-hussars": {
+    "width": 58,
+    "height": 110
+  },
+  "farg-forg-ferg": {
+    "width": 48,
+    "height": 96
+  },
+  "unknown": {
+    "width": 56,
+    "height": 56
+  },
+  "unknown-infantry": {
+    "width": 64,
+    "height": 64
+  },
+  "unknown-cavalry": {
+    "width": 64,
+    "height": 64
+  },
+  "unknown-artillery": {
+    "width": 56,
+    "height": 56
+  },
+  "chilean-viejos-estandartes": {
+    "width": 48,
+    "height": 96
+  },
+  "chilean-husares-de-la-muerte": {
+    "width": 48,
+    "height": 96
+  },
+  "chilean-grenadiers": {
+    "width": 48,
+    "height": 96
+  },
+  "chilean-huasos-y-gauchos": {
+    "width": 48,
+    "height": 96
+  },
+  "chilean-haras-nacionales": {
+    "width": 48,
+    "height": 96
+  },
+  "headless-hussarman": {
+    "width": 72,
+    "height": 128
+  },
+  "roman-legion": {
+    "width": 64,
+    "height": 128
+  },
+  "infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "grenadiers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "chasseurs-column": {
+    "width": 96,
+    "height": 48
+  },
+  "guards-column": {
+    "width": 96,
+    "height": 48
+  },
+  "militia-line": {
+    "width": 40,
+    "height": 160
+  },
+  "argentinian-patricians-column": {
+    "width": 96,
+    "height": 48
+  },
+  "argentinian-patricians-line": {
+    "width": 40,
+    "height": 160
+  },
+  "argentinian-patricians-square": {
+    "width": 80,
+    "height": 80
+  },
+  "austrian-chasseurs-column": {
+    "width": 96,
+    "height": 48
+  },
+  "austrian-chasseurs-line": {
+    "width": 40,
+    "height": 160
+  },
+  "austrian-czech-infanterie-column": {
+    "width": 96,
+    "height": 48
+  },
+  "austrian-czech-infanterie-line": {
+    "width": 40,
+    "height": 160
+  },
+  "austrian-galician-infanterie-column": {
+    "width": 96,
+    "height": 48
+  },
+  "austrian-galician-infanterie-line": {
+    "width": 40,
+    "height": 160
+  },
+  "austrian-grenadiers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "austrian-grenadiers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "austrian-grenadiers-square": {
+    "width": 80,
+    "height": 80
+  },
+  "austrian-hungarian-grenadiers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "austrian-hungarian-grenadiers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "austrian-hungarian-grenadiers-square": {
+    "width": 80,
+    "height": 80
+  },
+  "austrian-hungarian-infanterie-column": {
+    "width": 96,
+    "height": 48
+  },
+  "austrian-hungarian-infanterie-line": {
+    "width": 40,
+    "height": 160
+  },
+  "austrian-imperial-infanterie-column": {
+    "width": 96,
+    "height": 48
+  },
+  "austrian-imperial-infanterie-line": {
+    "width": 40,
+    "height": 160
+  },
+  "austrian-infantry": {
+    "width": 48,
+    "height": 96
+  },
+  "austrian-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "austrian-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "austrian-infantry-square": {
+    "width": 80,
+    "height": 80
+  },
+  "austrian-italian-infanterie-column": {
+    "width": 96,
+    "height": 48
+  },
+  "austrian-italian-infanterie-line": {
+    "width": 40,
+    "height": 160
+  },
+  "austrian-moravian-infanterie-column": {
+    "width": 96,
+    "height": 48
+  },
+  "austrian-moravian-infanterie-line": {
+    "width": 40,
+    "height": 160
+  },
+  "bavarian-chasseurs-column": {
+    "width": 96,
+    "height": 48
+  },
+  "bavarian-chasseurs-line": {
+    "width": 40,
+    "height": 160
+  },
+  "bavarian-chasseurs-square": {
+    "width": 80,
+    "height": 80
+  },
+  "bavarian-grenadiers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "bavarian-grenadiers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "bavarian-grenadiers-square": {
+    "width": 80,
+    "height": 80
+  },
+  "bavarian-guards-column": {
+    "width": 96,
+    "height": 48
+  },
+  "bavarian-guards-line": {
+    "width": 40,
+    "height": 160
+  },
+  "bavarian-guards-square": {
+    "width": 80,
+    "height": 80
+  },
+  "bavarian-line-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "bavarian-line-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "bavarian-line-infantry-square": {
+    "width": 80,
+    "height": 80
+  },
+  "brazilian-cazadores-column": {
+    "width": 96,
+    "height": 48
+  },
+  "brazilian-cazadores-line": {
+    "width": 40,
+    "height": 160
+  },
+  "brazilian-cazadores-square": {
+    "width": 80,
+    "height": 80
+  },
+  "brazilian-emperors-guards-column": {
+    "width": 96,
+    "height": 48
+  },
+  "brazilian-emperors-guards-line": {
+    "width": 40,
+    "height": 160
+  },
+  "brazilian-emperors-guards-square": {
+    "width": 80,
+    "height": 80
+  },
+  "brazilian-infantaria-de-linha-column": {
+    "width": 96,
+    "height": 48
+  },
+  "brazilian-infantaria-de-linha-line": {
+    "width": 40,
+    "height": 160
+  },
+  "brazilian-infantaria-de-linha-square": {
+    "width": 80,
+    "height": 80
+  },
+  "british-69th-foot-column": {
+    "width": 96,
+    "height": 48
+  },
+  "british-69th-foot-line": {
+    "width": 40,
+    "height": 160
+  },
+  "british-coldstream-guards-column": {
+    "width": 96,
+    "height": 48
+  },
+  "british-coldstream-guards-line": {
+    "width": 40,
+    "height": 160
+  },
+  "british-coldstream-guards-square": {
+    "width": 80,
+    "height": 80
+  },
+  "british-grenadiers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "british-grenadiers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "british-grenadiers-square": {
+    "width": 80,
+    "height": 80
+  },
+  "british-kings-dutch-brigade-column": {
+    "width": 96,
+    "height": 48
+  },
+  "british-kings-dutch-brigade-line": {
+    "width": 40,
+    "height": 160
+  },
+  "british-kings-german-legion-column": {
+    "width": 96,
+    "height": 48
+  },
+  "british-kings-german-legion-line": {
+    "width": 40,
+    "height": 160
+  },
+  "british-rifle-brigade-column": {
+    "width": 96,
+    "height": 48
+  },
+  "british-rifle-brigade-line": {
+    "width": 40,
+    "height": 160
+  },
+  "british-rifle-brigade-square": {
+    "width": 80,
+    "height": 80
+  },
+  "chilean-grenadiers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "chilean-grenadiers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "chilean-grenadiers-square": {
+    "width": 80,
+    "height": 80
+  },
+  "chilean-huasos-y-gauchos-line": {
+    "width": 40,
+    "height": 160
+  },
+  "chilean-viejos-estandartes-column": {
+    "width": 96,
+    "height": 48
+  },
+  "chilean-viejos-estandartes-line": {
+    "width": 40,
+    "height": 160
+  },
+  "chilean-viejos-estandartes-square": {
+    "width": 80,
+    "height": 80
+  },
+  "east-india-bengali-sepoys-column": {
+    "width": 96,
+    "height": 48
+  },
+  "east-india-bengali-sepoys-line": {
+    "width": 40,
+    "height": 160
+  },
+  "east-india-madras-pioneers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "east-india-madras-pioneers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "east-india-nusseree-gurkhas-column": {
+    "width": 96,
+    "height": 48
+  },
+  "east-india-nusseree-gurkhas-line": {
+    "width": 40,
+    "height": 160
+  },
+  "french-chasseurs-column": {
+    "width": 96,
+    "height": 48
+  },
+  "french-chasseurs-line": {
+    "width": 40,
+    "height": 160
+  },
+  "french-irish-legion-column": {
+    "width": 96,
+    "height": 48
+  },
+  "french-irish-legion-line": {
+    "width": 40,
+    "height": 160
+  },
+  "french-italian-legion-column": {
+    "width": 96,
+    "height": 48
+  },
+  "french-italian-legion-line": {
+    "width": 40,
+    "height": 160
+  },
+  "french-marie-louise-line": {
+    "width": 40,
+    "height": 160
+  },
+  "french-middle-guard-column": {
+    "width": 96,
+    "height": 48
+  },
+  "french-middle-guard-line": {
+    "width": 49,
+    "height": 160,
+    "offsetX": 4
+  },
+  "french-national-guard-line": {
+    "width": 40,
+    "height": 160
+  },
+  "french-old-guard-column": {
+    "width": 96,
+    "height": 48
+  },
+  "french-old-guard-line": {
+    "width": 40,
+    "height": 160
+  },
+  "french-polish-legion-column": {
+    "width": 96,
+    "height": 48
+  },
+  "french-polish-legion-line": {
+    "width": 40,
+    "height": 160
+  },
+  "french-swiss-legion-column": {
+    "width": 96,
+    "height": 48
+  },
+  "french-swiss-legion-line": {
+    "width": 40,
+    "height": 160
+  },
+  "french-young-guard-column": {
+    "width": 96,
+    "height": 48
+  },
+  "french-young-guard-line": {
+    "width": 50,
+    "height": 160,
+    "offsetX": 5
+  },
+  "hellenic-evzones-column": {
+    "width": 96,
+    "height": 48
+  },
+  "hellenic-evzones-line": {
+    "width": 40,
+    "height": 160
+  },
+  "hellenic-line-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "hellenic-line-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "hellenic-sacred-band-column": {
+    "width": 96,
+    "height": 48
+  },
+  "hellenic-sacred-band-line": {
+    "width": 40,
+    "height": 160
+  },
+  "highland-guard-column": {
+    "width": 96,
+    "height": 48
+  },
+  "highland-guard-line": {
+    "width": 40,
+    "height": 160
+  },
+  "highland-guard-square": {
+    "width": 80,
+    "height": 80
+  },
+  "italian-alpine-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "italian-alpine-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "italian-bersaglieri-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "italian-bersaglieri-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "italian-guards-column": {
+    "width": 96,
+    "height": 48
+  },
+  "italian-guards-line": {
+    "width": 40,
+    "height": 160
+  },
+  "italian-light-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "italian-light-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "italian-light-infantry-square": {
+    "width": 80,
+    "height": 80
+  },
+  "lobster-grenadiers-column": {
+    "width": 103,
+    "height": 58
+  },
+  "lobster-grenadiers-line": {
+    "width": 49,
+    "height": 167
+  },
+  "lobster-grenadiers-square": {
+    "width": 88,
+    "height": 89
+  },
+  "lobster-guards-column": {
+    "width": 101,
+    "height": 59
+  },
+  "lobster-guards-line": {
+    "width": 46,
+    "height": 171
+  },
+  "lobster-guards-square": {
+    "width": 86,
+    "height": 90
+  },
+  "ornate-middle-guard-column": {
+    "width": 104,
+    "height": 60
+  },
+  "ornate-middle-guard-line": {
+    "width": 48,
+    "height": 174
+  },
+  "ornate-middle-guard-square": {
+    "width": 88,
+    "height": 94
+  },
+  "ornate-old-guard-column": {
+    "width": 108,
+    "height": 60
+  },
+  "ornate-old-guard-line": {
+    "width": 50,
+    "height": 174
+  },
+  "ornate-old-guard-square": {
+    "width": 92,
+    "height": 94
+  },
+  "ornate-russian-grenadiers-column": {
+    "width": 107,
+    "height": 68
+  },
+  "ornate-russian-grenadiers-line": {
+    "width": 54,
+    "height": 176
+  },
+  "ornate-russian-grenadiers-square": {
+    "width": 91,
+    "height": 98
+  },
+  "ornate-russian-guards-column": {
+    "width": 107,
+    "height": 68
+  },
+  "ornate-russian-guards-line": {
+    "width": 53,
+    "height": 176
+  },
+  "ornate-russian-guards-square": {
+    "width": 91,
+    "height": 98
+  },
+  "ornate-young-guard-column": {
+    "width": 108,
+    "height": 56
+  },
+  "ornate-young-guard-line": {
+    "width": 57,
+    "height": 168,
+    "offsetX": 2
+  },
+  "ornate-young-guard-square": {
+    "width": 92,
+    "height": 88
+  },
+  "prussian-1st-east-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "prussian-1st-east-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "prussian-1st-west-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "prussian-1st-west-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "prussian-2nd-east-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "prussian-2nd-east-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "prussian-fusiliers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "prussian-fusiliers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "prussian-grenadiers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "prussian-grenadiers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "prussian-grenadiers-square": {
+    "width": 80,
+    "height": 80
+  },
+  "prussian-lifeguards-column": {
+    "width": 96,
+    "height": 48
+  },
+  "prussian-lifeguards-line": {
+    "width": 40,
+    "height": 160
+  },
+  "prussian-pomeranian-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "prussian-pomeranian-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "roman-legion-column": {
+    "width": 100,
+    "height": 62
+  },
+  "roman-legion-line": {
+    "width": 44,
+    "height": 164
+  },
+  "roman-legion-square": {
+    "width": 83,
+    "height": 84
+  },
+  "russian-35th-jagers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "russian-35th-jagers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "russian-finland-lifeguards-column": {
+    "width": 96,
+    "height": 48
+  },
+  "russian-finland-lifeguards-line": {
+    "width": 40,
+    "height": 160
+  },
+  "russian-grenadiers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "russian-grenadiers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "russian-grenadiers-square": {
+    "width": 80,
+    "height": 80
+  },
+  "russian-lifeguards-column": {
+    "width": 96,
+    "height": 48
+  },
+  "russian-lifeguards-line": {
+    "width": 40,
+    "height": 160
+  },
+  "russian-nevskiy-musketeers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "russian-nevskiy-musketeers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "russian-novgorod-musketeers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "russian-novgorod-musketeers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "russian-preobrazhenskiy-column": {
+    "width": 96,
+    "height": 48
+  },
+  "russian-preobrazhenskiy-line": {
+    "width": 40,
+    "height": 160
+  },
+  "russian-siberian-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "russian-siberian-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "serbian-revolutionary-militia-line": {
+    "width": 40,
+    "height": 160
+  },
+  "swedish-caroleans-column": {
+    "width": 96,
+    "height": 48
+  },
+  "swedish-caroleans-line": {
+    "width": 40,
+    "height": 160
+  },
+  "swedish-caroleans-square": {
+    "width": 80,
+    "height": 80
+  },
+  "the-blackwatch-column": {
+    "width": 96,
+    "height": 48
+  },
+  "the-blackwatch-line": {
+    "width": 40,
+    "height": 160
+  },
+  "the-rebellious-ai-grenadiers": {
+    "width": 53,
+    "height": 100
+  },
+  "the-rebellious-ai-grenadiers-column": {
+    "width": 108,
+    "height": 56
+  },
+  "the-rebellious-ai-grenadiers-line": {
+    "width": 53,
+    "height": 166,
+    "offsetX": 4
+  },
+  "the-rebellious-ai-grenadiers-square": {
+    "width": 89,
+    "height": 88
+  },
+  "the-rebellious-ai-guards": {
+    "width": 54,
+    "height": 100
+  },
+  "the-rebellious-ai-guards-column": {
+    "width": 108,
+    "height": 56
+  },
+  "the-rebellious-ai-guards-line": {
+    "width": 53,
+    "height": 166,
+    "offsetX": 4
+  },
+  "the-rebellious-ai-guards-square": {
+    "width": 89,
+    "height": 88
+  },
+  "the-rebellious-ai-light-infantry": {
+    "width": 53,
+    "height": 100
+  },
+  "the-rebellious-ai-light-infantry-column": {
+    "width": 108,
+    "height": 55
+  },
+  "the-rebellious-ai-light-infantry-line": {
+    "width": 53,
+    "height": 166,
+    "offsetX": 4
+  },
+  "the-rebellious-ai-light-infantry-square": {
+    "width": 89,
+    "height": 88
+  },
+  "valentines-chasseurs-column": {
+    "width": 96,
+    "height": 48
+  },
+  "valentines-chasseurs-line": {
+    "width": 40,
+    "height": 160
+  },
+  "valentines-guards-column": {
+    "width": 96,
+    "height": 48
+  },
+  "valentines-guards-line": {
+    "width": 40,
+    "height": 160
+  },
+  "valentines-line-column": {
+    "width": 96,
+    "height": 48
+  },
+  "valentines-line-line": {
+    "width": 40,
+    "height": 160
+  },
+  "valentines-line-square": {
+    "width": 80,
+    "height": 80
+  },
+  "xiangqi-grenadiers-column": {
+    "width": 96,
+    "height": 48
+  },
+  "xiangqi-grenadiers-line": {
+    "width": 40,
+    "height": 160
+  },
+  "xiangqi-grenadiers-square": {
+    "width": 80,
+    "height": 80
+  },
+  "xiangqi-guards-column": {
+    "width": 96,
+    "height": 48
+  },
+  "xiangqi-guards-line": {
+    "width": 40,
+    "height": 160
+  },
+  "xiangqi-light-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "xiangqi-light-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "xiangqi-light-infantry-square": {
+    "width": 80,
+    "height": 80
+  },
+  "xiangqi-line-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "xiangqi-line-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "bronze-grenadier-column": {
+    "width": 96,
+    "height": 48
+  },
+  "bronze-grenadier-line": {
+    "width": 40,
+    "height": 160
+  },
+  "bronze-grenadier-square": {
+    "width": 80,
+    "height": 80
+  },
+  "bronze-guard-column": {
+    "width": 96,
+    "height": 48
+  },
+  "bronze-guard-line": {
+    "width": 40,
+    "height": 160
+  },
+  "bronze-guard-square": {
+    "width": 80,
+    "height": 80
+  },
+  "bronze-light-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "bronze-light-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "bronze-light-infantry-square": {
+    "width": 80,
+    "height": 80
+  },
+  "bronze-line-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "bronze-line-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "bronze-line-infantry-square": {
+    "width": 80,
+    "height": 80
+  },
+  "bronze-militia-line": {
+    "width": 40,
+    "height": 160
+  },
+  "gold-grenadier-column": {
+    "width": 96,
+    "height": 48
+  },
+  "gold-grenadier-line": {
+    "width": 40,
+    "height": 160
+  },
+  "gold-grenadier-square": {
+    "width": 80,
+    "height": 80
+  },
+  "gold-guard-column": {
+    "width": 96,
+    "height": 48
+  },
+  "gold-guard-line": {
+    "width": 40,
+    "height": 160
+  },
+  "gold-guard-square": {
+    "width": 80,
+    "height": 80
+  },
+  "gold-light-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "gold-light-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "gold-light-infantry-square": {
+    "width": 80,
+    "height": 80
+  },
+  "gold-line-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "gold-line-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "gold-line-infantry-square": {
+    "width": 80,
+    "height": 80
+  },
+  "gold-militia-line": {
+    "width": 40,
+    "height": 160
+  },
+  "silver-grenadier-column": {
+    "width": 96,
+    "height": 48
+  },
+  "silver-grenadier-line": {
+    "width": 40,
+    "height": 160
+  },
+  "silver-grenadier-square": {
+    "width": 80,
+    "height": 80
+  },
+  "silver-guard-column": {
+    "width": 96,
+    "height": 48
+  },
+  "silver-guard-line": {
+    "width": 40,
+    "height": 160
+  },
+  "silver-guard-square": {
+    "width": 80,
+    "height": 80
+  },
+  "silver-light-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "silver-light-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "silver-light-infantry-square": {
+    "width": 80,
+    "height": 80
+  },
+  "silver-line-infantry-column": {
+    "width": 96,
+    "height": 48
+  },
+  "silver-line-infantry-line": {
+    "width": 40,
+    "height": 160
+  },
+  "silver-line-infantry-square": {
+    "width": 80,
+    "height": 80
+  },
+  "silver-militia-line": {
+    "width": 40,
+    "height": 160
+  }
+}

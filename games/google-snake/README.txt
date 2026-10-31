@@ -1,11 +1,2 @@
-Snake version 12
-
-Open the root index.html through your static host to go directly to v/12/.
-The original game bundle and loader are retained. The mod loader, mod menu,
-remote mod configuration/downloads, saved mod settings, and version picker
-are removed. Touch controls are retained in snake-bootstrap.js.
-
-The game still uses the original Google-hosted image/audio/font resources.
-This change removes mods; it does not make the game assets offline.
-No browser testing was performed for this edit.
-Original source: DarkSnakeGang/GoogleSnakeModsWebsite, version 12.
+Desktop test copy, Google Snake version 12. Open index.html through the Python hub.
+The original Google sprite images and audio binaries are now bundled locally; the external font may still load remotely. Touch controls retained. Face/eye rendering was visually checked. See SOURCE.txt.

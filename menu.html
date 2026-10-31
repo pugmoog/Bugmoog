@@ -57,7 +57,7 @@
     .byline { margin: 6px 0 0; color: green; font-weight: bold; }
 
     .update-note {
-      margin-bottom: 40px;
+      margin-bottom: 14px;
       color: #c00000;
       font-weight: bold;
       text-align: center;
@@ -232,18 +232,46 @@
         margin-left:  7px;
         margin-right: 7px
     }
-  </style>
+.release-history{margin-top:12px}.release-history>summary{cursor:pointer;text-decoration:underline;color:green}.release-history[open]>summary{margin-bottom:8px}.release{text-align:left;border-top:1px solid #ccc;padding:0}.release>summary{cursor:pointer;color:green;padding:6px 2px;line-height:1.35;font-weight:bold}.release>summary:hover{background:#e7e7e7}.release ul{margin:2px 0 12px;padding-left:25px;line-height:1.5}.release li{margin:4px 0}.release[open]>summary{padding-bottom:4px}.release-date{font-size:.8em;font-weight:normal;color:#555;margin-left:8px}.history-source{font-weight:normal;font-size:.85rem}
+
+.release-highlight { display: inline-block; background: #fff0a6; color: #482b00; border: 1px solid #000; border-radius: 5px; padding: 4px 7px; margin: 3px 0; font-size: 1.08em; font-weight: bold; }
+.release-highlight hl, hl.release-highlight { background: #fff0a6; color: #482b00; }
+.games-milestone {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 4px 0 4px 16px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  font-weight: bold;
+  color: #8000b5;
+  background: repeating-linear-gradient(135deg, #ff0033 0%, #ff6600 14%, #ffcc00 28%, #00cc33 42%, #0066ff 57%, #7700ff 71%, #ff00bb 85%, #ff0033 100%);
+  background-size: 100% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: milestone-rainbow 6s linear infinite;
+}
+@keyframes milestone-rainbow {
+  from { background-position: 0 0; }
+  to { background-position: 240px 240px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .games-milestone { animation: none; }
+}
+#saves-dialog { width: min(540px, 85vw); max-height: 80vh; overflow: auto; }
+#saves-dialog textarea { box-sizing: border-box; width: 100%; min-height: 90px; }
+#save-error { color: #a00000; }
+#save-message { white-space: pre-wrap; }
+</style>
 </head>
 <body>
 
-  <div class="update-note">
-      <strong>What’s new in v5.3: </strong>
-      Made sobosuba have higher bumpers
-  </div>
+  <div class="update-note"><strong>What’s new in v5.4: </strong>Added <hl>Pokémon Emerald</hl>, <hl>Red vs Blue</hl>, <hl>Stick Ranger 2</hl>, and <hl class="release-highlight">Lines of Battle</hl>. <span class="release-highlight">Gave <hl>Drive Mad</hl> 200 levels</span>. <span class="release-highlight">Updated <hl>Minecraft</hl> to v26.3</span>. Fixed <hl>Google Snake</hl> graphics. Added changelog.<details class="release-history"><summary>Full changelog · v1.0–v5.4 <span class="games-milestone">Passed the 100 games mark!</span></summary><details class="release"><summary>v5.4 <span class="release-date">2026-10-30</span></summary><ul><li><span class="release-highlight">Fixed saving progress</span></li><li>Added <hl>Pokémon Emerald</hl>, <hl>Red vs Blue</hl>, <hl>Stick Ranger 2</hl>, and <hl class="release-highlight">Lines of Battle</hl>.</li><li><span class="release-highlight">Gave <hl>Drive Mad</hl> 200 levels</span>.</li><li><span class="release-highlight">Updated <hl>Minecraft</hl> to v26.3</span>.</li><li>Fixed missing eyes, mouths, and other graphics in <hl>Google Snake</hl>.</li><li>Corrected the <hl>Google Minesweeper</hl> name and thumbnail.</li><li>Changed popularity sorting to use the last week.</li><li>Brought back the expandable changelog.</li></ul></details><details class="release"><summary>v5.3 <span class="release-date">2026-10-13</span></summary><ul><li>Made <hl>sobosuba</hl> have higher bumpers.</li><li>Fixed devices being counted more than once in stats.</li></ul></details><details class="release"><summary>v5.2 <span class="release-date">2026-10-08</span></summary><ul><li>Added <hl>The Powder Toy</hl>, <hl>Granny 3</hl>, <hl>Friday Night Funkin’</hl>, <hl>Do Not Stop!</hl>, <hl>Don’t Shoot the Puppy</hl>, <hl>Gun Mayhem 3</hl>, <hl>Moto X3M</hl>, and <hl>Doodle Jump</hl>.</li><li>Replaced <hl>Minesweeper</hl>/<hl>Snake</hl> with Google versions.</li><li>Maybe updated <hl>Super Liquid Soccer</hl> to the 2026 version.</li><li>Fixed <hl>Lemonoids</hl>.</li><li>Switched <hl>Powder Toy</hl> to a single-threaded build and default sorting to Newest.</li></ul></details><details class="release"><summary>v5.1 <span class="release-date">2026-09-10</span></summary><ul><li>Added <hl>GunSpin</hl>, <hl>Warfare 1944</hl>, <hl>Sobosuba</hl>, and <hl>Walkable Cities</hl>.</li><li>Repaired itch-game embedding and <hl>Sobosuba</hl> touch controls.</li><li>Added stats and game sorting, moved personal tools to Chet, and connected chatroom identity.</li><li>Removed the proxy button for iOS 26 compatibility.</li><li>Fixed <hl>Lemonoids</hl> and selected Random as the default sort.</li></ul></details><details class="release"><summary>v5.0 <span class="release-date">2026-08-27</span></summary><ul><li>Redesigned the interface and replaced the historical changelog with a current-release banner.</li><li>Added a proxy, chatroom, and progress saving.</li><li>Maybe some games still don’t save properly.</li></ul></details><details class="release"><summary>v4.9 <span class="release-date">2026-06-16</span></summary><ul><li>Added <hl>CMMM+</hl>.</li><li>Updated <hl>Lemonoids</hl>.</li></ul></details><details class="release"><summary>v4.8 <span class="release-date">2026-06-14</span></summary><ul><li>Removed <hl>GeoGuessr</hl> and <hl>BTD3</hl> because they did not work.</li><li>Fixed a <hl>Terraria</hl> path typo, missing <hl>Super Mario 64</hl> files, gamepad blocking, and keyboard handling.</li><li>Added game categories.</li></ul></details><details class="release"><summary>v4.7 <span class="release-date">2026-06-13</span></summary><ul><li>Repaired fullscreen and keyboard handling.</li><li>Added <hl>A Dance of Fire and Ice</hl>, <hl>Clover Pit</hl>, <hl>Volley Random</hl>, <hl>Super Mario World</hl>, <hl>Basketball Stars</hl>, <hl>GeoGuessr</hl>, <hl>Terraria</hl>, <hl>Icy Purple Head</hl>, <hl>Cluster Rush</hl>, <hl>Big Tower Tiny Square</hl>, <hl>BTD4</hl>, <hl>Super Mario 64</hl>, <hl>Trimps</hl>, <hl>Mario</hl>, <hl>Tetris</hl>, <hl>Curve Ball 3D</hl>, and <hl>Google Snake</hl>.</li></ul></details><details class="release"><summary>v4.6 <span class="release-date">2026-05-27</span></summary><ul><li>Introduced progress-saving support.</li><li>Added <hl>Bubble Shooter</hl>, <hl>Slice It All</hl>, and <hl>We Become What We Behold</hl>.</li></ul></details><details class="release"><summary>v4.5 <span class="release-date">2026-05-16</span></summary><ul><li>Moved game files into Bugmoog.</li><li>Removed <hl>Backyard Baseball</hl> for Safari compatibility.</li><li>Added <hl>Riddle Transfer 1 &amp; 2</hl>, <hl>Bloons Tower Defense 3</hl>, <hl>Stacktris</hl>, and <hl>Soccer Skills World Cup</hl>.</li></ul></details><details class="release"><summary>v4.4 <span class="release-date">2026-05-15</span></summary><ul><li>Fixed a <hl>Lemonoids</hl> bug and recorded future plans.</li></ul></details><details class="release"><summary>v4.3 <span class="release-date">2026-05-14</span></summary><ul><li>Updated <hl>Lemonoids</hl>.</li></ul></details><details class="release"><summary>v4.2 <span class="release-date">2026-05-10</span></summary><ul><li>Added a persistent update log and alphabetical ordering.</li><li>Updated <hl>Granny</hl>/<hl>Granny 2</hl> thumbnails.</li><li>Added <hl>Backyard Baseball</hl>, <hl>The Binding of Isaac</hl>, <hl>Geometry Dash World Toxic Factory</hl>, <hl>Riddle School</hl>, and <hl>Puppet Hockey</hl>.</li></ul></details><details class="release"><summary>v4.1 <span class="release-date">2026-04-28</span></summary><ul><li>Combined <hl>Minecraft</hl> entries.</li><li>Added <hl>Retro Bowl College</hl>.</li><li>Fixed bugs.</li></ul></details><details class="release"><summary>v4.0 <span class="release-date">2026-04-26</span></summary><ul><li>Added a search bar and Clear control.</li><li>Standardized game labels.</li></ul></details><details class="release"><summary>v3.8 <span class="release-date">2026-04-25</span></summary><ul><li>Added <hl>Traffic Jam 3D</hl>, <hl>OvO</hl>, <hl>Bloxorz</hl>, <hl>Drift Boss</hl>, and <hl>The World’s Hardest Game</hl>.</li></ul></details><details class="release"><summary>v3.7 <span class="release-date">2026-04-24</span></summary><ul><li>Added <hl>Soccer Random</hl>, <hl>Hole.io</hl>, <hl>Block Blast</hl>, <hl>Tiny Fishing</hl>, <hl>Retro Bowl</hl>, <hl>Territorial.io</hl>, <hl>Baldi’s Basics</hl>, and <hl>Poor Bunny</hl>.</li><li>Removed <hl>Granny 3</hl>.</li></ul></details><details class="release"><summary>v3.6 <span class="release-date">2026-04-24</span></summary><ul><li>Changed game thumbnails to direct hosted URLs and adjusted menu loading internals.</li></ul></details><details class="release"><summary>v3.5 <span class="release-date">2026-04-23</span></summary><ul><li>Added the four main <hl>FNAF</hl> games behind a picker.</li><li>Changed the <hl>Geometry Dash</hl> build.</li><li>Added an updates section.</li></ul></details><details class="release"><summary>v3.4 <span class="release-date">2026-04-23</span></summary><ul><li>Added <hl>Rocketpult</hl>.</li><li>Updated <hl>Geometry Dash</hl> and gamepad handling.</li></ul></details><details class="release"><summary>v3.3 <span class="release-date">2026-04-22</span></summary><ul><li>Added <hl>Five Nights at Freddy’s</hl>, <hl>Basket Random</hl>, <hl>Bit Planes</hl>, and <hl>Monkey Mart</hl>.</li><li>Added a game-suggestion form link.</li></ul></details><details class="release"><summary>v3.2 <span class="release-date">2026-04-17</span></summary><ul><li>Added two <hl>Desmos</hl> game entries.</li></ul></details><details class="release"><summary>v3.1 <span class="release-date">2026-04-17</span></summary><ul><li>Added <hl>Bouncy Man</hl>.</li></ul></details><details class="release"><summary>v3.0 <span class="release-date">2026-04-15</span></summary><ul><li>Added <hl>Clock Simulator</hl> and <hl>Subway Surfers</hl>.</li></ul></details><details class="release"><summary>v2.9 <span class="release-date">2026-04-15</span></summary><ul><li>Added <hl>Minecraft mobile</hl>, <hl>Paper.io</hl>, <hl>Minesweeper</hl>, <hl>Crossy Road</hl>, and <hl>Super Liquid Soccer</hl>.</li><li>Adjusted game layout and installer guidance.</li></ul></details><details class="release"><summary>v2.7 <span class="release-date">2026-03-23</span></summary><ul><li>Added <hl>Fruit Ninja</hl>, <hl>Geometry Dash</hl>, <hl>Ragdoll Hit</hl>, and a password-protected game entry.</li></ul></details><details class="release"><summary>v2.6 <span class="release-date">2026-03-21</span></summary><ul><li>Changed the <hl>Lemonoids Jumbo</hl> thumbnail to an animated image.</li></ul></details><details class="release"><summary>v2.5 <span class="release-date">2026-03-17</span></summary><ul><li>Added <hl>Lemonoids</hl>, <hl>Lemonoids Jumbo</hl>, <hl>Water Works</hl>, and <hl>This Game Is Pretty Hard 2</hl>.</li><li>Improved the embedded game wrapper.</li></ul></details><details class="release"><summary>v2.2 <span class="release-date">2026-03-07</span></summary><ul><li>Updated thumbnail source paths.</li><li>Added fullscreen and back buttons.</li></ul></details><details class="release"><summary>v2.1 <span class="release-date">2026-03-06</span></summary><ul><li>Updated game thumbnails and image loading.</li><li>Corrected the <hl>Escape Road</hl> label and menu hover behavior.</li></ul></details><details class="release"><summary>v1.7 <span class="release-date">2026-03-06</span></summary><ul><li>Game menu with <hl>Chrome Dino</hl>, <hl>Cookie Clicker</hl>, <hl>Minecraft</hl>, <hl>Drive Mad</hl>, <hl>Slope</hl>, <hl>Granny</hl> and other launch games.</li></ul></details><details class="release"><summary>v1.0–v1.6</summary><ul><li>idk i forgot</li></ul></details></details></div>
 
   <header>
     <div>
-      <h1>BugMoog v5.3</h1>
+      <h1>BugMoog v5.4</h1>
       <p class="byline">By Pugmoog</p>
     </div>
     <div class="header-actions">
@@ -254,8 +282,25 @@
       <div class="action-row">
         <button class="chat-button" onclick="loadChatroom()">Chatroom</button>
       </div>
+      <div class="action-row"><button id="saves-button">Saves</button></div>
     </div>
   </header>
+  <p id="save-error" role="alert" hidden></p>
+  <dialog id="saves-dialog">
+    <h2>Saves</h2>
+    <ul id="save-list"></ul>
+    <button id="save-download" data-save-action>Download save file</button>
+    <button id="save-copy" data-save-action>Copy save code</button>
+    <label>Import file <input id="save-file" type="file" accept=".json,.bugmoog-save.json"></label>
+    <label for="save-code">Save code</label>
+    <textarea id="save-code" spellcheck="false"></textarea>
+    <button id="save-preview" data-save-action>Preview import</button>
+    <div id="save-import-preview"></div>
+    <button id="save-apply" data-save-action hidden>Import selected games</button>
+    <button id="save-rollback" data-save-action>Undo last import</button>
+    <p id="save-message" role="status"></p>
+    <button onclick="this.closest('dialog').close()">Close</button>
+  </dialog>
 
   <main>
     <div class="browse-heading">
@@ -315,9 +360,12 @@
   </dialog>
 
   <script>
-    const bugmoogScript = location.protocol === 'file:'
+    window.bugmoogLocal = location.protocol === 'file:' || /^(localhost|127\.0\.0\.1|\[?::1\]?)$/.test(location.hostname);
+    const bugmoogScript = window.bugmoogLocal
       ? './script.js'
-      : 'https://pugmoog.github.io/Bugmoog/script.js?v=5.3-higher-bumpers';
+      : 'https://pugmoog.github.io/Bugmoog/script.js?v=5.4';
+    const bugmoogSaveBase = new URL('.', new URL(bugmoogScript, location.href)).href;
+    for (const name of ['save-common.js', 'save-host.js']) document.write('<script src="' + bugmoogSaveBase + name + '?v=5.4-save1"><\/script>');
     document.write('<script src="' + bugmoogScript + '"><\/script>');
   </script>
   <script>
@@ -359,6 +407,8 @@
 
     updateResultCount();
   </script>
-  <footer><a href="https://pugmoog.github.io/Bugmoog/bugmoog-stats" target="_blank" rel="noreferrer">Stats</a></footer>
+
+<footer><a id="stats-link" href="https://pugmoog.github.io/Bugmoog/bugmoog-stats" target="_blank" rel="noreferrer">Stats</a></footer>
+<script>if (window.bugmoogLocal) document.querySelector('#stats-link').href = './bugmoog-stats/';</script>
 </body>
 </html>

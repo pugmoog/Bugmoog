@@ -38,7 +38,7 @@ The menu listens for `postMessage` events from `game-page.html`:
 - `fs` asks the outer frame to enter fullscreen.
 - fullscreen state is sent back to the wrapper so it can hide or restore its controls.
 
-The wrapper also stores a small per-game cookie substitute in its own `localStorage`. That is why some same-origin games can retain progress, although browser origin rules mean it is not a universal replacement for real cookies.
+The menu owns the durable save records in the launching website’s `bugmoog-saves-v1` IndexedDB database. The wrapper receives one game’s record over a private message channel, restores its storage, then navigates to the existing game URL. A parser-blocking `save-runtime.js` script in local game HTML installs the storage hooks before the game starts. LocalStorage and cookie changes, plus snapshots of changed IndexedDB databases, are sent back to the menu and acknowledged only after its transaction commits. Game databases on the asset host are temporary per-launch working copies, not shared save profiles.
 
 ## Why direct Proxy and Chatroom pages now say “Not available”
 
@@ -51,3 +51,19 @@ This is a user-interface gate, not strong access control. It is JavaScript deliv
 ## Hosting and updates
 
 Everything described here is static frontend code published by GitHub Pages. Updating the Rugmoog repository changes the installer page. Updating the Bugmoog repository changes what the bookmarklet fetches the next time it runs. Updating the separate proxy or chatroom repository changes the corresponding tool the next time Bugmoog opens it.
+
+## Local preview
+
+Run `python3 serve-local.py` from this repository, then open `http://localhost:8765/menu.html`. The Python HTTP server binds to localhost and serves the repository, blocking hidden files and the stats backend source directory. Its read-only stats routes fetch public seven-day popularity reports and dashboard reports from the existing stats service. Local gameplay does not send analytics events.
+
+On localhost, the menu loads `./script.js`, and the script uses relative image, analytics-helper, wrapper, and game paths. On other websites, the bookmarklet menu uses absolute URLs under `https://pugmoog.github.io/Bugmoog/`. Keep the deployment base absolute: the menu document runs on the original host website. Game IDs and deployed wrapper query URLs remain stable.
+
+Most Popular and Least Popular use `game_open` counts from the seven days before the report request, rather than the all-time popularity endpoint. Counts retain the stats service’s hourly resolution.
+
+The full changelog is embedded in the menu. The implemented unified save system, archive controls, and remaining game-specific limitations are documented in `docs/progress-saving.html`. The Saves dialog exports files or codes, previews imports with per-game selection, and retains a rollback copy. Existing game URLs are unchanged; websites are separated naturally by their native storage origins.
+
+## Save integration maintenance
+
+New local game HTML files must include a parser-blocking relative script reference to `save-runtime.js` before any game script. Each nested local HTML document needs it too. Do not add `async` or `defer`: startup reads must use restored storage. `save-host.js` runs in the menu’s origin; `save-wrapper.js` runs on the asset origin. The initial connection validates the wrapper window and asset origin, then uses a dedicated MessageChannel. Only the selected game record is sent.
+
+Host records use structured-clone data in IndexedDB. Portable archives use a versioned graph encoding and CRC32 corruption check; the checksum is not encryption or authentication. Imports never evaluate code. The host’s games/leases/backups stores are updated in transactions; leases and revision checks prevent stale tab writes. Legacy shim buckets are copied only with the player’s confirmation, and never removed automatically.

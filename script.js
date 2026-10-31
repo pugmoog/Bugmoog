@@ -3,8 +3,9 @@ if (window.location.href === "https://pugmoog.github.io/Bugmoog/menu.html") {
   window.location.href = "https://rugmoog.github.io";
 }
 
-const weburl = "https://pugmoog.github.io/Bugmoog/";
-const BUGMOOG_ORIGIN = "https://pugmoog.github.io";
+const IS_LOCAL = window.bugmoogLocal ?? /^(localhost|127\.0\.0\.1|\[?::1\]?)$/.test(location.hostname);
+const weburl = IS_LOCAL ? "./" : "https://pugmoog.github.io/Bugmoog/";
+const BUGMOOG_ORIGIN = new URL(weburl, location.href).origin;
 let statsFrame = null;
 let statsReady = false;
 let statsQueue = [];
@@ -12,7 +13,7 @@ let gamePopularity = {};
 
 function setupStats() {
   statsFrame = document.createElement("iframe");
-  statsFrame.src = weburl + "analytics.html?v=1";
+  statsFrame.src = weburl + "analytics.html?v=weekly";
   statsFrame.hidden = true;
   statsFrame.setAttribute("aria-hidden", "true");
   statsFrame.tabIndex = -1;
@@ -28,6 +29,7 @@ function sendStatsMessage(message) {
 }
 
 function trackBugmoogEvent(event, subject) {
+  if (IS_LOCAL) return;
   sendStatsMessage({ type: "bugmoog-stats-event", event, subject });
 }
 
@@ -68,16 +70,21 @@ window.addEventListener("message", event => {
 // Game loading
 async function loadPage(url) {
   trackBugmoogEvent("game_open", url);
-  loadPageGeneral("https://pugmoog.github.io/Bugmoog/games/" + url);
+  loadPageGeneral(weburl + "games/" + url);
 }
 
+let launchingGame = false;
 async function loadPageGeneral(url) {
-  if (gamePageFrame.style.display === "block") {
+  if (launchingGame || gamePageFrame.style.display === "block") {
     return;
   }
 
+  launchingGame = true;
+  try { await window.BugmoogSaves.prepare(url); }
+  catch (error) { window.BugmoogSaves.error(error); launchingGame = false; return; }
   gamePageFrame.src = weburl + "game-page.html?game=" + encodeURIComponent(url);
   gamePageFrame.style.display = "block";
+  launchingGame = false;
 
   focusInterval = setInterval(focus, 20);
 }
@@ -90,13 +97,13 @@ function password(url) {
 }
 
 window.addEventListener("message", (e) => {
-  if (e.data === "close") {
+  if (e.source === gamePageFrame.contentWindow && e.origin === BUGMOOG_ORIGIN && e.data === "close") {
     closePage();
   }
 });
 
 window.addEventListener("message", (e) => {
-  if (e.data === "fs") {
+  if (e.source === gamePageFrame.contentWindow && e.origin === BUGMOOG_ORIGIN && e.data === "fs") {
     console.log("fsing");
     fs();
   }
@@ -158,14 +165,24 @@ function focus() {
   }
 }
 
-function closePage() {
+let closingGame = false;
+async function closePage() {
+  if (closingGame) return;
+  closingGame = true;
+  try { await window.BugmoogSaves.close(); }
+  catch (error) { window.BugmoogSaves.error(error); closingGame = false; return; }
   gamePageFrame.style.display = "none";
   gamePageFrame.src = "about:blank";
   clearInterval(focusInterval);
+  closingGame = false;
 }
 
 // Load game buttons
 const games = [
+  { name: "Pokémon Emerald", id: "pokemon-emerald", image: "emerald.jpg", category: "Story", added: "2026-10-30" },
+  { name: "Red vs Blue", id: "red-vs-blue", image: "redblue.png", category: "Casual", added: "2026-10-30" },
+  { name: "Stick Ranger 2", id: "stick-ranger-2", image: "rangers.png", category: "Strategy", added: "2026-10-30" },
+  { name: "Lines of Battle", id: "lines-of-battle", image: "lob.png", category: "Strategy", added: "2026-10-30" },
   { name: "The Powder Toy", id: "the-powder-toy", image: "the-powder-toy.png", category: "Casual", added: "2026-10-08" },
   { name: "Moto X3M", id: "moto-x3m", image: "moto-x3m.png", category: "Action", added: "2026-10-08" },
   { name: "Gun Mayhem 3", id: "gun-mayhem-3", image: "gun-mayhem-3.png", category: "Action", added: "2026-10-08" },
@@ -207,7 +224,7 @@ const games = [
   { name: "Little Alchemy", id: "little-alchemy", image: "la1.png", category: "Puzzle", added: "2026-05-16" },
   { name: "Little Alchemy 2", id: "little-alchemy-two", image: "la2.png", category: "Puzzle", added: "2026-05-16" },
   { name: "Minecraft", id: "eaglercraft", image: "minecraft.png", category: "Action", added: "2026-05-16" },
-  { name: "Minesweeper", id: "minesweeper", image: "minesweeper.png", category: "Puzzle", added: "2026-05-16" },
+  { name: "Google Minesweeper", id: "minesweeper", image: "minesweeper.png", category: "Puzzle", added: "2026-05-16" },
   { name: "Monkey Mart", id: "monkey-mart", image: "monkey-mart.png", category: "Strategy", added: "2026-05-16" },
   { name: "OvO", id: "ovo", image: "ovo.png", category: "Action", added: "2026-05-16" },
   { name: "Paper.io", id: "paper-io", image: "paper-io.png", category: "Casual", added: "2026-05-16" },
@@ -273,8 +290,9 @@ games.forEach(game => {
   element.className = "game";
   element._gameData = game;
   element.dataset.category = game.category;
+  if (game.id) element.dataset.id = game.id;
   element.innerHTML = `
-    <img src='https://pugmoog.github.io/Bugmoog/images/${game.image}'>
+    <img src='${weburl}images/${game.image}'>
     <h3>${game.name}</h3>
   `;
 

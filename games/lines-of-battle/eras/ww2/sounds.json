@@ -1,0 +1,20 @@
+{
+  "melee-combat": {
+    "filename": "melee-combat.mp3",
+    "loop": true,
+    "spatialSound": true,
+    "category": "battle"
+  },
+  "infantry-movement": {
+    "filename": "infantry-movement.mp3",
+    "loop": true,
+    "spatialSound": true,
+    "category": "battle"
+  },
+  "tank-movement": {
+    "filename": "tank-movement.mp3",
+    "loop": true,
+    "spatialSound": true,
+    "category": "battle"
+  }
+}

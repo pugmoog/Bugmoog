@@ -72,7 +72,7 @@ function switchToMobile() {
 
   
   .rNjvu {
-    background-image: url(//www.google.com/logos/fnbx/snake_arcade/swipe.svg) !important
+    background-image: url(../../assets/snake_arcade/swipe.svg) !important
   }
 
   

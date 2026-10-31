@@ -1,0 +1,5 @@
+EmulatorJS v4.2.3, mGBA core, single-threaded WASM plus legacy core. https://github.com/EmulatorJS/EmulatorJS/tree/v4.2.3
+Core/build files from https://cdn.emulatorjs.org/4.2.3/data/
+ROM source requested by user: https://github.com/AlexBlackmore/ROMs/blob/master/gba/Pokemon%20-%20Emerald%20Version%20%28USA%2C%20Europe%29.gba
+ROM SHA1: f3ae088181bf583e55daf962a92bb46f4f1d07b7
+Save-file exports are more portable than emulator save states. Use one consistent URL/browser for saves. Safari may suspend pagehide work; periodic flush and manual exports remain necessary. Touch+keyboard available; no guarantee of every mobile browser/device.

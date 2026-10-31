@@ -5,6 +5,7 @@
 <script>
 (() => {
   const API = "https://d3txi12i3pqbxm.cloudfront.net/chet/bugmoog-stats/api";
+  const LOCAL = /^(localhost|127\.0\.0\.1|\[?::1\]?)$/.test(location.hostname);
   const STORAGE_KEY = "bugmoog-analytics-id";
   let visitorId = localStorage.getItem(STORAGE_KEY);
   if (!/^[a-f0-9-]{20,80}$/i.test(visitorId || "")) {
@@ -24,7 +25,7 @@
   window.addEventListener("message", async event => {
     if (event.source !== parent) return;
     const message = event.data;
-    if (message?.type === "bugmoog-stats-event") {
+    if (message?.type === "bugmoog-stats-event" && !LOCAL) {
       request("/event", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -34,8 +35,19 @@
     }
     if (message?.type === "bugmoog-stats-popularity-request") {
       try {
-        const data = await request("/popularity");
-        const games = Object.fromEntries(data.games.map(game => [game.id, game.opens]));
+        const to = Date.now();
+        const from = to - 7 * 86400000;
+        let games;
+        if (LOCAL) {
+          const response = await fetch('./weekly-popularity', { cache: 'no-store' });
+          if (!response.ok) throw new Error('Weekly statistics unavailable.');
+          games = (await response.json()).games;
+        } else {
+          const data = await request(`/report/${from}/${to}/hour`);
+          games = Object.fromEntries(data.summary
+            .filter(row => row.event === 'game_open' && row.subject)
+            .map(row => [row.subject, row.opens]));
+        }
         parent.postMessage({ type: "bugmoog-stats-popularity", games }, "*");
       } catch {}
     }

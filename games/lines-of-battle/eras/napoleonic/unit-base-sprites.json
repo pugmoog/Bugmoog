@@ -1,0 +1,170 @@
+{
+  "cavalry": {
+    "width": 48,
+    "height": 96
+  },
+  "mass": {
+    "width": 48,
+    "height": 96
+  },
+  "column": {
+    "width": 96,
+    "height": 48
+  },
+  "line": {
+    "width": 40,
+    "height": 160
+  },
+  "square": {
+    "width": 80,
+    "height": 80
+  },
+  "8lb-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "12lb-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "horse-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "skirmishers": {
+    "width": 48,
+    "height": 96
+  },
+  "howitzers": {
+    "width": 64,
+    "height": 128
+  },
+  "militia": {
+    "width": 48,
+    "height": 96
+  },
+  "tanks": {
+    "width": 96,
+    "height": 96
+  },
+  "4lb-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "6lb-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "rockets": {
+    "width": 64,
+    "height": 128
+  },
+  "xiangqi-horse-artillery": {
+    "width": 64,
+    "height": 128
+  },
+  "ornate-base": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-base2": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-base3": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-chasseurs-e-cheval": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-empress-dragoons": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-grenadiers-a-cheval": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-polish-lancers": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-russian-cuirassiers": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-russian-dragoons": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-russian-grenadiers": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-russian-guards": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-russian-lancers": {
+    "width": 72,
+    "height": 128
+  },
+  "ornate-russian-hussars": {
+    "width": 72,
+    "height": 128
+  },
+  "lobster-dragoons": {
+    "width": 58,
+    "height": 110
+  },
+  "lobster-cuirassiers": {
+    "width": 58,
+    "height": 110
+  },
+  "lobster-grenadiers": {
+    "width": 58,
+    "height": 110
+  },
+  "lobster-guards": {
+    "width": 58,
+    "height": 110
+  },
+  "lobster-lancers": {
+    "width": 58,
+    "height": 110
+  },
+  "lobster-hussars": {
+    "width": 58,
+    "height": 110
+  },
+  "farg-forg-ferg": {
+    "width": 48,
+    "height": 96
+  },
+  "unknown": {
+    "width": 56,
+    "height": 56
+  },
+  "10lb-licorne": {
+    "width": 64,
+    "height": 128
+  },
+  "18lb-licorne": {
+    "width": 64,
+    "height": 128
+  },
+  "headless-hussarman": {
+    "width": 72,
+    "height": 128
+  },
+  "roman-legion": {
+    "width": 64,
+    "height": 128
+  },
+  "militia-line": {
+    "width": 40,
+    "height": 160
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "watchGame": "Guarda il gioco",
+  "noFinishedGamesYet": "Nessun gioco terminato ancora!",
+  "yourTeam": "La tua squadra",
+  "opponentTeam": "Squadra avversaria",
+  "ranked": "Classificata",
+  "showPlayers": "Mostra giocatori",
+  "playersModalTitle": "Giocatori — partita #{{gameId}}",
+  "rosterCountLabel": "{{count}} giocatori"
+}

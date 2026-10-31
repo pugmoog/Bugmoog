@@ -1,0 +1,3 @@
+https://github.com/stroongdog/strongdog3/tree/master/html/Red%20vs%20Blue/game
+Original TurboWarp-packaged Scratch game. Red: Z; Blue: M. Repeated presses push the bar. Full game files downloaded, excluding Strongdog catalog wrapper.
+Removed the game entry point’s top-level catalog redirect for standalone use.

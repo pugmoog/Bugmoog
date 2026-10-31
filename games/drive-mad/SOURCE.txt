@@ -1,0 +1,6 @@
+Drive Mad (repository describes this as the Poki 200+ level version)
+Source: https://github.com/finalities/dmad-poki
+Downloaded 2026-10-30.
+Strongdog catalog points to a dead Heroku embed rather than game assets.
+Removed the remote base URL so scripts and assets load from this folder.
+No gameplay testing performed.

@@ -1,0 +1,2 @@
+Extracted /Users/matt/Downloads/build-1.4.5.zip, build-1.4.5 directory. Original compiled files retained. This is the itch build: VITE_ITCH=true, blank VITE_SERVER_URL and VITE_WS_SERVER_URL. Online multiplayer/login require external services or a differently configured build. No server source supplied.
+Local browser check reached the landing page. The /version backend request returned 404; online gameplay is not verified. Some regional locale requests fall back to the supplied base language.

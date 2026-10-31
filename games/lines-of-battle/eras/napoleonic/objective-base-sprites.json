@@ -1,0 +1,66 @@
+{
+  "default": {
+    "width": 64,
+    "height": 64
+  },
+  "royal-crown": {
+    "width": 64,
+    "height": 64
+  },
+  "pour-le-merite": {
+    "width": 64,
+    "height": 64
+  },
+  "austrias-venus": {
+    "width": 64,
+    "height": 64
+  },
+  "french-eagle": {
+    "width": 64,
+    "height": 64
+  },
+  "russian-cross": {
+    "width": 64,
+    "height": 64
+  },
+  "serpe-of-braganca": {
+    "width": 64,
+    "height": 64
+  },
+  "base-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "xiangqi": {
+    "width": 64,
+    "height": 64
+  },
+  "square-flag": {
+    "width": 64,
+    "height": 64
+  },
+  "imperial-ottoman-standard": {
+    "width": 64,
+    "height": 64
+  },
+  "bigly-bones": {
+    "width": 64,
+    "height": 64
+  },
+  "shogi": {
+    "width": 64,
+    "height": 64
+  },
+  "blossom-point": {
+    "width": 64,
+    "height": 64
+  },
+  "yinyang-core": {
+    "width": 64,
+    "height": 64
+  },
+  "skull": {
+    "width": 64,
+    "height": 64
+  }
+}

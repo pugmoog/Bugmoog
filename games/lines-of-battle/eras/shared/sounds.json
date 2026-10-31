@@ -1,0 +1,20 @@
+{
+  "notification": {
+    "filename": "notification.mp3",
+    "loop": false,
+    "spatialSound": false,
+    "category": "notification"
+  },
+  "long-press": {
+    "filename": "long-press.mp3",
+    "loop": false,
+    "spatialSound": false,
+    "category": "general"
+  },
+  "clock-tick": {
+    "filename": "clock-tick.mp3",
+    "loop": false,
+    "spatialSound": false,
+    "category": "notification"
+  }
+}

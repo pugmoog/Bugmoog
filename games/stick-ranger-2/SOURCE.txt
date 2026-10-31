@@ -1,0 +1,1 @@
+Downloaded from https://dan-ball.jp/en/javagame/ranger2/ on 2026-10-30. Version 34.6. Copyright ha55ii / DAN-BALL retained. Local launch page calls Init with no DAN-BALL account; hostname check adapted for localhost/LAN testing. All 37 engine PNG assets bundled. Original website account features not supplied.
